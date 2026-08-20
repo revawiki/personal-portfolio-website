@@ -18,3 +18,6 @@ backend/build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Windows/Cygwin crash dumps
+*.stackdump
