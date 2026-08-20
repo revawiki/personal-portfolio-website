@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Tenant ECS Platform Migration — Reva Wiki</title>
+  <meta name="description" content="Transitioning 100+ monolithic EC2 deployments into a multi-tenant AWS ECS platform, with a Singapore → Jakarta regional migration — ~70% cost reduction, 2x faster deploys." />
+  <link rel="canonical" href="https://revawiki.io/case-study-ecs.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Multi-Tenant ECS Platform Migration — Reva Wiki" />
+  <meta property="og:description" content="One instance per client doesn't scale. Here's what replaced it." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/projects.html">Projects</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Multi-Tenant ECS Platform</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Case study · PT Telkom Indonesia Tbk · Netmonk</p>
+      <h1>Multi-Tenant ECS Platform Migration</h1>
+      <p class="cs-deck">
+        The product had grown to 100+ monolithic EC2 deployments — roughly one
+        per client. Every new customer meant new infrastructure, and the ceiling
+        was getting closer with each signature.
+      </p>
+      <div class="cs-byline">
+        <span>Reva Wiki</span>
+        <span aria-hidden="true">·</span>
+        <span>2022 — 2024</span>
+        <span aria-hidden="true">·</span>
+        <span>8 min read</span>
+      </div>
+    </header>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">~70%</span>
+        <span class="label">AWS infrastructure cost reduction</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">2x</span>
+        <span class="label">faster deploys — ~10 → ~5 min</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">100+</span>
+        <span class="label">EC2 deployments consolidated</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">4</span>
+        <span class="label">engineers on the team I led</span>
+      </div>
+    </div>
+
+    <nav class="cs-toc" aria-label="On this page">
+      <span class="cs-toc-label">On this page</span>
+      <a href="#context">Context</a>
+      <a href="#problem">The problem</a>
+      <a href="#why-ecs">Why ECS, not Kubernetes</a>
+      <a href="#region">The region move</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#outcome">Outcome</a>
+      <a href="#lessons">Lessons</a>
+    </nav>
+
+    <section id="context" class="cs-section">
+      <h2>Context</h2>
+      <p>
+        Netmonk is Telkom Indonesia's network monitoring product. It had grown
+        the way successful products often do — one client at a time, each getting
+        their own deployment because that was the fastest thing to do at the time.
+      </p>
+      <p>
+        By the time I was promoted to lead the DevOps initiative, that pattern
+        had produced 100+ monolithic EC2 deployments. I led a team of 4 engineers
+        to re-architect it.
+      </p>
+    </section>
+
+    <section id="problem" class="cs-section">
+      <h2>The problem</h2>
+      <p>
+        One instance per client is a decision that charges compound interest.
+        Every client carries their own idle capacity. Every patch is 100+
+        operations. Every new signature provisions new infrastructure before it
+        generates any margin.
+      </p>
+      <div class="callout">
+        <p>
+          The architecture wasn't wrong when it was chosen. It became wrong at
+          about client number thirty, and nobody had a reason to stop and say so.
+        </p>
+      </div>
+      <a href="/article-instance-per-client.html" class="inline-link">Read: the hidden cost of one-instance-per-client →</a>
+    </section>
+
+    <section id="why-ecs" class="cs-section">
+      <h2>Why ECS, not Kubernetes</h2>
+      <p>
+        The default answer to "we need container orchestration" is Kubernetes. We
+        chose AWS ECS deliberately.
+      </p>
+      <p>
+        Kubernetes would have given us more capability than the workload needed,
+        in exchange for an operational surface a 4-person team would then own
+        permanently — control plane, upgrades, and a much steeper on-call
+        learning curve for everyone who touched it afterwards.
+      </p>
+      <p>
+        ECS gave us what the migration actually required: client workloads
+        decoupled from dedicated instances onto shared infrastructure, with an
+        operational model the team could run without becoming Kubernetes
+        specialists first.
+      </p>
+    </section>
+
+    <section id="region" class="cs-section">
+      <h2>The region move</h2>
+      <p>
+        The platform had been running in AWS Singapore because, when it was
+        built, that was the nearest region. AWS Jakarta had since opened.
+      </p>
+      <p>
+        Rather than lift-and-shift, I re-architected the migration — combining
+        the region move with the multi-tenancy transition so the estate was
+        rebuilt correctly once rather than moved twice. That combined
+        re-architecture is what produced the
+        <strong>~70% AWS infrastructure cost reduction</strong>.
+      </p>
+    </section>
+
+    <section id="pipeline" class="cs-section">
+      <h2>Pipeline</h2>
+      <p>
+        Shared infrastructure raises the stakes on deployment: a bad release now
+        reaches every tenant rather than one. The Bitbucket CI/CD pipeline was
+        built with that in mind, with DevSecOps scanning integrated into the
+        pipeline rather than bolted on after.
+      </p>
+      <p>
+        Deployment time dropped from <strong>~10 minutes to ~5</strong> — and,
+        more usefully, became a repeatable process rather than a per-client
+        procedure.
+      </p>
+    </section>
+
+    <section id="outcome" class="cs-section">
+      <h2>Outcome</h2>
+      <p>
+        ~70% lower infrastructure cost, deploys twice as fast, and — the point of
+        the whole exercise — no more per-client instance ceiling. Onboarding a
+        new client stopped being an infrastructure event.
+      </p>
+    </section>
+
+    <section id="lessons" class="cs-section">
+      <h2>Lessons</h2>
+      <ul class="lesson-list">
+        <li><strong>Pick the orchestrator your team can run at 3am.</strong> ECS over Kubernetes cost us capability we didn't need and saved us operational load we'd have carried forever.</li>
+        <li><strong>Combine migrations when they touch the same surface.</strong> Doing the region move and the multi-tenancy rebuild as one re-architecture is where the 70% came from.</li>
+        <li><strong>Shared infrastructure raises the cost of a bad deploy.</strong> The pipeline and its security scanning weren't optional extras — they were the precondition.</li>
+        <li><strong>Architectures expire quietly.</strong> One-instance-per-client never announced that it had stopped working. Someone has to go looking.</li>
+      </ul>
+    </section>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="/case-study-copilot.html" class="cs-next-card">
+        <span class="cs-next-label">Next case study</span>
+        <strong>Unified AI Operations Ecosystem</strong>
+        <span>RAG + MCP + human-in-the-loop across 20+ AWS accounts</span>
+      </a>
+      <a href="/projects.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>All projects</strong>
+        <span>Every case study and lab experiment in one place</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">Reva Wiki</a>
+        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
+      </div>
+      <nav class="footer-nav" aria-label="Site map">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/index.html">Home</a>
+          <a href="/story.html">Story</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#experience">Experience</a>
+          <a href="/index.html#skills">Skills</a>
+        </div>
+        <div class="footer-col">
+          <h5>Work</h5>
+          <a href="/projects.html">All projects</a>
+          <a href="/case-study-copilot.html">Unified AI Ops</a>
+          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
+          <a href="/case-study-terraform.html">Terraform migration</a>
+          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
+        </div>
+        <div class="footer-col">
+          <h5>Writing</h5>
+          <a href="/articles.html">All articles</a>
+          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
+          <a href="/article-yaml-terraform.html">YAML over HCL</a>
+          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
+        </div>
+        <div class="footer-col">
+          <h5>Elsewhere</h5>
+          <a href="mailto:reva.wiki@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
+      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>

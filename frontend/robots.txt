@@ -1,0 +1,24 @@
+# Swap the Sitemap host below once the real domain is attached
+# (see infra/infra/site_stack.py -- cdk deploy -c domainName=...)
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI crawlers -- allowed, and pointed at /llms.txt for a structured summary
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://revawiki.io/sitemap.xml

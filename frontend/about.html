@@ -3,109 +3,156 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About — Reva Wiki</title>
+  <title>About &mdash; Reva Wiki</title>
+  <meta name="description" content="Reva Hristo Wiki Fonseca - IT Infrastructure and AIOps Specialist in Bogor, Indonesia. 7+ years across telco, FMCG and national research." />
+  <link rel="canonical" href="https://revawiki.io/about.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About &mdash; Reva Wiki" />
+  <meta property="og:description" content="Reva Hristo Wiki Fonseca - IT Infrastructure and AIOps Specialist in Bogor, Indonesia. 7+ years across telco, FMCG and national research." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <header class="nav">
-    <a href="/index.html" class="brand">Reva Wiki</a>
-    <nav>
-      <a href="/index.html">Home</a>
-      <a href="/projects.html">Projects</a>
-      <a href="/about.html">About</a>
-    </nav>
-  </header>
-
   <main>
-    <section class="hero">
-      <h1>About</h1>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">About</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">About</p>
+      <h1>Reva Hristo Wiki Fonseca</h1>
+      <p class="cs-deck">
+        IT Infrastructure &amp; AIOps Specialist based in Bogor, Indonesia.
+        Seven years designing, running and automating enterprise-scale cloud
+        across telco, FMCG and national research &mdash; currently directing
+        AIOps R&amp;D at Tech Mahindra for Indonesia&rsquo;s largest telco cloud
+        operation.
+      </p>
+      <div class="cs-actions">
+        <a href="mailto:reva.wiki@gmail.com" class="btn">Email me</a>
+        <a href="/story.html" class="btn btn-outline">Read the full story</a>
+      </div>
+    </header>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">7+</span>
+        <span class="label">years in infrastructure</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">11</span>
+        <span class="label">AWS &amp; Azure certifications</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">20+</span>
+        <span class="label">AWS accounts under management</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">7</span>
+        <span class="label">engineers in the largest team led</span>
+      </div>
+    </div>
+
+    <section class="cs-section">
+      <h2>In short</h2>
       <p>
-        Reva Hristo Wiki Fonseca — a boy from a rural corner of Indonesia,
-        now thriving to become the country's go-to AIOps expert, one
-        automated workflow at a time. Grounded in cloud infrastructure with
-        growing expertise in agentic AI, focused on making IT operations
-        resilient so engineers can prioritize building over firefighting.
+        I automate the parts of IT operations that people are quietly absorbing
+        by hand. That has meant different things at different scales &mdash;
+        Puppet across 40+ HPC nodes at a research agency, Terraform pipelines
+        replacing 40-minute manual deploys, a multi-tenant ECS platform
+        replacing 100+ per-client EC2 instances, and most recently a unified AI
+        operations layer built on RAG, MCP servers and human-in-the-loop
+        governance.
+      </p>
+      <p>
+        The consistent thread is that I would rather the system handle it and
+        the human review it, than the other way round.
       </p>
     </section>
 
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="project-list">
-        <div class="project">
-          <h3>Senior System Engineer — Tech Mahindra</h3>
-          <div class="stack">January 2025 – Present</div>
-          <p>Leading AIOps R&amp;D for a major Indonesian telco; directs engineering across AWS and Kubernetes infrastructure; reduced incident response time and prevented revenue loss via a unified agentic AI system.</p>
+    <section class="cs-section">
+      <h2>Currently</h2>
+      <div class="role-list">
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>Tech Mahindra</h3>
+              <p class="role-title">Senior System Engineer &middot; AIOps R&amp;D</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Jan 2025 &mdash; Present</span>
+            </div>
+          </div>
+          <p class="role-summary">
+            Directing AIOps R&amp;D across 20+ AWS accounts and 10+ Kubernetes
+            clusters. MTTD ~20 &rarr; &le;5 min, MTTR ~30 &rarr; &le;10 min,
+            change throughput 1&ndash;2 &rarr; 4+ per day, and IDR 79B+ in yearly
+            revenue loss prevented through Direct Connect failover automation.
+          </p>
+          <div class="award">
+            <span class="award-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+            </span>
+            <p><strong>Innovator of the Month</strong> &mdash; Tech Mahindra Chief People Officer, June 2025.</p>
+          </div>
+        </article>
+      </div>
+      <p class="sec-note">
+        Full history in the <a href="/index.html#experience">experience section</a>
+        or on <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>.
+      </p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Certifications</h2>
+      <p>
+        Nine AWS certifications including three at Professional level
+        (Gen AI Developer, DevOps Engineer, Solutions Architect), plus Azure
+        Administrator Associate and Azure Fundamentals.
+      </p>
+      <p class="sec-note">
+        Full list on the <a href="/index.html#education">homepage</a>, verifiable via
+        <a href="https://www.credly.com/users/revawiki" target="_blank" rel="noopener">Credly</a>.
+      </p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Education</h2>
+      <div class="edu-list">
+        <div class="edu">
+          <div class="edu-meta">2023 &middot; UIN Syarif Hidayatullah Jakarta</div>
+          <h4>Bachelor of Computer Science</h4>
+          <p>Completed alongside full-time work.</p>
         </div>
-        <div class="project">
-          <h3>Senior DevOps Engineer — PT HM Sampoerna Tbk.</h3>
-          <div class="stack">June 2024 – December 2024</div>
-          <p>Maintained SLAs for the application portfolio; led console-to-Terraform migration; standardized legacy AWS accounts to Philip Morris International compliance; automated repetitive tasks via Jenkins.</p>
-        </div>
-        <div class="project">
-          <h3>DevOps Lead — PT Telkom Indonesia Tbk</h3>
-          <div class="stack">April 2022 – May 2024</div>
-          <p>Promoted to lead the DevOps team; architected a multi-tenant AWS ECS platform; migrated Singapore to Jakarta; accelerated deployments via Bitbucket CI/CD.</p>
-        </div>
-        <div class="project">
-          <h3>Technical Support Engineer — PT Telkom Indonesia Tbk</h3>
-          <div class="stack">August 2020 – April 2022</div>
-          <p>Supported Netmonk clients with installations and troubleshooting; built Terraform/Ansible deployment pipelines; improved incident response through Grafana observability.</p>
-        </div>
-        <div class="project">
-          <h3>System Administrator — BRIN, Aviation Technology Research Center</h3>
-          <div class="stack">June 2020 – August 2020</div>
-          <p>Built an HPC lab from scratch; planned network topology; automated OS installation and cluster configuration.</p>
-        </div>
-        <div class="project">
-          <h3>Junior System Administrator — BRIN, Informatics Research Center</h3>
-          <div class="stack">February 2019 – December 2019</div>
-          <p>Maintained the HPC lab; repaired nodes; automated installations; implemented Puppet configuration management.</p>
+        <div class="edu">
+          <div class="edu-meta">2016 &middot; SMKN 3 Bogor</div>
+          <h4>Vocational Diploma in Computer Networks</h4>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2>Skills</h2>
-      <div class="highlights">
-        <div class="card">
-          <h3>AIOps &amp; AI Automation</h3>
-          <p>Agent Swarm, RAG &amp; Knowledge Base, MCP Server, Human-in-the-Loop, Guardrails, Amazon Bedrock, Copilot Studio, Azure AI Foundry, Dify, n8n</p>
-        </div>
-        <div class="card">
-          <h3>Cloud &amp; Infra</h3>
-          <p>AWS, Azure, GCP, Alibaba Cloud, DigitalOcean, Kubernetes, Docker, Terraform, Ansible, Puppet</p>
-        </div>
-        <div class="card">
-          <h3>DevOps &amp; DevSecOps</h3>
-          <p>Bitbucket Pipeline, Jenkins, GitLab, Grafana, Datadog, Prometheus, PagerDuty, SonarQube, Snyk, Trivy, Vault</p>
-        </div>
-        <div class="card">
-          <h3>Languages</h3>
-          <p>Python, Bash, PowerShell, Go</p>
-        </div>
+    <section class="cs-section">
+      <h2>Elsewhere</h2>
+      <div class="cta">
+        <a href="mailto:reva.wiki@gmail.com" class="btn">Email</a>
+        <a href="https://linkedin.com/in/revawiki" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/revawiki" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
 
-    <section class="highlights">
-      <div class="card">
-        <h3>Education</h3>
-        <p>
-          B.Comp.Sci — UIN Syarif Hidayatullah Jakarta (2023)<br />
-          Vocational Diploma, Computer Networks — SMKN 3 Bogor (2016)
-        </p>
-      </div>
-      <div class="card">
-        <h3>Contact</h3>
-        <p><a href="mailto:reva.wiki@gmail.com">reva.wiki@gmail.com</a></p>
-      </div>
-      <div class="card">
-        <h3>Elsewhere</h3>
-        <p>
-          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a><br />
-          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
-        </p>
-      </div>
-    </section>
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/story.html" class="cs-next-card">
+        <span class="cs-next-label">The long version</span>
+        <strong>Story</strong>
+        <span>From a vocational diploma to directing AIOps R&amp;D</span>
+      </a>
+      <a href="/projects.html" class="cs-next-card">
+        <span class="cs-next-label">See the work</span>
+        <strong>Projects</strong>
+        <span>Case studies with the numbers behind them</span>
+      </a>
+    </nav>
   </main>
 
   <div id="chat-widget" class="chat-widget">
@@ -119,8 +166,49 @@
     </div>
   </div>
 
-  <footer>
-    <p>&copy; <span id="year"></span> Reva Wiki</p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">Reva Wiki</a>
+        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
+      </div>
+      <nav class="footer-nav" aria-label="Site map">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/index.html">Home</a>
+          <a href="/story.html">Story</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#experience">Experience</a>
+          <a href="/index.html#skills">Skills</a>
+        </div>
+        <div class="footer-col">
+          <h5>Work</h5>
+          <a href="/projects.html">All projects</a>
+          <a href="/case-study-copilot.html">Unified AI Ops</a>
+          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
+          <a href="/case-study-terraform.html">Terraform migration</a>
+          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
+        </div>
+        <div class="footer-col">
+          <h5>Writing</h5>
+          <a href="/articles.html">All articles</a>
+          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
+          <a href="/article-yaml-terraform.html">YAML over HCL</a>
+          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
+        </div>
+        <div class="footer-col">
+          <h5>Elsewhere</h5>
+          <a href="mailto:reva.wiki@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
+      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+    </div>
   </footer>
 
   <script src="/js/chat.js"></script>

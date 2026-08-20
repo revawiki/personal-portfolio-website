@@ -1,0 +1,136 @@
+# Reva Hristo Wiki Fonseca
+
+> AIOps Builder · DevOps Expert · Cloud Specialist — transforming traditional IT operations into a highly automated ecosystem
+
+## Summary
+
+IT infrastructure and AIOps specialist based in Bogor, Indonesia. 7+ years across
+cloud infrastructure, DevOps, and — most recently — agentic AI applied to IT
+operations. Currently leading AIOps R&D for a major Indonesian telco at Tech
+Mahindra. Focused on making operations resilient enough that engineers build
+instead of firefight.
+
+## Contact
+
+- **Location:** Bogor, Indonesia
+- **Email:** reva.wiki@gmail.com
+- **GitHub:** https://github.com/revawiki
+- **LinkedIn:** https://linkedin.com/in/revawiki
+- **Website:** https://revawiki.io
+
+## Core Competencies
+
+- **AIOps & AI Automation:** agent swarms, RAG & knowledge bases, MCP servers, human-in-the-loop, guardrails
+- **Cloud Architecture:** hybrid and multi-cloud design, container orchestration, cost optimization
+- **Infrastructure as Code:** Terraform, Ansible, Puppet, config-driven provisioning, drift elimination
+- **Observability & SRE:** metrics, logs, traces, SLO design, anomaly detection, incident response
+- **CI/CD & DevSecOps:** GitOps workflow, zero-downtime deploys, pipeline-integrated security scanning
+- **Enablement:** runbooks, SOPs, internal tooling, training
+
+## Work Experience
+
+### Tech Mahindra (2025 - Present) — Senior System Engineer
+Leading AIOps R&D for a major Indonesian telco.
+- Built a unified L1 copilot correlating monitoring, ITSM/CMDB, docs, and comms into one triage layer
+- Led an R&D team of 4 building AI-driven automation across 20+ AWS accounts and 10+ Kubernetes clusters
+- Automatic anomaly detection cut MTTD from ~20 to <=5 minutes; AI-assisted first-level RCA cut MTTR from ~30 to <=10 minutes
+- Automatic MOP (Method-of-Procedure) checker cut review cycles ~60 -> ~20 minutes and raised throughput from 1-2 to 4+ change requests/day
+- Automatic AWS Direct Connect failover eliminated manual switchover, preventing IDR 79B+ in yearly revenue loss from recurrent fiber-optic outages
+- Recognized as Innovator of the Month by Tech Mahindra's Chief People Officer, June 2025
+- Case study: https://revawiki.io/case-study-copilot.html
+
+### PT HM Sampoerna Tbk. (2024) — Senior DevOps Engineer
+Philip Morris International group. Owned SLAs while migrating legacy AWS accounts
+onto compliant GitOps provisioning.
+- Led a team of 7 engineers through the console-to-Terraform migration across dev/staging/production
+- Replaced per-environment HCL with one codebase driven by per-environment YAML (for_each + TF_VAR_env)
+- Standardized inherited legacy AWS configurations across 40+ accounts to PMI global compliance
+- Reduced AWS infrastructure cost for the SEA region ~55% via rightsizing, reservation optimization and eliminating redundant resources
+- Eliminated 1-2 hours of daily repetitive service-request work through targeted Jenkins automations
+- Case study: https://revawiki.io/case-study-terraform.html
+
+### PT Telkom Indonesia Tbk (2022 - 2024) — DevOps Lead
+Netmonk product. Promoted to lead the DevOps team.
+- Architected a multi-tenant AWS ECS platform replacing 100+ single-tenant EC2 instances
+- Cut AWS infrastructure cost ~70%
+- Migrated from AWS Singapore to the new AWS Jakarta region
+- Halved deploy time (10 -> 5 min) via DevSecOps-integrated Bitbucket pipeline
+- Case study: https://revawiki.io/case-study-ecs.html
+
+### PT Telkom Indonesia Tbk (2020 - 2022) — Technical Support Engineer
+- Reduced deployment time from ~40 to ~10 minutes through Terraform + Ansible provisioned pipelines
+- Reduced MTTR from ~30 to ~15 minutes by implementing a Grafana-based observability system
+
+### BRIN — National Research & Innovation Agency (2019 - 2020) — System Administrator
+- Rebuilt legacy HPC lab infrastructure by repairing 20+ broken nodes, avoiding new hardware purchases
+- Implemented Puppet configuration management, ensuring consistency across 40+ HPC nodes
+
+### PT Griya Mitra Persada (2018) — IT Support Lead
+- Led a team of 5 across 50+ end-devices throughout the Asian Games 2018 event
+
+## Awards
+
+- **Innovator of the Month** (Tech Mahindra, June 2025) — awarded by the Chief People Officer for client-acknowledged AI enablement initiatives in cloud operations
+
+## Certifications
+
+### AWS (9)
+- AWS Certified Gen AI Developer - Professional
+- AWS Certified DevOps Engineer - Professional
+- AWS Certified Solutions Architect - Professional
+- AWS Certified Machine Learning Engineer - Associate
+- AWS Certified SysOps Administrator - Associate
+- AWS Certified Solutions Architect - Associate
+- AWS Certified Developer - Associate
+- AWS Certified AI Practitioner
+- AWS Certified Cloud Practitioner
+
+### Microsoft (2)
+- Microsoft Certified: Azure Administrator Associate
+- Microsoft Certified: Azure Fundamentals
+
+## Education
+
+- **2023** — UIN Syarif Hidayatullah Jakarta: Bachelor of Computer Science
+- **2016** — SMKN 3 Bogor: Vocational Diploma, Computer Networks
+
+## Tech Stack
+
+- **AI / Agentic:** Amazon Bedrock, Microsoft Copilot Studio, Azure AI Foundry, Dify, n8n
+- **Cloud:** AWS, Azure, GCP, Alibaba Cloud, DigitalOcean
+- **Containers:** Kubernetes, Docker, ECS
+- **IaC:** Terraform, Ansible, Puppet
+- **CI/CD:** Bitbucket Pipelines, Jenkins, GitLab CI
+- **Observability:** Grafana, Datadog, New Relic, Elastic, Prometheus, PagerDuty
+- **DevSecOps:** SonarQube, Snyk, Trivy, Vault, Teleport, JFrog
+- **Languages:** Python, Bash, PowerShell, Go
+- **ITSM:** ServiceNow, BMC Remedy, Confluence, Notion
+
+## Languages
+
+- **Indonesian:** Native
+- **English:** Professional proficiency
+
+## Published Case Studies
+
+- [Unified AI Operations Ecosystem](https://revawiki.io/case-study-copilot.html): RAG + MCP + human-in-the-loop across 20+ AWS accounts. MTTD ~20 -> <=5 min, MTTR ~30 -> <=10 min, change throughput 1-2 -> 4+/day
+- [AWS Direct Connect Auto-Failover](https://revawiki.io/case-study-dx-failover.html): automated physical-layer failover, IDR 79B+ yearly revenue loss prevented. Code: github.com/revawiki/aws-direct-connect-auto-failover
+- [Console -> Terraform at 40+ Accounts](https://revawiki.io/case-study-terraform.html): one codebase, per-environment YAML config, ~55% SEA cost reduction
+- [Multi-Tenant ECS Platform Migration](https://revawiki.io/case-study-ecs.html): 100+ EC2 deployments consolidated, ~70% cost reduction, 2x faster deploys
+
+## Articles
+
+- [Why Your AIOps Platform Needs Human-in-the-Loop](https://revawiki.io/article-aiops-hitl.html)
+- [YAML Over HCL: Making Terraform Safe for Non-Experts](https://revawiki.io/article-yaml-terraform.html)
+- [The Hidden Cost of One-Instance-Per-Client Architectures](https://revawiki.io/article-instance-per-client.html)
+
+## About This Site
+
+Interactive CV with a serverless Claude chatbot. Static frontend on S3/CloudFront,
+FastAPI on AWS Lambda behind API Gateway (via Mangum), API key in Secrets Manager,
+all provisioned with AWS CDK in Python. Source: https://github.com/revawiki
+
+## What I'm Looking For
+
+Senior remote or hybrid roles where infrastructure automation and applied AI meet:
+AIOps, Platform Engineering, SRE, or Cloud Architecture.

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Story — Reva Wiki</title>
+  <meta name="description" content="From a vocational school in Bogor and a lab of broken HPC nodes to directing AIOps R&D for Indonesia's largest telco cloud operation — the long version." />
+  <link rel="canonical" href="https://revawiki.io/story.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The Story — Reva Wiki" />
+  <meta property="og:description" content="From a vocational school in Bogor to directing AIOps R&D for a national telco." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Story</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">The long version</p>
+      <h1>Seven years of making infrastructure quieter</h1>
+      <p class="cs-deck">
+        The CV version is six bullet points and some percentages. This is the
+        one with the parts those bullets have to leave out — including the year
+        I spent fixing machines nobody wanted to fund replacements for.
+      </p>
+      <div class="cs-byline">
+        <span>Reva Wiki</span>
+        <span aria-hidden="true">·</span>
+        <span>Bogor, Indonesia</span>
+        <span aria-hidden="true">·</span>
+        <span>10 min read</span>
+      </div>
+    </header>
+
+    <nav class="cs-toc" aria-label="On this page">
+      <span class="cs-toc-label">On this page</span>
+      <a href="#start">Where it started</a>
+      <a href="#broken">A lab full of broken nodes</a>
+      <a href="#pager">Meeting the pager</a>
+      <a href="#lead">Being handed a team</a>
+      <a href="#enterprise">Enterprise scale</a>
+      <a href="#ai">The turn toward AI</a>
+      <a href="#next">What's next</a>
+    </nav>
+
+    <!-- TODO(reva): this is written from your CV timeline. The emotional beats
+         are inferred -- rewrite anything that doesn't sound like you. -->
+
+    <section id="start" class="cs-section">
+      <h2>Where it started</h2>
+      <p>
+        I finished a vocational diploma in computer networks at SMKN 3 Bogor in
+        2016. Not a computer science degree — a trade qualification, the kind
+        that teaches you to crimp a cable properly and read a switch
+        configuration before it teaches you what an algorithm is.
+      </p>
+      <p>
+        My first real responsibility came in 2018, leading a team of five keeping
+        50+ end-devices alive through the Asian Games. Big event, unglamorous
+        work, and a very clear definition of success: nobody notices you exist.
+      </p>
+      <div class="callout">
+        <p>
+          That turned out to be the whole career in miniature. The best
+          infrastructure work is invisible. You only get attention when something
+          breaks.
+        </p>
+      </div>
+    </section>
+
+    <section id="broken" class="cs-section">
+      <h2>A lab full of broken nodes</h2>
+      <p>
+        In 2019 I joined BRIN — Indonesia's national research agency — as a
+        junior system administrator on the HPC lab. Two things defined that
+        period.
+      </p>
+      <p>
+        The first: I repaired <strong>20+ broken nodes</strong> rather than
+        replacing them. There was no budget for new hardware, so the choice was
+        fix what exists or run degraded. I learned more about how machines
+        actually fail in that year than in any subsequent one.
+      </p>
+      <p>
+        The second: with <strong>40+ HPC nodes</strong> to keep consistent, doing
+        it by hand stopped being viable. I implemented Puppet for configuration
+        management — my first real encounter with the idea that infrastructure
+        should be <em>described</em> rather than <em>administered</em>.
+      </p>
+      <p>
+        I didn't have the vocabulary for it then. But that's where the through-line
+        of everything since actually starts.
+      </p>
+    </section>
+
+    <section id="pager" class="cs-section">
+      <h2>Meeting the pager</h2>
+      <p>
+        In late 2020 I joined PT Telkom Indonesia as a technical support engineer
+        on Netmonk, their network monitoring product. Client installations,
+        troubleshooting, incidents — the front line.
+      </p>
+      <p>
+        Two things bothered me enough to fix them. Deployments took around 40
+        minutes of manual steps, so I built Terraform + Ansible provisioned
+        pipelines and got it to <strong>~10</strong>. And incidents took around
+        30 minutes to resolve largely because nobody could see what was happening,
+        so I implemented Grafana-based observability and got MTTR to
+        <strong>~15</strong>.
+      </p>
+      <p>
+        Nobody assigned me either of those. They were just the parts of the job
+        that felt stupid to keep doing by hand.
+      </p>
+    </section>
+
+    <section id="lead" class="cs-section">
+      <h2>Being handed a team</h2>
+      <p>
+        In 2022 I was promoted to lead the DevOps initiative — four engineers,
+        and a platform that had quietly grown into 100+ monolithic EC2
+        deployments, roughly one per client.
+      </p>
+      <p>
+        That architecture wasn't wrong when it was chosen. It became wrong
+        somewhere around client thirty, and nobody had a reason to stop and say
+        so. We re-architected onto a multi-tenant AWS ECS platform and combined
+        it with the Singapore → Jakarta regional move, which together cut
+        infrastructure cost <strong>~70%</strong>.
+      </p>
+      <p>
+        The lesson that stuck wasn't technical. It was that architectures expire
+        silently, and someone has to be willing to go looking.
+      </p>
+      <a href="/case-study-ecs.html" class="inline-link">Read the full case study →</a>
+    </section>
+
+    <section id="enterprise" class="cs-section">
+      <h2>Enterprise scale</h2>
+      <p>
+        2024 took me to PT HM Sampoerna — part of Philip Morris International —
+        as a senior DevOps engineer leading seven engineers. Different world:
+        global compliance standards, 40+ inherited AWS accounts, and an estate
+        built through years of console clicks.
+      </p>
+      <p>
+        We migrated it onto Terraform with a GitOps branching strategy. The
+        design decision I'm still proudest of is deliberately boring: one
+        codebase, per-environment YAML, so an engineer who doesn't know HCL can
+        still make a safe change. Standardizing the estate also exposed enough
+        waste to cut SEA cloud spend <strong>~55%</strong>.
+      </p>
+      <a href="/case-study-terraform.html" class="inline-link">Read the full case study →</a>
+    </section>
+
+    <section id="ai" class="cs-section">
+      <h2>The turn toward AI</h2>
+      <p>
+        In January 2025 I joined Tech Mahindra to direct AIOps R&amp;D for
+        Indonesia's largest telco cloud operation — 20+ AWS accounts, 10+
+        Kubernetes clusters, a team of four, and a mandate to make SLA attainment
+        stop depending on how many experienced people happen to be awake.
+      </p>
+      <p>
+        It's the same instinct from the HPC lab, pointed at a harder problem.
+        Anomaly detection took MTTD from ~20 minutes to ≤5. AI-assisted
+        first-level RCA took MTTR from ~30 to ≤10. A Method-of-Procedure checker
+        roughly tripled change throughput. And a Direct Connect failover
+        automation removed a manual switchover that recurrent fiber cuts kept
+        demanding — accounting for IDR 79B+ in yearly revenue loss prevented.
+      </p>
+      <p>
+        In June 2025 that work was recognized as
+        <a href="/index.html#recognition">Innovator of the Month</a> by the Chief
+        People Officer.
+      </p>
+      <div class="callout callout-warn">
+        <p>
+          The thing I care about isn't that AI does the work. It's that the
+          human stays in the loop and out of the path — reviewing decisions
+          instead of executing steps.
+        </p>
+      </div>
+      <a href="/article-aiops-hitl.html" class="inline-link">Read: why AIOps needs human-in-the-loop →</a>
+    </section>
+
+    <section id="next" class="cs-section">
+      <h2>What's next</h2>
+      <p>
+        From crimping cables in Bogor to architecting agentic operations for a
+        national telco, and it still feels early. The problems keep getting
+        bigger — more scale, more industries, more of the decision-making moving
+        into systems that need to be governed properly.
+      </p>
+      <p>
+        Which is the part I actually want. Bigger fleets, harder failures, and
+        the ongoing question of how much you can safely automate before you need
+        a human to say yes.
+      </p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Timeline</h2>
+      <ol class="timeline">
+        <li>
+          <span class="tl-date">2016</span>
+          <div>
+            <h4>Vocational diploma, computer networks</h4>
+            <p>SMKN 3 Bogor. Trade qualification, not a CS degree.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2018</span>
+          <div>
+            <h4>Asian Games — first team lead</h4>
+            <p>PT Griya Mitra Persada. Five people, 50+ devices, zero drama.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2019</span>
+          <div>
+            <h4>HPC lab, and the first taste of IaC</h4>
+            <p>BRIN. Repaired 20+ nodes; Puppet across 40+ of them.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2020</span>
+          <div>
+            <h4>Front line at Telkom</h4>
+            <p>Deploys ~40 → ~10 min with Terraform + Ansible. MTTR ~30 → ~15 with Grafana.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2022</span>
+          <div>
+            <h4>Promoted to DevOps Lead</h4>
+            <p>100+ EC2 deployments → multi-tenant ECS. ~70% cost reduction.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2023</span>
+          <div>
+            <h4>Bachelor of Computer Science</h4>
+            <p>UIN Syarif Hidayatullah Jakarta, completed alongside full-time work.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2024</span>
+          <div>
+            <h4>Compliance-grade GitOps at PMI scale</h4>
+            <p>PT HM Sampoerna. 40+ accounts standardized, ~55% SEA cost reduction.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-date">2025</span>
+          <div>
+            <h4>Directing AIOps R&amp;D</h4>
+            <p>Tech Mahindra. MTTD 4x, MTTR 3x, IDR 79B+ prevented. Innovator of the Month.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/projects.html" class="cs-next-card">
+        <span class="cs-next-label">See the work</span>
+        <strong>Projects</strong>
+        <span>Case studies with the numbers behind them</span>
+      </a>
+      <a href="/index.html#contact" class="cs-next-card">
+        <span class="cs-next-label">Get in touch</span>
+        <strong>Let's discuss</strong>
+        <span>Email, LinkedIn, or ask the chatbot</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">Reva Wiki</a>
+        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
+      </div>
+      <nav class="footer-nav" aria-label="Site map">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/index.html">Home</a>
+          <a href="/story.html">Story</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#experience">Experience</a>
+          <a href="/index.html#skills">Skills</a>
+        </div>
+        <div class="footer-col">
+          <h5>Work</h5>
+          <a href="/projects.html">All projects</a>
+          <a href="/case-study-copilot.html">Unified AI Ops</a>
+          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
+          <a href="/case-study-terraform.html">Terraform migration</a>
+          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
+        </div>
+        <div class="footer-col">
+          <h5>Writing</h5>
+          <a href="/articles.html">All articles</a>
+          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
+          <a href="/article-yaml-terraform.html">YAML over HCL</a>
+          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
+        </div>
+        <div class="footer-col">
+          <h5>Elsewhere</h5>
+          <a href="mailto:reva.wiki@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
+      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>

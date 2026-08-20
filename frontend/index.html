@@ -3,7 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reva Wiki — IT Infrastructure & AIOps Specialist</title>
+  <title>Reva Wiki — AIOps Builder · DevOps Expert · Cloud Specialist</title>
+  <meta name="description" content="IT Infrastructure & AIOps Specialist with 7+ years running enterprise-scale cloud across telco, FMCG and research. AI-driven automation for cloud operations." />
+  <link rel="canonical" href="https://revawiki.io/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Reva Wiki" />
+  <meta property="og:title" content="Reva Wiki — AIOps Builder · DevOps Expert · Cloud Specialist" />
+  <meta property="og:description" content="7+ years running enterprise-scale cloud infrastructure. Currently directing AIOps R&D for Indonesia's largest telco cloud operations." />
+  <meta property="og:url" content="https://revawiki.io/" />
+  <meta property="og:image" content="https://revawiki.io/assets/avatar.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Reva Hristo Wiki Fonseca",
+    "alternateName": "revawiki",
+    "url": "https://revawiki.io/",
+    "image": "https://revawiki.io/assets/avatar.jpg",
+    "email": "reva.wiki@gmail.com",
+    "jobTitle": "IT Infrastructure & AIOps Specialist",
+    "worksFor": { "@type": "Organization", "name": "Tech Mahindra" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Bogor", "addressCountry": "ID" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "UIN Syarif Hidayatullah Jakarta" }
+    ],
+    "sameAs": [
+      "https://github.com/revawiki",
+      "https://linkedin.com/in/revawiki"
+    ],
+    "knowsAbout": ["AIOps", "DevOps", "Cloud Infrastructure", "Terraform", "Kubernetes", "AWS", "Observability", "Site Reliability Engineering"]
+  }
+  </script>
+
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -48,7 +82,7 @@
 
     <section class="story">
       <div class="story-text">
-        <p><span class="story-highlight">6+ years building</span> infrastructure in the silence.</p>
+        <p><span class="story-highlight">7+ years building</span> infrastructure in the silence.</p>
         <p>From a rural corner of Indonesia, managing multiple large-scale systems.</p>
 
         <p class="story-gap">Passion drives the hunger for perfection.</p>
@@ -63,51 +97,694 @@
         <p class="story-gap story-bold">The grind never stops.</p>
         <p>Bigger scale. Harder problems. More complex industries.</p>
         <p><span class="story-highlight">Always ready for any kind of challenge.</span></p>
+        <p class="story-more"><a href="/story.html">Read the full story →</a></p>
       </div>
 
       <div class="story-ctas">
-        <a href="/about.html#experience" class="story-btn">
+        <a href="#experience" class="story-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
           My Journey
         </a>
-        <a href="/projects.html" class="story-btn">
+        <a href="#projects" class="story-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
           My Signature Work
         </a>
-        <a href="mailto:reva.wiki@gmail.com" class="story-btn">
+        <a href="#contact" class="story-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          Let's Discuss More
+          Let's Discuss
         </a>
         <button id="ask-me-btn" type="button" class="story-btn story-btn-primary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-          Ask Me Anything
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"></path><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+          Ask Me
         </button>
       </div>
     </section>
 
-    <section class="hero-note">
-      <p>
-        This site is itself a demo: static frontend on S3/CloudFront, a
-        serverless FastAPI chatbot on Lambda, all defined in AWS CDK (Python).
+    <!-- ============================ EXPERIENCE ============================ -->
+    <section id="experience" class="sec sec-centered">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        </span>
+        <h2 class="sec-title">Work Experience</h2>
+      </div>
+      <p class="sec-lede">
+        7+ years designing and running enterprise-scale cloud infrastructure across
+        <em>telco, FMCG, and national research</em> — supporting B2B and B2C production
+        workloads that serve millions of users.
       </p>
-      <div class="cta">
-        <a href="/projects.html" class="btn">See projects</a>
-        <a href="https://github.com/revawiki" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
+
+      <div class="competency-grid competency-grid-3">
+        <div class="competency">
+          <h4>AIOps &amp; AI Automation</h4>
+          <p>Agent swarm · RAG &amp; knowledge base · MCP server · human-in-the-loop · guardrails</p>
+        </div>
+        <div class="competency">
+          <h4>Cloud Infrastructure</h4>
+          <p>Container orchestration · hybrid architecture · infrastructure as code · cost optimization</p>
+        </div>
+        <div class="competency">
+          <h4>DevOps</h4>
+          <p>CI/CD pipeline · GitOps workflow · zero-downtime deployment · monitoring, logging &amp; traceability</p>
+        </div>
+      </div>
+
+      <div class="role-list">
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>Tech Mahindra</h3>
+              <p class="role-title">Senior System Engineer</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Jan 2025 — Present</span>
+              <span>Telco CloudOps · Indonesia</span>
+            </div>
+          </div>
+          <p class="role-summary">
+            Directing AIOps R&amp;D to streamline cloud operations through AI and automation
+            for consistent SLA attainment — leading a team of 4 engineers across
+            20+ AWS accounts and 10+ Kubernetes clusters in production.
+          </p>
+          <ul class="role-points">
+            <li>Built automatic infrastructure anomaly detection that cut <strong>MTTD from ~20 to ≤5 minutes</strong>; a later iteration added AI-assisted first-level RCA, cutting <strong>MTTR from ~30 to ≤10 minutes</strong></li>
+            <li>Introduced an automatic MOP (Method-of-Procedure) checker flagging invalid steps pre-deployment — review cycles dropped <strong>~60 → ~20 minutes</strong>, throughput rose from <strong>1–2 to 4+ change requests per day</strong></li>
+            <li>Developed automatic AWS Direct Connect failover that eliminated manual switchover, <strong>preventing IDR 79B+ in yearly revenue loss</strong> from recurrent fiber-optic outages</li>
+            <li>Architected a unified AI operations ecosystem integrating RAG knowledge base, MCP servers, and human-in-the-loop governance as the foundation for continued CloudOps AI work</li>
+          </ul>
+          <div class="award">
+            <span class="award-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+            </span>
+            <p>
+              <strong>Innovator of the Month</strong> — awarded by Tech Mahindra's Chief
+              People Officer, June 2025, for client-acknowledged AI enablement initiatives
+              in cloud operations.
+            </p>
+          </div>
+          <div class="badges">
+            <span class="badge">Amazon Bedrock</span>
+            <span class="badge">MCP</span>
+            <span class="badge">RAG</span>
+            <span class="badge">Kubernetes</span>
+            <span class="badge">Python</span>
+          </div>
+          <div class="role-links">
+            <a href="/case-study-copilot.html" class="inline-link">Case study: Unified AI Ops Ecosystem →</a>
+            <a href="/case-study-dx-failover.html" class="inline-link">Case study: Direct Connect auto-failover →</a>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>PT HM Sampoerna Tbk.</h3>
+              <p class="role-title">Senior DevOps Engineer</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Jun 2024 — Dec 2024</span>
+              <span>Philip Morris International</span>
+            </div>
+          </div>
+          <p class="role-summary">
+            Led a team of 7 engineers moving highly critical application infrastructure
+            off console-based provisioning and onto Terraform, under Philip Morris
+            International's global security and governance standards.
+          </p>
+          <ul class="role-points">
+            <li>Enforced a consistent GitOps branching strategy across dev, staging, and production environments</li>
+            <li>Evaluated and standardized inherited legacy AWS configurations across <strong>40+ accounts</strong> for PMI global compliance alignment</li>
+            <li>Reduced AWS infrastructure cost for the SEA region <strong>~55%</strong> through rightsizing, reservation optimization, and elimination of redundant resources</li>
+            <li>Eliminated <strong>1–2 hours of daily repetitive service-request work</strong> via targeted Jenkins automations, freeing team capacity for higher-value work</li>
+          </ul>
+          <div class="badges">
+            <span class="badge">Terraform</span>
+            <span class="badge">GitOps</span>
+            <span class="badge">Jenkins</span>
+            <span class="badge">AWS</span>
+            <span class="badge">FinOps</span>
+          </div>
+          <div class="role-links">
+            <a href="/case-study-terraform.html" class="inline-link">Case study: Console → Terraform at 40+ accounts →</a>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>PT Telkom Indonesia Tbk</h3>
+              <p class="role-title">DevOps Lead</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Apr 2022 — May 2024</span>
+              <span>Netmonk</span>
+            </div>
+          </div>
+          <p class="role-summary">
+            Promoted to lead the DevOps initiative, heading a team of 4 engineers to
+            re-architect the platform from monolithic per-client deployments into a
+            scalable multi-tenant, cloud-native setup.
+          </p>
+          <ul class="role-points">
+            <li>Architected an AWS ECS-based platform transitioning from <strong>100+ monolithic EC2 deployments</strong> to multi-tenant cloud-native services</li>
+            <li>Reduced AWS infrastructure cost <strong>~70%</strong> by re-architecting the regional migration from Singapore to Jakarta</li>
+            <li>Cut deployment time from <strong>~10 to ~5 minutes</strong> through Bitbucket CI/CD pipeline implementation</li>
+          </ul>
+          <div class="badges">
+            <span class="badge">AWS ECS</span>
+            <span class="badge">Multi-Tenancy</span>
+            <span class="badge">Bitbucket CI/CD</span>
+            <span class="badge">Docker</span>
+          </div>
+          <div class="role-links">
+            <a href="/case-study-ecs.html" class="inline-link">Case study: Multi-tenant ECS migration →</a>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>PT Telkom Indonesia Tbk</h3>
+              <p class="role-title">Technical Support Engineer</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Aug 2020 — Apr 2022</span>
+              <span>Netmonk</span>
+            </div>
+          </div>
+          <ul class="role-points">
+            <li>Reduced deployment time from <strong>~40 to ~10 minutes</strong> through Terraform + Ansible provisioned pipelines</li>
+            <li>Reduced MTTR from <strong>~30 to ~15 minutes</strong> by implementing a Grafana-based observability system</li>
+          </ul>
+          <div class="badges">
+            <span class="badge">Terraform</span>
+            <span class="badge">Ansible</span>
+            <span class="badge">Grafana</span>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>BRIN — National Research &amp; Innovation Agency</h3>
+              <p class="role-title">System Administrator · Junior System Administrator</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Feb 2019 — Aug 2020</span>
+              <span>Aviation Tech &amp; Informatics Research Centers</span>
+            </div>
+          </div>
+          <ul class="role-points">
+            <li>Rebuilt legacy HPC lab infrastructure by repairing <strong>20+ broken nodes</strong>, avoiding new hardware purchases entirely</li>
+            <li>Implemented configuration management with Puppet, ensuring infrastructure consistency across <strong>40+ HPC nodes</strong></li>
+          </ul>
+          <div class="badges">
+            <span class="badge">HPC</span>
+            <span class="badge">Puppet</span>
+            <span class="badge">Linux</span>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <div>
+              <h3>PT Griya Mitra Persada</h3>
+              <p class="role-title">IT Support Lead</p>
+            </div>
+            <div class="role-meta">
+              <span class="role-dates">Jul 2018 — Sep 2018</span>
+              <span>Asian Games 2018</span>
+            </div>
+          </div>
+          <ul class="role-points">
+            <li>Led a team of 5 keeping <strong>50+ end-devices</strong> running smoothly throughout the Asian Games event</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="sec-note">
+        Full history and dates on <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>.
+      </p>
+    </section>
+
+    <!-- ============================ RECOGNITION =========================== -->
+    <section id="recognition" class="sec sec-centered">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15.09 8.26 22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+        </span>
+        <h2 class="sec-title">Recognition</h2>
+      </div>
+      <p class="sec-lede">
+        What the people I worked alongside had to say.
+      </p>
+
+      <div class="quote-grid">
+        <!-- TODO(reva): paste real LinkedIn recommendations here. LinkedIn blocks
+             automated access, so these are structural placeholders only -- do not
+             ship with the {{...}} text still in place. -->
+        <figure class="quote-card">
+          <blockquote>
+            {{Paste the recommendation text from linkedin.com/in/revawiki/details/recommendations/}}
+          </blockquote>
+          <figcaption>
+            <strong>{{Recommender Name}}</strong>
+            <span>{{Their Title}} @ Tech Mahindra</span>
+          </figcaption>
+        </figure>
+        <figure class="quote-card">
+          <blockquote>
+            {{Paste the recommendation text from linkedin.com/in/revawiki/details/recommendations/}}
+          </blockquote>
+          <figcaption>
+            <strong>{{Recommender Name}}</strong>
+            <span>{{Their Title}} @ PT Telkom Indonesia</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="award-strip">
+        <div class="award-item">
+          <span class="award-year">2025</span>
+          <div>
+            <h4>Innovator of the Month</h4>
+            <p>Tech Mahindra · awarded by the Chief People Officer for client-acknowledged AI enablement in cloud operations</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="highlights">
-      <div class="card">
-        <h3>Product</h3>
-        <p>Led a unified AIOps platform that cut MTTR 4x and prevented IDR 79B+ in annual revenue loss.</p>
+    <!-- ============================= PROJECTS ============================= -->
+    <section id="projects" class="sec sec-centered">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        </span>
+        <h2 class="sec-title">Signature Work</h2>
       </div>
-      <div class="card">
-        <h3>AI</h3>
-        <p>Chat with the bot in the corner — it's powered by Claude and knows about this site.</p>
+      <p class="sec-lede">
+        The systems worth writing up — each one started as a bottleneck somebody
+        was absorbing manually.
+      </p>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-card-head">
+            <h3>Unified AI Operations Ecosystem</h3>
+            <span class="tag tag-live">In production</span>
+          </div>
+          <p>
+            RAG knowledge base, MCP servers, and human-in-the-loop governance
+            integrated into one CloudOps layer — anomaly detection plus AI-assisted
+            first-level RCA across 20+ AWS accounts and 10+ Kubernetes clusters.
+          </p>
+          <div class="stat-inline">
+            <span><strong>MTTD</strong> ~20 → ≤5 min</span>
+            <span><strong>MTTR</strong> ~30 → ≤10 min</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Amazon Bedrock</span>
+            <span class="badge">MCP</span>
+            <span class="badge">RAG</span>
+            <span class="badge">HITL</span>
+          </div>
+          <a href="/case-study-copilot.html" class="inline-link">Read the case study →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-head">
+            <h3>AWS Direct Connect Auto-Failover</h3>
+            <span class="tag tag-live">In production</span>
+          </div>
+          <p>
+            An all-around approach for automating Direct Connect failover during
+            physical-layer network incidents — removing the manual switchover that
+            recurrent fiber-optic outages used to demand.
+          </p>
+          <div class="stat-inline">
+            <span><strong>IDR 79B+</strong> yearly revenue loss prevented</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Python</span>
+            <span class="badge">AWS Direct Connect</span>
+            <span class="badge">Network Automation</span>
+          </div>
+          <div class="role-links">
+            <a href="/case-study-dx-failover.html" class="inline-link">Read the case study →</a>
+            <a href="https://github.com/revawiki/aws-direct-connect-auto-failover" class="inline-link" target="_blank" rel="noopener">View code →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-head">
+            <h3>Console → Terraform at 40+ Accounts</h3>
+            <span class="tag">Shipped</span>
+          </div>
+          <p>
+            Migrated highly critical application infrastructure off console-based
+            provisioning onto Terraform with a consistent GitOps branching strategy,
+            aligning inherited legacy AWS accounts to PMI global standards.
+          </p>
+          <div class="stat-inline">
+            <span><strong>~55%</strong> SEA cloud cost reduction</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Terraform</span>
+            <span class="badge">GitOps</span>
+            <span class="badge">Jenkins</span>
+          </div>
+          <a href="/case-study-terraform.html" class="inline-link">Read the case study →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-head">
+            <h3>Multi-Tenant ECS Platform</h3>
+            <span class="tag">Shipped</span>
+          </div>
+          <p>
+            Transitioned 100+ monolithic EC2 deployments into a scalable multi-tenant
+            AWS ECS platform, re-architecting the regional migration from Singapore
+            to Jakarta along the way.
+          </p>
+          <div class="stat-inline">
+            <span><strong>~70%</strong> cost reduction</span>
+            <span><strong>2x</strong> faster deploys</span>
+          </div>
+          <div class="badges">
+            <span class="badge">AWS ECS</span>
+            <span class="badge">Multi-Tenancy</span>
+            <span class="badge">Bitbucket CI/CD</span>
+          </div>
+          <a href="/case-study-ecs.html" class="inline-link">Read the case study →</a>
+        </article>
       </div>
-      <div class="card">
-        <h3>Cloud</h3>
-        <p>This site runs on S3, CloudFront, API Gateway, Lambda, and Secrets Manager — all provisioned with AWS CDK. Day job: AWS, Azure, GCP, Kubernetes, Terraform.</p>
+
+      <h3 class="sub-title">Lab &amp; Experiments</h3>
+      <p class="sec-lede">
+        Public repos where patterns get tried before they touch anything that pages me.
+      </p>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/revawiki/aws-api-mcp-chatbot-integration" target="_blank" rel="noopener">
+          <span class="repo-name">aws-api-mcp-chatbot-integration</span>
+          <span class="repo-lang">Python</span>
+          <p>Prototype integrating an AWS API MCP server with a messaging application</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/prometheus-blackbox-exporter-api-availabillity-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">prometheus-blackbox-exporter</span>
+          <span class="repo-lang">Shell</span>
+          <p>API availability monitoring — Prometheus + Blackbox Exporter with Grafana</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/acs-stack-cpe-stats-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">acs-stack-cpe-stats-monitoring</span>
+          <span class="repo-lang">JavaScript</span>
+          <p>GenieACS-based automation and statistics collection for CPE devices</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/tig-stack-routeros-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">tig-stack-routeros-monitoring</span>
+          <span class="repo-lang">RouterOS</span>
+          <p>TIG stack with Telegraf HTTP listener monitoring RouterOS devices via webhook</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/preprovisioned-magento-on-minikube" target="_blank" rel="noopener">
+          <span class="repo-name">preprovisioned-magento-on-minikube</span>
+          <span class="repo-lang">Shell</span>
+          <p>Magento2 stack on Minikube via Helm — MariaDB + OpenSearch + Valkey</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/prometheus-kong-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">prometheus-kong-monitoring</span>
+          <span class="repo-lang">Shell</span>
+          <p>Kong monitoring stack using the Prometheus plugin</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/tig-stack-mongo-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">tig-stack-mongo-monitoring</span>
+          <span class="repo-lang">JavaScript</span>
+          <p>MongoDB usage monitoring on a simple TIG stack schema</p>
+        </a>
+        <a class="repo" href="https://github.com/revawiki/preprovisioned-grafana-mysql-data-viz" target="_blank" rel="noopener">
+          <span class="repo-name">preprovisioned-grafana-mysql-data-viz</span>
+          <span class="repo-lang">Dockerfile</span>
+          <p>Pre-configured Grafana visualization with MySQL as datasource</p>
+        </a>
+      </div>
+      <p class="sec-note">
+        More on <a href="https://github.com/revawiki" target="_blank" rel="noopener">github.com/revawiki</a>.
+      </p>
+    </section>
+
+    <!-- ============================= SHARING ============================== -->
+    <section id="sharing" class="sec sec-centered">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        </span>
+        <h2 class="sec-title">Sharing</h2>
+      </div>
+      <p class="sec-lede">
+        Writing and talks on automation, observability, and agentic operations.
+      </p>
+
+      <div class="share-grid">
+        <a href="/article-aiops-hitl.html" class="share-card">
+          <div class="share-meta">Article · 2025</div>
+          <h4>Why Your AIOps Platform Needs Human-in-the-Loop</h4>
+          <p>Automate the analysis, not the decision — where the approval gate belongs and why.</p>
+        </a>
+        <a href="/article-yaml-terraform.html" class="share-card">
+          <div class="share-meta">Article · 2024</div>
+          <h4>YAML Over HCL: Making Terraform Safe for Non-Experts</h4>
+          <p>One codebase, per-environment config, and engineers who don't need to learn HCL to ship.</p>
+        </a>
+        <a href="/article-instance-per-client.html" class="share-card">
+          <div class="share-meta">Article · 2023</div>
+          <h4>The Hidden Cost of One-Instance-Per-Client</h4>
+          <p>What 100+ single-tenant instances actually cost, and what shared infrastructure recovered.</p>
+        </a>
+      </div>
+
+      <h3 class="sub-title">Speaking &amp; Enablement</h3>
+      <!-- TODO(reva): swap the {{...}} fields and /assets/talks/*.jpg for the real
+           event details and photos from your LinkedIn posts. LinkedIn blocks
+           automated access so these could not be pulled in. -->
+      <div class="talk-list">
+        <article class="talk talk-with-photo">
+          <div class="talk-photo">
+            <img src="/assets/talks/talk-1.jpg" alt="" loading="lazy"
+                 onerror="this.closest('.talk-with-photo').classList.add('no-photo')" />
+            <span class="photo-fallback">Photo</span>
+          </div>
+          <div class="talk-body">
+            <div class="talk-meta">{{Year}} · {{Event / Venue}}</div>
+            <h4>{{Talk Title}}</h4>
+            <p>{{One or two sentences: audience, topic, and what they walked away with.}}</p>
+            <a href="#" class="inline-link">View the post →</a>
+          </div>
+        </article>
+        <article class="talk talk-with-photo">
+          <div class="talk-photo">
+            <img src="/assets/talks/talk-2.jpg" alt="" loading="lazy"
+                 onerror="this.closest('.talk-with-photo').classList.add('no-photo')" />
+            <span class="photo-fallback">Photo</span>
+          </div>
+          <div class="talk-body">
+            <div class="talk-meta">{{Year}} · {{Event / Venue}}</div>
+            <h4>{{Talk Title}}</h4>
+            <p>{{One or two sentences: audience, topic, and what they walked away with.}}</p>
+            <a href="#" class="inline-link">View the post →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================= EDUCATION & CERTS ========================== -->
+    <section id="education" class="sec sec-centered">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path></svg>
+        </span>
+        <h2 class="sec-title">Education &amp; Certifications</h2>
+      </div>
+
+      <div class="edu-list">
+        <div class="edu">
+          <div class="edu-meta">2023 · UIN Syarif Hidayatullah Jakarta</div>
+          <h4>Bachelor of Computer Science</h4>
+        </div>
+        <div class="edu">
+          <div class="edu-meta">2016 · SMKN 3 Bogor</div>
+          <h4>Vocational Diploma in Computer Networks</h4>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Certifications</h3>
+      <div class="cert-group">
+        <div class="cert-group-head">
+          <span class="cert-issuer-badge">AWS</span>
+          <span class="cert-count">9 certifications</span>
+        </div>
+        <div class="cert-grid">
+          <div class="cert cert-pro"><span class="cert-level">Professional</span><span class="cert-name">Gen AI Developer</span></div>
+          <div class="cert cert-pro"><span class="cert-level">Professional</span><span class="cert-name">DevOps Engineer</span></div>
+          <div class="cert cert-pro"><span class="cert-level">Professional</span><span class="cert-name">Solutions Architect</span></div>
+          <div class="cert"><span class="cert-level">Associate</span><span class="cert-name">Machine Learning Engineer</span></div>
+          <div class="cert"><span class="cert-level">Associate</span><span class="cert-name">SysOps Administrator</span></div>
+          <div class="cert"><span class="cert-level">Associate</span><span class="cert-name">Solutions Architect</span></div>
+          <div class="cert"><span class="cert-level">Associate</span><span class="cert-name">Developer</span></div>
+          <div class="cert"><span class="cert-level">Foundational</span><span class="cert-name">AI Practitioner</span></div>
+          <div class="cert"><span class="cert-level">Foundational</span><span class="cert-name">Cloud Practitioner</span></div>
+        </div>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-group-head">
+          <span class="cert-issuer-badge">Microsoft</span>
+          <span class="cert-count">2 certifications</span>
+        </div>
+        <div class="cert-grid">
+          <div class="cert"><span class="cert-level">Associate</span><span class="cert-name">Azure Administrator</span></div>
+          <div class="cert"><span class="cert-level">Foundational</span><span class="cert-name">Azure Fundamentals</span></div>
+        </div>
+      </div>
+
+      <p class="sec-note">
+        Verifiable on <a href="https://www.credly.com/users/revawiki" target="_blank" rel="noopener">Credly</a>.
+      </p>
+    </section>
+
+    <!-- ============================== SKILLS ============================== -->
+    <section id="skills" class="sec sec-centered">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        </span>
+        <h2 class="sec-title">Technical Skills</h2>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-row">
+          <span class="stack-label">AI Automation</span>
+          <div class="badges">
+            <span class="badge">Amazon Bedrock</span>
+            <span class="badge">Microsoft Copilot Studio</span>
+            <span class="badge">Azure AI Foundry</span>
+            <span class="badge">Dify</span>
+            <span class="badge">n8n</span>
+            <span class="badge">UiPath</span>
+            <span class="badge">Power Platform</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Cloud</span>
+          <div class="badges">
+            <span class="badge">AWS</span>
+            <span class="badge">Azure</span>
+            <span class="badge">GCP</span>
+            <span class="badge">Alibaba Cloud</span>
+            <span class="badge">DigitalOcean</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Orchestration</span>
+          <div class="badges">
+            <span class="badge">Kubernetes</span>
+            <span class="badge">Docker</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">IaC &amp; Config</span>
+          <div class="badges">
+            <span class="badge">Terraform</span>
+            <span class="badge">Ansible</span>
+            <span class="badge">Puppet</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">CI/CD</span>
+          <div class="badges">
+            <span class="badge">Bitbucket Pipelines</span>
+            <span class="badge">Jenkins</span>
+            <span class="badge">GitLab</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Observability</span>
+          <div class="badges">
+            <span class="badge">Grafana</span>
+            <span class="badge">Datadog</span>
+            <span class="badge">New Relic</span>
+            <span class="badge">Elastic</span>
+            <span class="badge">Prometheus</span>
+            <span class="badge">PagerDuty</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">DevSecOps</span>
+          <div class="badges">
+            <span class="badge">Brinqa</span>
+            <span class="badge">Faraday</span>
+            <span class="badge">SonarQube</span>
+            <span class="badge">Snyk</span>
+            <span class="badge">Trivy</span>
+            <span class="badge">JFrog</span>
+            <span class="badge">Teleport</span>
+            <span class="badge">Vault</span>
+            <span class="badge">Burp Suite</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Languages</span>
+          <div class="badges">
+            <span class="badge">Python</span>
+            <span class="badge">Bash</span>
+            <span class="badge">PowerShell</span>
+            <span class="badge">Go</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">ITSM &amp; Docs</span>
+          <div class="badges">
+            <span class="badge">ServiceNow</span>
+            <span class="badge">BMC Remedy</span>
+            <span class="badge">Confluence</span>
+            <span class="badge">Notion</span>
+            <span class="badge">SharePoint</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-cols">
+        <div class="skills-col">
+          <h4>Languages</h4>
+          <div class="kv"><span>Indonesian</span><span>Native</span></div>
+          <div class="kv"><span>English</span><span>Professional proficiency</span></div>
+        </div>
+        <div class="skills-col">
+          <h4>How I work</h4>
+          <div class="badges">
+            <span class="badge">Systems Thinking</span>
+            <span class="badge">E2E Ownership</span>
+            <span class="badge">Incident Calm</span>
+            <span class="badge">Team Enablement</span>
+            <span class="badge">Bias for Action</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= CONTACT ============================== -->
+    <section id="contact" class="sec sec-centered contact-sec">
+      <div class="sec-header">
+        <span class="sec-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </span>
+        <h2 class="sec-title">Let's discuss</h2>
+      </div>
+      <p class="sec-lede">
+        I build automation for infrastructure that can't afford to page someone at
+        3am. If that's the kind of problem you have — let's talk.
+      </p>
+      <div class="cta">
+        <a href="mailto:reva.wiki@gmail.com" class="btn">Email me</a>
+        <a href="https://linkedin.com/in/revawiki" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/revawiki" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
   </main>
@@ -123,8 +800,49 @@
     </div>
   </div>
 
-  <footer>
-    <p>&copy; <span id="year"></span> Reva Wiki</p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">Reva Wiki</a>
+        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
+      </div>
+      <nav class="footer-nav" aria-label="Site map">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/index.html">Home</a>
+          <a href="/story.html">Story</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#experience">Experience</a>
+          <a href="/index.html#skills">Skills</a>
+        </div>
+        <div class="footer-col">
+          <h5>Work</h5>
+          <a href="/projects.html">All projects</a>
+          <a href="/case-study-copilot.html">Unified AI Ops</a>
+          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
+          <a href="/case-study-terraform.html">Terraform migration</a>
+          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
+        </div>
+        <div class="footer-col">
+          <h5>Writing</h5>
+          <a href="/articles.html">All articles</a>
+          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
+          <a href="/article-yaml-terraform.html">YAML over HCL</a>
+          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
+        </div>
+        <div class="footer-col">
+          <h5>Elsewhere</h5>
+          <a href="mailto:reva.wiki@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
+      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+    </div>
   </footer>
 
   <script src="/js/hero-dots.js"></script>

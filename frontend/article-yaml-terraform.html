@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YAML Over HCL: Making Terraform Safe for Non-Experts &mdash; Reva Wiki</title>
+  <meta name="description" content="One Terraform codebase driven by per-environment YAML. Why the edit surface you choose decides who on your team can safely contribute." />
+  <link rel="canonical" href="https://revawiki.io/article-yaml-terraform.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="YAML Over HCL: Making Terraform Safe for Non-Experts" />
+  <meta property="og:description" content="One Terraform codebase driven by per-environment YAML. Why the edit surface you choose decides who on your team can safely contribute." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/articles.html">Articles</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">YAML over HCL</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Article &middot; Infrastructure as Code</p>
+      <h1>YAML Over HCL: Making Terraform Safe for Non-Experts</h1>
+      <p class="cs-deck">Migrating 40+ inherited AWS accounts onto Terraform, the obvious approach was one codebase per environment. That approach encodes the exact drift you migrated to escape.</p>
+      <div class="cs-byline">
+        <span>Reva Wiki</span>
+        <span aria-hidden="true">&middot;</span>
+        <span>2024</span>
+        <span aria-hidden="true">&middot;</span>
+        <span>7 min read</span>
+      </div>
+    </header>
+
+    <!-- TODO(reva): drafted from your own project experience -- edit the voice
+         and add any detail you want public before publishing. -->
+
+    <section id="setup" class="cs-section">
+      <h2>The setup</h2>
+      <p>Global compliance required GitOps-based provisioning through Terraform. What we had was years of console-era decisions across 40+ AWS accounts: inconsistent naming, stateful configurations nobody wanted to touch, and environment-specific variations that existed because somebody needed them once on a Friday.</p>
+      <p>Both facts had to become true at the same time, and delivery was not allowed to stop while it happened.</p>
+    </section>
+
+    <section id="trap" class="cs-section">
+      <h2>The per-environment trap</h2>
+      <p>The instinctive move is a directory per environment. <code>dev/</code>, <code>staging/</code>, <code>prod/</code>, each with its own HCL. It feels organised. It is a trap, for two reasons.</p>
+      <p><strong>It preserves the drift.</strong> You migrated because environments had diverged. Giving each its own codebase guarantees they keep diverging &mdash; only now the divergence is in version control and looks deliberate.</p>
+      <p><strong>It concentrates knowledge.</strong> Three HCL codebases means the number of people who can safely change any of them is however many know Terraform well. On most teams that is two, and one of them is on leave.</p>
+      <div class="callout"><p>A migration that hits the compliance deadline and leaves you with three diverging codebases has not solved the problem. It has renamed it.</p></div>
+    </section>
+
+    <section id="approach" class="cs-section">
+      <h2>One codebase, config-driven</h2>
+      <p>What we built instead: a single Terraform module set describing every resource shape the portfolio needs, with per-environment YAML supplying the differences.</p>
+      <p>Resources filter by environment flag through <code>for_each</code> loops, driven by <code>TF_VAR_env</code> injection at pipeline runtime. The same plan command produces the right subset per environment, because the environment is an input rather than a directory.</p>
+      <p>The HCL gets written once and reviewed once. Everything that varies lives in configuration.</p>
+    </section>
+
+    <section id="interface" class="cs-section">
+      <h2>Configuration is an interface</h2>
+      <p>This is the part that gets undersold. Choosing YAML as the edit surface is not a syntax preference &mdash; it is a decision about who is allowed to contribute.</p>
+      <p>HCL is a language. It has module semantics, state implications, and failure modes that are genuinely non-obvious. Asking an application engineer to make a safe change in HCL means asking them to learn Terraform properly first.</p>
+      <p>A YAML value is a value. The diff is readable by anyone on the review. The blast radius of a mistake is bounded by what the module permits &mdash; and the module was written by somebody who knew what they were doing, once.</p>
+      <p><strong>The operational outcome:</strong> an engineer who does not know HCL could still safely change infrastructure. That is an organisational result achieved through a technical decision.</p>
+    </section>
+
+    <section id="cost" class="cs-section">
+      <h2>Standardization surfaces waste</h2>
+      <p>An unplanned benefit: once every account was described the same way, the redundant and simply-forgotten resources became a list rather than a rumour.</p>
+      <p>Rightsizing, reservation optimization, and eliminating resources nobody could name cut AWS infrastructure cost for the SEA region by roughly 55%. None of that was findable while the estate was still described inconsistently.</p>
+      <p>Standardize first, optimize second. In that order, the second step is mostly reading a list.</p>
+    </section>
+
+    <section id="caveats" class="cs-section">
+      <h2>Where this does not fit</h2>
+      <p>Honest caveats, because config-driven IaC is not free:</p>
+      <ul class="lesson-list"><li><strong>The modules have to be genuinely good.</strong> All the complexity moved somewhere &mdash; into module design. A sloppy module behind a clean YAML interface is a worse outcome, not a better one.</li><li><strong>Expressiveness is capped by design.</strong> If a team legitimately needs environment-specific resource <em>shapes</em> rather than values, you will fight the abstraction. Decide that up front.</li><li><strong>Debugging gains a layer.</strong> &ldquo;Why was this resource not created&rdquo; now spans the YAML, the <code>for_each</code>, and the module. Good error messages stop being optional.</li></ul>
+      <p>For a portfolio of similarly-shaped applications across dev, staging and production, the trade lands firmly on the config-driven side.</p>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep reading">
+      <a href="/case-study-terraform.html" class="cs-next-card">
+        <span class="cs-next-label">Case study</span>
+        <strong>Console &rarr; Terraform at 40+ Accounts</strong>
+        <span>The full migration, including the cost work</span>
+      </a>
+      <a href="/articles.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>All articles</strong>
+        <span>More on AIOps, IaC, and cloud cost</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">Reva Wiki</a>
+        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
+      </div>
+      <nav class="footer-nav" aria-label="Site map">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/index.html">Home</a>
+          <a href="/story.html">Story</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#experience">Experience</a>
+          <a href="/index.html#skills">Skills</a>
+        </div>
+        <div class="footer-col">
+          <h5>Work</h5>
+          <a href="/projects.html">All projects</a>
+          <a href="/case-study-copilot.html">Unified AI Ops</a>
+          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
+          <a href="/case-study-terraform.html">Terraform migration</a>
+          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
+        </div>
+        <div class="footer-col">
+          <h5>Writing</h5>
+          <a href="/articles.html">All articles</a>
+          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
+          <a href="/article-yaml-terraform.html">YAML over HCL</a>
+          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
+        </div>
+        <div class="footer-col">
+          <h5>Elsewhere</h5>
+          <a href="mailto:reva.wiki@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
+      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>

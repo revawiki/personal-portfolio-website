@@ -107,6 +107,22 @@ class SiteStack(Stack):
             self,
             "SiteDistribution",
             default_root_object="index.html",
+            # S3 behind OAC answers 403 (not 404) for objects that don't exist,
+            # so both have to be mapped for frontend/404.html to ever show.
+            error_responses=[
+                cloudfront.ErrorResponse(
+                    http_status=403,
+                    response_http_status=404,
+                    response_page_path="/404.html",
+                    ttl=Duration.minutes(5),
+                ),
+                cloudfront.ErrorResponse(
+                    http_status=404,
+                    response_http_status=404,
+                    response_page_path="/404.html",
+                    ttl=Duration.minutes(5),
+                ),
+            ],
             domain_names=[domain_name, f"www.{domain_name}"] if domain_name else None,
             certificate=certificate,
             default_behavior=cloudfront.BehaviorOptions(

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Console → Terraform at 40+ AWS Accounts — Reva Wiki</title>
+  <meta name="description" content="Migrating critical application infrastructure from console-based provisioning to a YAML-driven Terraform codebase across 40+ AWS accounts, cutting SEA cloud cost ~55%." />
+  <link rel="canonical" href="https://revawiki.io/case-study-terraform.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Console → Terraform at 40+ AWS Accounts — Reva Wiki" />
+  <meta property="og:description" content="One Terraform codebase, per-environment YAML config, and engineers who never had to learn HCL." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/projects.html">Projects</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Console → Terraform</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Case study · PT HM Sampoerna Tbk. (Philip Morris International)</p>
+      <h1>Console → Terraform at 40+ AWS Accounts</h1>
+      <p class="cs-deck">
+        Global compliance required GitOps-based provisioning. The estate we
+        inherited was click-ops across 40+ accounts, with naming drift and
+        environment-specific snowflakes everywhere. Both things had to be true
+        at once, without stopping delivery.
+      </p>
+      <div class="cs-byline">
+        <span>Reva Wiki</span>
+        <span aria-hidden="true">·</span>
+        <span>2024</span>
+        <span aria-hidden="true">·</span>
+        <span>8 min read</span>
+      </div>
+    </header>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">~55%</span>
+        <span class="label">SEA infrastructure cost reduction</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">40+</span>
+        <span class="label">legacy AWS accounts standardized</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">1–2 h</span>
+        <span class="label">daily repetitive work eliminated</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">7</span>
+        <span class="label">engineers led through the migration</span>
+      </div>
+    </div>
+
+    <nav class="cs-toc" aria-label="On this page">
+      <span class="cs-toc-label">On this page</span>
+      <a href="#context">Context</a>
+      <a href="#problem">The problem</a>
+      <a href="#approach">The YAML approach</a>
+      <a href="#cost">Cost work</a>
+      <a href="#automation">Jenkins automation</a>
+      <a href="#outcome">Outcome</a>
+      <a href="#lessons">Lessons</a>
+    </nav>
+
+    <section id="context" class="cs-section">
+      <h2>Context</h2>
+      <p>
+        PT HM Sampoerna is part of Philip Morris International, which means its
+        cloud estate answers to PMI's global security and governance standards —
+        not just local ones. I joined as Senior DevOps Engineer owning SLAs for
+        the application portfolio, and led a team of 7 engineers through the
+        migration.
+      </p>
+      <p>
+        The mandate: move highly critical application infrastructure off
+        console-based provisioning and onto Terraform, with a consistent GitOps
+        branching strategy across dev, staging, and production.
+      </p>
+    </section>
+
+    <section id="problem" class="cs-section">
+      <h2>The problem</h2>
+      <p>
+        Inherited estates are rarely clean. This one had accumulated years of
+        console-era decisions across 40+ accounts: inconsistent naming, stateful
+        configurations nobody wanted to touch, and environment-specific
+        variations that existed because someone once needed them on a Friday.
+      </p>
+      <p>
+        The obvious approach — write Terraform per environment — reproduces the
+        drift in code instead of removing it. You end up with three codebases
+        that diverge quietly, and a team where only two people can safely change
+        any of them.
+      </p>
+      <div class="callout">
+        <p>
+          Compliance wanted GitOps. Operations wanted to not be blocked. A
+          three-codebase HCL sprawl would have satisfied the first and destroyed
+          the second.
+        </p>
+      </div>
+    </section>
+
+    <section id="approach" class="cs-section">
+      <h2>The YAML approach</h2>
+      <p>
+        Instead of per-environment Terraform, I built a single config-driven
+        codebase: one set of HCL, with per-environment YAML supplying the
+        differences.
+      </p>
+      <ol class="step-list">
+        <li>
+          <h4>One codebase</h4>
+          <p>A single Terraform module set describing every resource shape the portfolio needs — written once, reviewed once.</p>
+        </li>
+        <li>
+          <h4>Per-environment YAML</h4>
+          <p>Environment differences live in configuration files, not in forked HCL. Dev, staging and production read the same modules with different inputs.</p>
+        </li>
+        <li>
+          <h4><code>for_each</code> + <code>TF_VAR_env</code></h4>
+          <p>Resources filter by environment flag through <code>for_each</code> loops, driven by <code>TF_VAR_env</code> injection at pipeline runtime — so the same plan command produces the right subset per environment.</p>
+        </li>
+        <li>
+          <h4>GitOps branching</h4>
+          <p>Dev, staging and production map to branches with the review gates compliance required, making promotion a reviewable diff rather than a console action.</p>
+        </li>
+      </ol>
+      <p>
+        The result that mattered most operationally: <strong>an engineer who
+        doesn't know HCL can still safely change infrastructure</strong>, because
+        the thing they edit is a YAML value with a reviewable diff.
+      </p>
+      <a href="/article-yaml-terraform.html" class="inline-link">Read: YAML over HCL, making Terraform safe for non-experts →</a>
+    </section>
+
+    <section id="cost" class="cs-section">
+      <h2>Cost work</h2>
+      <p>
+        Standardization surfaces waste. Once every account was described the same
+        way, the redundant and simply-forgotten resources became visible as a
+        list rather than a rumour.
+      </p>
+      <p>
+        Rightsizing, reservation optimization, and elimination of redundant and
+        unused resources cut
+        <strong>AWS infrastructure cost for the SEA region by ~55%</strong>.
+      </p>
+    </section>
+
+    <section id="automation" class="cs-section">
+      <h2>Jenkins automation</h2>
+      <p>
+        Separately from the migration, the team was absorbing 1–2 hours per day
+        of repetitive service-request work — the kind of task that's individually
+        trivial and collectively a whole headcount.
+      </p>
+      <p>
+        Targeted Jenkins automations removed that entirely, freeing team capacity
+        for the migration itself rather than the ticket queue around it.
+      </p>
+    </section>
+
+    <section id="outcome" class="cs-section">
+      <h2>Outcome</h2>
+      <p>
+        Compliance achieved without blocking operations. 40+ legacy accounts
+        aligned to PMI global standards, SEA cloud spend down ~55%, and 1–2 hours
+        of daily toil removed from the team's day.
+      </p>
+      <p>
+        The durable win is the one that doesn't appear in a metric: the team no
+        longer needed a Terraform specialist in the room to make a safe change.
+      </p>
+    </section>
+
+    <section id="lessons" class="cs-section">
+      <h2>Lessons</h2>
+      <ul class="lesson-list">
+        <li><strong>Don't encode drift.</strong> Writing per-environment Terraform preserves exactly the inconsistency you migrated to escape.</li>
+        <li><strong>Configuration is an interface.</strong> Choosing YAML over HCL as the edit surface decided who on the team could contribute — that's an org outcome, not a syntax preference.</li>
+        <li><strong>Standardize first, then optimize.</strong> The ~55% cost reduction was only findable after everything was described consistently.</li>
+        <li><strong>Compliance deadlines are not an excuse to ship sprawl.</strong> The constraint made the design better, not worse.</li>
+      </ul>
+    </section>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="/case-study-ecs.html" class="cs-next-card">
+        <span class="cs-next-label">Next case study</span>
+        <strong>Multi-Tenant ECS Platform</strong>
+        <span>100+ EC2 instances → shared ECS, ~70% cost reduction</span>
+      </a>
+      <a href="/projects.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>All projects</strong>
+        <span>Every case study and lab experiment in one place</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">Reva Wiki</a>
+        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
+      </div>
+      <nav class="footer-nav" aria-label="Site map">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/index.html">Home</a>
+          <a href="/story.html">Story</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#experience">Experience</a>
+          <a href="/index.html#skills">Skills</a>
+        </div>
+        <div class="footer-col">
+          <h5>Work</h5>
+          <a href="/projects.html">All projects</a>
+          <a href="/case-study-copilot.html">Unified AI Ops</a>
+          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
+          <a href="/case-study-terraform.html">Terraform migration</a>
+          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
+        </div>
+        <div class="footer-col">
+          <h5>Writing</h5>
+          <a href="/articles.html">All articles</a>
+          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
+          <a href="/article-yaml-terraform.html">YAML over HCL</a>
+          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
+        </div>
+        <div class="footer-col">
+          <h5>Elsewhere</h5>
+          <a href="mailto:reva.wiki@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
+      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>
