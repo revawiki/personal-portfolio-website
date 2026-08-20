@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Reva Wiki</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a href="/index.html" class="brand">Reva Wiki</a>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Projects</h1>
+      <p>Enterprise infra/AIOps work, plus this site as a self-contained cloud + AI demo.</p>
+    </section>
+
+    <section class="project-list">
+      <div class="project">
+        <h3>This site</h3>
+        <div class="stack">Python · FastAPI · AWS Lambda · CloudFront · CDK</div>
+        <p>Serverless portfolio + chatbot. Static frontend on S3/CloudFront, chatbot API on Lambda behind API Gateway, all defined as code.</p>
+        <a href="https://github.com/revawiki" target="_blank" rel="noopener">View repo →</a>
+      </div>
+
+      <div class="project">
+        <h3>Unified L1 Copilot Platform</h3>
+        <div class="stack">Tech Mahindra · RAG · MCP · Agent orchestration</div>
+        <p>
+          Enterprise IT ops was fragmented across tools with high change-request
+          volume and observability gaps causing manual triage fatigue. Built a
+          centralized AIOps engine correlating infra monitoring, ITSM/CMDB,
+          docs, and comms into one layer, with human approval before any
+          production action.
+        </p>
+        <p><strong>Result:</strong> 4x faster MTTR, 2x faster change execution, IDR 79B+ annual revenue loss prevented, 20% weekly engineering time reclaimed.</p>
+      </div>
+
+      <div class="project">
+        <h3>YAML-based Terraform Standardization</h3>
+        <div class="stack">PT HM Sampoerna Tbk. · Terraform · GitOps</div>
+        <p>
+          Global compliance required GitOps provisioning via Terraform
+          Enterprise, but legacy resources had inconsistent naming and
+          environment drift. Replaced per-environment Terraform code with one
+          codebase driven by per-environment YAML config, using
+          <code>for_each</code> and <code>TF_VAR_env</code> injection.
+        </p>
+        <p><strong>Result:</strong> compliance without blocking operations; non-Terraform-expert engineers could safely edit YAML instead of HCL.</p>
+      </div>
+
+      <div class="project">
+        <h3>Multi-Tenant ECS Platform Migration</h3>
+        <div class="stack">PT Telkom Indonesia Tbk · AWS ECS · Bitbucket CI/CD</div>
+        <p>
+          Product had grown to 100+ single-tenant EC2 instances (one per
+          client) — unsustainable cost and ops overhead. Redesigned onto a
+          shared AWS ECS platform, migrated Singapore → Jakarta region, and
+          added a DevSecOps-integrated CI/CD pipeline.
+        </p>
+        <p><strong>Result:</strong> ~70% AWS cost reduction, deploys cut from 10 to 5 minutes, no more per-client instance ceiling.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Reva Wiki</p>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>

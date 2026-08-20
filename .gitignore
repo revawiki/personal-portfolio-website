@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# CDK
+infra/cdk.out/
+infra/.cdk.staging/
+
+# Lambda build output
+backend/build/
+
+# env / secrets
+.env
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db

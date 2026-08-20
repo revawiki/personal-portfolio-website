@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Reva Wiki</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a href="/index.html" class="brand">Reva Wiki</a>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>About</h1>
+      <p>
+        Reva Hristo Wiki Fonseca — a boy from a rural corner of Indonesia,
+        now thriving to become the country's go-to AIOps expert, one
+        automated workflow at a time. Grounded in cloud infrastructure with
+        growing expertise in agentic AI, focused on making IT operations
+        resilient so engineers can prioritize building over firefighting.
+      </p>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="project-list">
+        <div class="project">
+          <h3>Senior System Engineer — Tech Mahindra</h3>
+          <div class="stack">January 2025 – Present</div>
+          <p>Leading AIOps R&amp;D for a major Indonesian telco; directs engineering across AWS and Kubernetes infrastructure; reduced incident response time and prevented revenue loss via a unified agentic AI system.</p>
+        </div>
+        <div class="project">
+          <h3>Senior DevOps Engineer — PT HM Sampoerna Tbk.</h3>
+          <div class="stack">June 2024 – December 2024</div>
+          <p>Maintained SLAs for the application portfolio; led console-to-Terraform migration; standardized legacy AWS accounts to Philip Morris International compliance; automated repetitive tasks via Jenkins.</p>
+        </div>
+        <div class="project">
+          <h3>DevOps Lead — PT Telkom Indonesia Tbk</h3>
+          <div class="stack">April 2022 – May 2024</div>
+          <p>Promoted to lead the DevOps team; architected a multi-tenant AWS ECS platform; migrated Singapore to Jakarta; accelerated deployments via Bitbucket CI/CD.</p>
+        </div>
+        <div class="project">
+          <h3>Technical Support Engineer — PT Telkom Indonesia Tbk</h3>
+          <div class="stack">August 2020 – April 2022</div>
+          <p>Supported Netmonk clients with installations and troubleshooting; built Terraform/Ansible deployment pipelines; improved incident response through Grafana observability.</p>
+        </div>
+        <div class="project">
+          <h3>System Administrator — BRIN, Aviation Technology Research Center</h3>
+          <div class="stack">June 2020 – August 2020</div>
+          <p>Built an HPC lab from scratch; planned network topology; automated OS installation and cluster configuration.</p>
+        </div>
+        <div class="project">
+          <h3>Junior System Administrator — BRIN, Informatics Research Center</h3>
+          <div class="stack">February 2019 – December 2019</div>
+          <p>Maintained the HPC lab; repaired nodes; automated installations; implemented Puppet configuration management.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="highlights">
+        <div class="card">
+          <h3>AIOps &amp; AI Automation</h3>
+          <p>Agent Swarm, RAG &amp; Knowledge Base, MCP Server, Human-in-the-Loop, Guardrails, Amazon Bedrock, Copilot Studio, Azure AI Foundry, Dify, n8n</p>
+        </div>
+        <div class="card">
+          <h3>Cloud &amp; Infra</h3>
+          <p>AWS, Azure, GCP, Alibaba Cloud, DigitalOcean, Kubernetes, Docker, Terraform, Ansible, Puppet</p>
+        </div>
+        <div class="card">
+          <h3>DevOps &amp; DevSecOps</h3>
+          <p>Bitbucket Pipeline, Jenkins, GitLab, Grafana, Datadog, Prometheus, PagerDuty, SonarQube, Snyk, Trivy, Vault</p>
+        </div>
+        <div class="card">
+          <h3>Languages</h3>
+          <p>Python, Bash, PowerShell, Go</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlights">
+      <div class="card">
+        <h3>Education</h3>
+        <p>
+          B.Comp.Sci — UIN Syarif Hidayatullah Jakarta (2023)<br />
+          Vocational Diploma, Computer Networks — SMKN 3 Bogor (2016)
+        </p>
+      </div>
+      <div class="card">
+        <h3>Contact</h3>
+        <p><a href="mailto:reva.wiki@gmail.com">reva.wiki@gmail.com</a></p>
+      </div>
+      <div class="card">
+        <h3>Elsewhere</h3>
+        <p>
+          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a><br />
+          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Reva Wiki</p>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #161616;
+  --text: #f2f2f2;
+  --text-dim: #9a9a9a;
+  --border: #2a2a2a;
+  --accent: #AC131C;
+  --accent-2: #950706;
+  --accent-3: #750227;
+  --accent-4: #570044;
+  --accent-5: #3B005C;
+  --accent-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 25%, var(--accent-3) 50%, var(--accent-4) 75%, var(--accent-5) 100%);
+  /* brighter red for text on --bg -- true --accent fails WCAG AA (~2.7:1) as foreground text on near-black, so it's reserved for fills (buttons, borders, bubbles) */
+  --accent-text: #ff3b44;
+  /* brightened same-hue companion to --accent-gradient, for gradient TEXT-FILL only --
+     the true dark palette stops fail contrast even at large-text size when used as
+     foreground text color, so text-fill uses these lightened stand-ins instead */
+  --accent-gradient-text: linear-gradient(135deg, #ff3b44 0%, #ff4d8d 50%, #b26bff 100%);
+  --accent-purple-text: #b26bff;
+  --radius: 10px;
+  --max-width: 960px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* static grey dot grid (no animation, no red/white) behind every section
+     except .hero, which layers its own animated version (canvas + gradient)
+     above this in its own stacking context (isolation: isolate) */
+  background:
+    radial-gradient(circle, rgba(154, 154, 154, 0.1) 1.3px, transparent 1.3px) 0 0 / 32px 32px,
+    var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--accent-text); }
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.nav .brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav nav a {
+  margin-left: 1.5rem;
+  color: var(--text-dim);
+  text-decoration: none;
+}
+.nav nav a:hover { color: var(--accent-text); }
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}
+
+/* used only inside .hero, to break its background out to full viewport
+   width (see .hero below) while keeping the actual content centered at
+   the same width main's other children (about.html/projects.html included,
+   which share this stylesheet) already use */
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main > section + section {
+  margin-top: 3rem;
+}
+
+main > section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate; /* contains the ::before/canvas z-index:-1/-2 so they stay behind the hero's own content without sinking below the page */
+  overflow: hidden; /* clips both layers cleanly to the hero's own bounds */
+  /* breaks out of main's centered max-width so the background spans the
+     full viewport, without touching main itself (about.html/projects.html
+     share this stylesheet and still rely on main's own centering) */
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  padding: 4rem 0;
+}
+
+/* static base layer: skewed red glow from each side, fading to black
+   (--bg) toward the center. Static -- the animated part is the dot grid
+   (.hero-canvas, drawn by js/hero-dots.js) layered on top of this. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 45% 85% at 0% 50%, rgba(172, 19, 28, 0.4), transparent 70%),
+    radial-gradient(ellipse 45% 85% at 100% 50%, rgba(172, 19, 28, 0.4), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+/* fixed-size circular frame -- border/shadow/sizing live here, NOT on the
+   zoomed img, so scaling the photo doesn't balloon the circle itself
+   (that was the earlier bug: transform on the bordered element grew the
+   whole circle from 140px to ~189px, throwing off alignment and spacing) */
+.hero-avatar-frame {
+  flex-shrink: 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 24px rgba(255, 59, 68, 0.25);
+  /* nudges the frame's center down from the top of the row to line up
+     with the headline (h1)'s center rather than the greeting line above it --
+     measured directly against rendered layout, not guessed */
+  margin-top: 3.86rem;
+}
+
+.hero-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* source photo is a tall portrait with the face near the top. Zooming
+     via transform scales from the CENTER by default, which was pulling
+     the top (hair) back out of frame even with object-position biased up --
+     anchoring transform-origin to the top instead makes the zoom grow the
+     crop downward (into the shoulders) rather than cutting into the head */
+  object-position: center top;
+  transform-origin: center top;
+  transform: scale(1.22);
+}
+
+.hero-content {
+  min-width: 0;
+  flex: 1 1 420px;
+}
+
+.hero .greeting {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-bottom: 0.02rem;
+}
+
+.highlight-text {
+  color: var(--accent-text);
+  font-weight: 800;
+}
+
+.hero h1 {
+  /* base size covers the sentence line + the merged-in jargon line (was a
+     separate .jargon paragraph, now literally h1's 3rd line via <br/>).
+     Sized so the ~73-char sentence wraps to exactly 2 lines (not 1, not 3)
+     within the hero-content column. .role-typer overrides this to stay
+     prominent as the big first line. */
+  font-size: 2rem;
+  line-height: 1.5;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.gradient-text {
+  background: var(--accent-gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-text); /* fallback if -webkit-text-fill-color unsupported */
+}
+
+.role-typer {
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+.cursor {
+  color: var(--accent-text);
+  animation: cursor-blink 1s step-start infinite;
+}
+
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+.hero h1 .term-group {
+  margin-top: 0.25rem;
+}
+
+.term {
+  white-space: nowrap;
+}
+
+.term-group {
+  position: relative;
+  display: inline-block;
+  padding: 0.05rem 0.2rem;
+}
+
+/* moving-trace overlay around the whole Agentic AI + IaC + O11Y group --
+   a short segment continuously travels the rectangle's perimeter, never
+   forming a complete static outline */
+.term-circle {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: -2px;
+  bottom: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* registered so --trace-color can be smoothly animated as a color (plain
+   custom properties don't interpolate -- they just jump) */
+@property --trace-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #b26bff;
+}
+
+.term-circle path {
+  fill: none;
+  stroke-width: 0.85;
+  stroke: var(--trace-color);
+  /* pathLength="1" normalizes the rect's perimeter to 1 unit, so dashoffset
+     below is a fraction of the perimeter, not pixels. */
+  /* dash+gap sums to 0.5 (half the perimeter), so the pattern repeats twice
+     around the loop -- two shorter segments, evenly spaced, instead of one */
+  stroke-dasharray: 0.12 0.38;
+  animation: term-circle-trace 6s linear infinite;
+}
+
+@keyframes term-circle-trace {
+  /* constant pace, no fast/slow phases. The path (index.html) is authored
+     to start at bottom-center and trace clockwise, with a perimeter of 264
+     units where the bottom/right/top/left edge-midpoints land at exactly
+     0%, 25%, 50%, 75% (100% loops back to bottom) -- so color is white
+     right at each edge-midpoint and purple at the roughly-halfway points
+     between them (near the corners), for the plus-shaped pattern. */
+  0%    { stroke-dashoffset: 0;     --trace-color: #ffffff; } /* bottom */
+  12.5% { --trace-color: #b26bff; }
+  25%   { --trace-color: #ffffff; } /* right */
+  37.5% { --trace-color: #b26bff; }
+  50%   { --trace-color: #ffffff; } /* top */
+  62.5% { --trace-color: #b26bff; }
+  75%   { --trace-color: #ffffff; } /* left */
+  87.5% { --trace-color: #b26bff; }
+  100%  { stroke-dashoffset: -1;    --trace-color: #ffffff; } /* bottom (loop) */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-circle path { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term { animation: none; }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.badge {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  font-size: 1rem;
+  color: var(--text-dim);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease, text-shadow 0.3s ease;
+}
+
+.badge-active {
+  background: rgba(255, 59, 68, 0.16);
+  border: 1px solid var(--accent);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 59, 68, 0.55), inset 0 0 6px rgba(255, 59, 68, 0.35);
+  text-shadow: 0 0 6px rgba(255, 59, 68, 0.75);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hero-note p {
+  color: var(--text-dim);
+  max-width: 60ch;
+  font-size: 1.05rem;
+}
+
+.cta { margin-top: 1.5rem; }
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  background: var(--accent-gradient);
+  color: #fff;
+  font-weight: 600;
+  margin-right: 0.75rem;
+  text-decoration: none;
+}
+.btn:hover { text-decoration: none; opacity: 0.9; }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--text); }
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.card h3 { margin-top: 0; }
+.card p { color: var(--text-dim); margin-bottom: 0; }
+
+.project-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.project {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.project h3 { margin: 0 0 0.25rem; }
+.project .stack { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.project p { margin: 0 0 0.5rem; }
+
+footer {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* chat widget */
+.chat-widget {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 50;
+}
+
+.chat-toggle {
+  background: var(--accent-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.chat-toggle:hover { opacity: 0.9; }
+
+.chat-panel {
+  position: absolute;
+  bottom: 3.5rem;
+  right: 0;
+  width: 320px;
+  max-height: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-panel.hidden { display: none; }
+
+.chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 200px;
+}
+
+.chat-msg {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  max-width: 85%;
+}
+
+.chat-user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #fff;
+}
+
+.chat-bot {
+  align-self: flex-start;
+  background: #232323;
+  color: var(--text);
+}
+
+#chat-form {
+  display: flex;
+  border-top: 1px solid var(--border);
+}
+
+#chat-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  padding: 0.75rem;
+  outline: none;
+}
+
+#chat-form button {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-weight: 600;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+#chat-form button:hover { color: var(--accent-text); }
+
+.story {
+  padding: 0 1rem 2.5rem;
+  text-align: center;
+}
+
+/* narrative text keeps a narrow reading column; .story-ctas (below) is a
+   sibling, NOT nested in this, so the CTA row can use the full section
+   width instead of being squeezed into the same 46rem and wrapping */
+.story-text {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.story p {
+  color: var(--text-dim);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.story-highlight {
+  background: var(--accent-gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-text); /* fallback if -webkit-text-fill-color unsupported */
+  font-weight: 700;
+}
+
+/* ".story p.x" (element+2 classes) beats ".story p" (element+1 class) on
+   specificity, so margin-top actually takes -- learned the hard way earlier
+   in this file that a plain ".x" class loses to ".parent element" and
+   silently no-ops instead of erroring */
+.story p.story-gap {
+  margin-top: 1.75rem;
+}
+
+.story p.story-proof {
+  margin-top: 1.75rem;
+  font-size: 1rem;
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.story p.story-bold {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.story-ctas {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.story-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.story-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.story-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.story-btn-primary {
+  border: none;
+  background: var(--accent-gradient-text);
+  color: #fff;
+}
+
+.story-btn-primary:hover {
+  opacity: 0.9;
+}
