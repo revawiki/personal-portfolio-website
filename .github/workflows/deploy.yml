@@ -1,0 +1,51 @@
+name: Deploy
+
+# Every push to master rebuilds the Lambda bundle and lets CDK reconcile the
+# whole stack (frontend upload + CloudFront invalidation included via
+# BucketDeployment). Auth is GitHub OIDC assuming a role that can only
+# assume the CDK bootstrap roles -- no long-lived AWS keys anywhere.
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write # OIDC token for AWS
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::891376937379:role/wiki-personal-site-gha-deploy
+          aws-region: ap-southeast-3
+
+      - name: Build Lambda bundle
+        run: bash backend/build.sh
+
+      - name: Install infra dependencies
+        run: pip install -r infra/requirements.txt
+
+      - name: CDK deploy
+        working-directory: infra
+        run: npx --yes aws-cdk@latest deploy --all --require-approval never
+        # When the domain goes live, deploy with it instead:
+        #   npx --yes aws-cdk@latest deploy --all --require-approval never -c domainName=revawiki.io
