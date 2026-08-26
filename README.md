@@ -88,7 +88,11 @@ At portfolio traffic levels: S3 + CloudFront + HTTP API + Lambda sit within or n
 
 ## Credits
 
-* [santifer/cv-santiago](https://github.com/santifer/cv-santiago) as the inspiration for the chat widget UX - the greeting-first thread, quick-question chips, and direct-contact card.
+* [santifer/cv-santiago](https://github.com/santifer/cv-santiago) as the inspiration for this whole project - seeing Santiago's portfolio is what pushed me to build an awesome portfolio site of my own, not just borrow any single feature from it.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ##### Questions / Inquiries
 If you have any question regarding the repo, feel free to e-mail me at reva.wiki@gmail.com. Thank you.
