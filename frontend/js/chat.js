@@ -124,7 +124,7 @@
       let external = true;
       try {
         const parsed = new URL(url);
-        if (parsed.hostname === "revawiki.io" || parsed.hostname === "www.revawiki.io") {
+        if (parsed.hostname === "revawiki.dev" || parsed.hostname === "www.revawiki.dev") {
           href = parsed.pathname + parsed.hash; // same-tab internal link
           external = false;
         }

@@ -46,6 +46,4 @@ jobs:
 
       - name: CDK deploy
         working-directory: infra
-        run: npx --yes aws-cdk@latest deploy --all --require-approval never
-        # When the domain goes live, deploy with it instead:
-        #   npx --yes aws-cdk@latest deploy --all --require-approval never -c domainName=revawiki.io
+        run: npx --yes aws-cdk@latest deploy --all --require-approval never -c domainName=revawiki.dev

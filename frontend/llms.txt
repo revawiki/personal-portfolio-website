@@ -16,7 +16,7 @@ instead of firefight.
 - **Email:** reva.wiki@gmail.com
 - **GitHub:** https://github.com/revawiki
 - **LinkedIn:** https://linkedin.com/in/revawiki
-- **Website:** https://revawiki.io
+- **Website:** https://revawiki.dev
 
 ## Core Competencies
 
@@ -37,7 +37,7 @@ Led AIOps R&D for a major Indonesian telco.
 - Automatic MOP (Method-of-Procedure) checker cut review cycles ~60 -> ~20 minutes and raised throughput from 1-2 to 4+ change requests/day
 - Automatic AWS Direct Connect failover eliminated manual switchover, preventing IDR 79B+ in yearly revenue loss from recurrent fiber-optic outages
 - Recognized as Innovator of the Month by Tech Mahindra's Chief People Officer, June 2025
-- Case study: https://revawiki.io/case-study-copilot.html
+- Case study: https://revawiki.dev/case-study-copilot.html
 
 ### PT HM Sampoerna Tbk. (2024) — Senior DevOps Engineer
 Philip Morris International group (tobacco industry, not pharma). Owned SLAs
@@ -47,7 +47,7 @@ while migrating legacy AWS accounts onto compliant GitOps provisioning.
 - Standardized inherited legacy AWS account configurations to PMI global compliance
 - Reduced AWS infrastructure cost for the SEA region ~55% via rightsizing, reservation optimization and eliminating redundant resources
 - Eliminated 1-2 hours of daily repetitive service-request work through targeted Jenkins automations
-- Case study: https://revawiki.io/case-study-terraform.html
+- Case study: https://revawiki.dev/case-study-terraform.html
 
 ### PT Telkom Indonesia Tbk (2022 - 2024) — DevOps Lead
 Netmonk product. Promoted to lead the DevOps team of 4 engineers.
@@ -55,7 +55,7 @@ Netmonk product. Promoted to lead the DevOps team of 4 engineers.
 - Cut AWS infrastructure cost ~70%
 - Migrated from AWS Singapore to the new AWS Jakarta region
 - Halved deploy time (10 -> 5 min) via DevSecOps-integrated Bitbucket pipeline
-- Case study: https://revawiki.io/case-study-ecs.html
+- Case study: https://revawiki.dev/case-study-ecs.html
 
 ### PT Telkom Indonesia Tbk (2020 - 2022) — Technical Support Engineer
 - Reduced deployment time from ~40 to ~10 minutes through Terraform + Ansible provisioned pipelines
@@ -113,20 +113,20 @@ Netmonk product. Promoted to lead the DevOps team of 4 engineers.
 
 ## Published Case Studies
 
-- [Unified L1 Copilot Platform](https://revawiki.io/case-study-copilot.html): RAG + MCP + human-in-the-loop across 20+ AWS accounts. MTTD ~20 -> <=5 min, MTTR ~30 -> <=10 min, change throughput 1-2 -> 4+/day
-- [AWS DX Auto-Failover](https://revawiki.io/case-study-dx-failover.html): automated physical-layer failover, IDR 79B+ yearly revenue loss prevented. Code: github.com/revawiki/aws-direct-connect-auto-failover
-- [YAML-based Terraform Standardization](https://revawiki.io/case-study-terraform.html): one codebase, per-environment YAML config, 100% of the flagship application's resources on Terraform, routine changes without touching HCL
-- [Multi-Tenant AWS ECS Platform Migration](https://revawiki.io/case-study-ecs.html): 100+ EC2 deployments consolidated, ~70% cost reduction, 2x faster deploys
-- [Jenkins to CloudBees Pipeline Migration](https://revawiki.io/case-study-cloudbees.html): 100+ pipelines migrated across 3 environments in 4 weeks (vs a 12-week manual plan) via a Jinja2 Jenkinsfile template and a Python migration script
-- [Dynamic EC2 Provisioning with Golden AMIs](https://revawiki.io/case-study-golden-ami.html): golden AMI pipeline + Terraform/Ansible provisioning via Bitbucket CI, deployment cut from ~40 to ~10 minutes
+- [Unified L1 Copilot Platform](https://revawiki.dev/case-study-copilot.html): RAG + MCP + human-in-the-loop across 20+ AWS accounts. MTTD ~20 -> <=5 min, MTTR ~30 -> <=10 min, change throughput 1-2 -> 4+/day
+- [AWS DX Auto-Failover](https://revawiki.dev/case-study-dx-failover.html): automated physical-layer failover, IDR 79B+ yearly revenue loss prevented. Code: github.com/revawiki/aws-direct-connect-auto-failover
+- [YAML-based Terraform Standardization](https://revawiki.dev/case-study-terraform.html): one codebase, per-environment YAML config, 100% of the flagship application's resources on Terraform, routine changes without touching HCL
+- [Multi-Tenant AWS ECS Platform Migration](https://revawiki.dev/case-study-ecs.html): 100+ EC2 deployments consolidated, ~70% cost reduction, 2x faster deploys
+- [Jenkins to CloudBees Pipeline Migration](https://revawiki.dev/case-study-cloudbees.html): 100+ pipelines migrated across 3 environments in 4 weeks (vs a 12-week manual plan) via a Jinja2 Jenkinsfile template and a Python migration script
+- [Dynamic EC2 Provisioning with Golden AMIs](https://revawiki.dev/case-study-golden-ami.html): golden AMI pipeline + Terraform/Ansible provisioning via Bitbucket CI, deployment cut from ~40 to ~10 minutes
 
 ## Sharing Sessions
 
-- [Chatting with Your AWS Infrastructure On-the-Go: The Power of AWS API MCP Server](https://revawiki.io/session-aws-community-day.html): AWS Community Day Indonesia, Oct 2025, BINUS @Alam Sutera Tangerang
-- [DevOps Jargon Explained: A Clear and Concise Breakdown](https://revawiki.io/session-tegal-dev.html): Tegal Dev Tech Talk, Feb 2025, co-presented with Wisnu Yumna Y
-- [Keeping Up Your Infra 24/7: Machine Perspective](https://revawiki.io/session-infra-24-7.html): guest session at RevoU on the seven SRE core principles translated into concrete infrastructure decisions
-- [Optimal Decision Making Process for Choosing the Right Tech Stack](https://revawiki.io/session-tech-stack-decision.html): internal sharing at Netmonk, Telkom Indonesia - decision factors, impact/effort matrix, and automation ROI arithmetic
-- [Making a "Good" Tech Start-Up](https://revawiki.io/session-good-tech-startup.html): internal sharing at Netmonk, Telkom Indonesia - product, go-to-market and culture, and why engineers are part of the product
+- [Chatting with Your AWS Infrastructure On-the-Go: The Power of AWS API MCP Server](https://revawiki.dev/session-aws-community-day.html): AWS Community Day Indonesia, Oct 2025, BINUS @Alam Sutera Tangerang
+- [DevOps Jargon Explained: A Clear and Concise Breakdown](https://revawiki.dev/session-tegal-dev.html): Tegal Dev Tech Talk, Feb 2025, co-presented with Wisnu Yumna Y
+- [Keeping Up Your Infra 24/7: Machine Perspective](https://revawiki.dev/session-infra-24-7.html): guest session at RevoU on the seven SRE core principles translated into concrete infrastructure decisions
+- [Optimal Decision Making Process for Choosing the Right Tech Stack](https://revawiki.dev/session-tech-stack-decision.html): internal sharing at Netmonk, Telkom Indonesia - decision factors, impact/effort matrix, and automation ROI arithmetic
+- [Making a "Good" Tech Start-Up](https://revawiki.dev/session-good-tech-startup.html): internal sharing at Netmonk, Telkom Indonesia - product, go-to-market and culture, and why engineers are part of the product
 
 ## About This Site
 

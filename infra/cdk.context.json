@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=891376937379:domainName=revawiki.dev:region=us-east-1": {
+    "Id": "/hostedzone/Z075987838I6F4UPR206I",
+    "Name": "revawiki.dev."
+  },
+  "hosted-zone:account=891376937379:domainName=revawiki.dev:region=ap-southeast-3": {
+    "Id": "/hostedzone/Z075987838I6F4UPR206I",
+    "Name": "revawiki.dev."
+  }
+}

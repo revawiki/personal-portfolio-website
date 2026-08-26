@@ -21,4 +21,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://revawiki.io/sitemap.xml
+Sitemap: https://revawiki.dev/sitemap.xml
