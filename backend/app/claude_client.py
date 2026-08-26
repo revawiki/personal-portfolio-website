@@ -5,10 +5,11 @@ fact-checked summary served to AI crawlers -- so the chatbot and the crawler
 file can never drift apart. build.sh copies it into the Lambda bundle as
 app/knowledge.md; local dev reads it straight from the frontend folder.
 
-Auth: ANTHROPIC_API_KEY locally, or Secrets Manager via CHAT_SECRET_ARN in
-AWS (see infra/infra/site_stack.py). With neither set, replies degrade to a
-canned dummy echo so the plumbing stays testable at zero cost -- CHAT_PROVIDER
-can also be set to "dummy" to force that explicitly.
+Auth: ANTHROPIC_API_KEY locally, or an SSM Parameter Store SecureString via
+CHAT_PARAM_NAME in AWS (see infra/infra/site_stack.py; standard-tier
+parameters cost nothing, unlike Secrets Manager). With neither set, replies
+degrade to a canned dummy echo so the plumbing stays testable at zero cost --
+CHAT_PROVIDER can also be set to "dummy" to force that explicitly.
 """
 import os
 import pathlib
@@ -19,7 +20,7 @@ import anthropic
 
 PROVIDER = os.environ.get("CHAT_PROVIDER", "anthropic").lower()
 API_KEY = os.environ.get("ANTHROPIC_API_KEY")
-SECRET_ARN = os.environ.get("CHAT_SECRET_ARN")
+PARAM_NAME = os.environ.get("CHAT_PARAM_NAME")
 MODEL = os.environ.get("CHAT_MODEL", "claude-haiku-4-5-20251001")
 
 # TLDR-style chat replies; the prompt caps replies at ~50 words, and this
@@ -60,6 +61,8 @@ def _extract_markers(text: str) -> tuple[str, bool, bool]:
     deflected = OFFTOPIC_MARKER in text
     contact = CONTACT_MARKER in text
     text = text.replace(OFFTOPIC_MARKER, "").replace(CONTACT_MARKER, "").strip()
+    # A marker dropped mid-sentence leaves a doubled space behind.
+    text = re.sub(r" {2,}", " ", text)
     return text, deflected, contact
 
 
@@ -149,22 +152,22 @@ def _system_prompt() -> str:
 
 
 @lru_cache(maxsize=1)
-def _secret_value() -> str:
-    """The API key from Secrets Manager (AWS path). boto3 comes from the
-    Lambda runtime; it's never needed locally."""
+def _param_value() -> str:
+    """The API key from SSM Parameter Store (AWS path, SecureString). boto3
+    comes from the Lambda runtime; it's never needed locally."""
     import boto3
 
-    client = boto3.client("secretsmanager")
-    value = client.get_secret_value(SecretId=SECRET_ARN)
-    return value["SecretString"]
+    client = boto3.client("ssm")
+    value = client.get_parameter(Name=PARAM_NAME, WithDecryption=True)
+    return value["Parameter"]["Value"]
 
 
 def _api_key() -> str | None:
     """The API key, or None when nothing is configured."""
     if API_KEY:
         return API_KEY
-    if SECRET_ARN:
-        return _secret_value()
+    if PARAM_NAME:
+        return _param_value()
     return None
 
 

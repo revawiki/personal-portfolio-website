@@ -6,9 +6,12 @@ account is organized.
 Layout (SiteStack, ap-southeast-3):
   S3 bucket (static frontend, private, OAC-only access)
   Lambda (FastAPI chatbot via Mangum) behind an HTTP API (API Gateway v2)
-  Secrets Manager secret holding the chat provider's API key (value set
-    out-of-band in the console, never in code) with read access granted to
-    the Lambda
+  SSM Parameter Store SecureString holding the chat API key -- created
+    out-of-band (CloudFormation cannot create SecureStrings):
+      aws ssm put-parameter --name /wiki-personal-site/chat-api-key \
+        --type SecureString --value <key> --region ap-southeast-3
+    The stack only grants the Lambda read access. Standard-tier parameters
+    are free, unlike Secrets Manager.
   CloudFront: default behavior -> S3, "/api/*" -> HTTP API
 
 CertificateStack (us-east-1, only when a domain is passed): CloudFront only
@@ -35,7 +38,6 @@ from aws_cdk import (
     aws_route53_targets as route53_targets,
     aws_s3 as s3,
     aws_s3_deployment as s3_deploy,
-    aws_secretsmanager as secretsmanager,
 )
 from constructs import Construct
 
@@ -46,6 +48,7 @@ PREFIX = "wiki-personal-site"
 # Must match backend/app/claude_client.py defaults.
 CHAT_PROVIDER = "anthropic"
 CHAT_MODEL = "claude-haiku-4-5-20251001"
+CHAT_PARAM_NAME = f"/{PREFIX}/chat-api-key"
 
 
 class CertificateStack(Stack):
@@ -95,13 +98,6 @@ class SiteStack(Stack):
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
         )
 
-        api_key_secret = secretsmanager.Secret(
-            self,
-            "ChatApiKeySecret",
-            secret_name=f"{PREFIX}/chat-api-key",
-            description="Chat provider API key used by the portfolio chatbot Lambda",
-        )
-
         chat_role = iam.Role(
             self,
             "ChatFunctionRole",
@@ -126,11 +122,20 @@ class SiteStack(Stack):
             memory_size=256,
             environment={
                 "CHAT_PROVIDER": CHAT_PROVIDER,
-                "CHAT_SECRET_ARN": api_key_secret.secret_arn,
+                "CHAT_PARAM_NAME": CHAT_PARAM_NAME,
                 "CHAT_MODEL": CHAT_MODEL,
             },
         )
-        api_key_secret.grant_read(chat_fn)
+        # SecureString read; decryption uses the AWS-managed aws/ssm key, so
+        # no explicit KMS grant is needed.
+        chat_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=["ssm:GetParameter"],
+                resources=[
+                    f"arn:aws:ssm:{self.region}:{self.account}:parameter{CHAT_PARAM_NAME}"
+                ],
+            )
+        )
 
         http_api = apigwv2.HttpApi(
             self,
@@ -217,4 +222,4 @@ class SiteStack(Stack):
 
         CfnOutput(self, "DistributionDomainName", value=distribution.distribution_domain_name)
         CfnOutput(self, "ChatApiEndpoint", value=http_api.api_endpoint)
-        CfnOutput(self, "ChatSecretName", value=api_key_secret.secret_name)
+        CfnOutput(self, "ChatParamName", value=CHAT_PARAM_NAME)

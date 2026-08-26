@@ -131,7 +131,7 @@ Netmonk product. Promoted to lead the DevOps team of 4 engineers.
 ## About This Site
 
 Interactive CV with a serverless Claude chatbot. Static frontend on S3/CloudFront,
-FastAPI on AWS Lambda behind API Gateway (via Mangum), API key in Secrets Manager,
+FastAPI on AWS Lambda behind API Gateway (via Mangum), API key in SSM Parameter Store,
 all provisioned with AWS CDK in Python.
 Source: https://github.com/revawiki/personal-portfolio-website
 
