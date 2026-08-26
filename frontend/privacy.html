@@ -7,10 +7,13 @@
   <meta name="description" content="How revawiki.io handles visitor data, analytics, and chatbot conversations." />
   <link rel="canonical" href="https://revawiki.io/privacy.html" />
   <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="case-study-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
@@ -25,29 +28,44 @@
         The summary below explains what happens when you visit or use the chat.
       </p>
       <div class="cs-byline">
-        <span>Last updated {{MONTH YEAR}}</span>
+        <span>Last updated August 2026</span>
       </div>
     </header>
 
-    <!-- TODO(reva): PLACEHOLDER PAGE. Confirm each section against what the
-         deployed stack actually does before launch -- in particular whether
-         any analytics is enabled, how long CloudFront/Lambda logs are kept,
-         and the retention policy for chat messages sent to the model
-         provider. Replace every {{...}} marker. -->
-
     <section class="cs-section">
       <h2>What this site collects</h2>
-      <p>{{Confirm and describe: the site is static (S3/CloudFront) and does not use cookies for tracking. Note any request logs CloudFront keeps, what fields they contain (IP, user agent, referrer), and how long they are retained.}}</p>
+      <p>
+        As little as possible. There are no accounts, no sign-ups, and no
+        tracking cookies. Like most websites, the hosting keeps standard
+        access logs (IP address, user agent, timestamp, requested page) for
+        operational and security purposes; these are not used to profile
+        visitors and are kept only as long as the hosting defaults require.
+      </p>
     </section>
 
     <section class="cs-section">
       <h2>Analytics</h2>
-      <p>{{State plainly whether any analytics product is in use. If none, say so. If one is added later, name it and link its privacy policy.}}</p>
+      <p>
+        None. No analytics product runs on this site: no Google Analytics, no
+        pixels, no fingerprinting. If that ever changes, this page will name
+        the product and link its privacy policy before it goes live.
+      </p>
     </section>
 
     <section class="cs-section">
       <h2>The chat assistant</h2>
-      <p>{{Describe the chat flow: messages you type are sent to an API running on AWS Lambda, which forwards them to a model provider to generate a reply. State whether conversations are stored, for how long, and who can read them. Name the model provider and link their policy. Advise visitors not to send personal or confidential information.}}</p>
+      <p>
+        When you send a message in the chat widget, that message, along with
+        the recent back-and-forth from your current tab, is sent to this
+        site's chat service, which uses Anthropic's Claude to generate the
+        reply. The conversation itself lives only in your browser tab and is
+        gone when you close it; this site keeps no database of chat
+        conversations. Anthropic processes the messages to produce the reply
+        under its own
+        <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">privacy policy</a>.
+        Treat the chat like a public contact form: don't paste anything
+        personal or confidential into it, ever.
+      </p>
     </section>
 
     <section class="cs-section">
@@ -72,11 +90,6 @@
         <span class="cs-next-label">Back to</span>
         <strong>Homepage</strong>
         <span>Experience, work, and sessions</span>
-      </a>
-      <a href="/index.html#contact" class="cs-next-card">
-        <span class="cs-next-label">Get in touch</span>
-        <strong>Let&rsquo;s talk</strong>
-        <span>Email or LinkedIn</span>
       </a>
     </nav>
   </main>
