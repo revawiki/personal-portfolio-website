@@ -75,6 +75,20 @@ After the first manual deploy, every push to `master` redeploys automatically th
 
 At portfolio traffic levels: S3 + CloudFront + HTTP API + Lambda sit within or near the AWS free tier, the SSM parameter is free, and chat replies on Claude Haiku cost fractions of a cent per conversation. Rough steady state: **$0-2/month** plus the domain's yearly registration.
 
-## Acknowledgments
+## Built With
 
-- Chat widget UX (greeting-first thread, quick-question chips, direct-contact card) inspired by [santifer/cv-santiago](https://github.com/santifer/cv-santiago).
+* [Amazon S3](https://aws.amazon.com/s3/) + [Amazon CloudFront](https://aws.amazon.com/cloudfront/) for hosting and serving the static frontend.
+* [Amazon API Gateway](https://aws.amazon.com/api-gateway/) + [AWS Lambda](https://aws.amazon.com/lambda/) for the serverless chat API ([FastAPI](https://fastapi.tiangolo.com/) via [Mangum](https://github.com/jordaneremieff/mangum)).
+* [Claude API](https://docs.anthropic.com/) (Haiku 4.5) for the chatbot's replies.
+* [AWS Systems Manager Parameter Store](https://aws.amazon.com/systems-manager/) for the API key as a free SecureString.
+* [Amazon Route 53](https://aws.amazon.com/route53/) + [AWS Certificate Manager](https://aws.amazon.com/certificate-manager/) for the custom domain and TLS.
+* [AWS CDK](https://aws.amazon.com/cdk/) (Python) for provisioning everything as code.
+* [GitHub Actions](https://github.com/features/actions) with OIDC for keyless continuous deployment.
+* [draw.io](https://www.drawio.com/) for the architecture diagram.
+
+## Credits
+
+* [santifer/cv-santiago](https://github.com/santifer/cv-santiago) as the inspiration for the chat widget UX - the greeting-first thread, quick-question chips, and direct-contact card.
+
+##### Questions / Inquiries
+If you have any question regarding the repo, feel free to e-mail me at reva.wiki@gmail.com. Thank you.
