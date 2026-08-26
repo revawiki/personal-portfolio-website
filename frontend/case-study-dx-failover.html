@@ -3,95 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AWS Direct Connect Auto-Failover — Reva Wiki</title>
-  <meta name="description" content="Automating AWS Direct Connect failover during physical-layer network incidents — removing manual switchover and preventing IDR 79B+ in yearly revenue loss." />
+  <title>AWS DX Auto-Failover — Reva Wiki</title>
+  <meta name="description" content="Automating AWS Direct Connect failover during physical-layer network incidents, removing manual switchover and preventing IDR 79B+ in yearly revenue loss." />
   <link rel="canonical" href="https://revawiki.io/case-study-dx-failover.html" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="AWS Direct Connect Auto-Failover — Reva Wiki" />
+  <meta property="og:title" content="AWS DX Auto-Failover — Reva Wiki" />
   <meta property="og:description" content="Removing the manual switchover that recurrent fiber-optic outages used to demand." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="case-study-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
       <a href="/projects.html">Projects</a>
       <span aria-hidden="true">/</span>
-      <span class="crumb-current">Direct Connect Auto-Failover</span>
+      <span class="crumb-current">AWS DX Auto-Failover</span>
     </nav>
 
     <header class="cs-header">
       <p class="kicker">Case study · Tech Mahindra</p>
-      <h1>AWS Direct Connect Auto-Failover</h1>
+      <h1>AWS DX Auto-Failover</h1>
       <p class="cs-deck">
         Recurrent fiber-optic cuts kept taking down a hybrid link that a national
         telco's production workloads depended on. Every incident meant a human
-        performing a manual switchover — at whatever hour it happened.
+        performing a manual switchover, at whatever hour it happened.
       </p>
       <div class="cs-byline">
-        <span>Reva Wiki</span>
-        <span aria-hidden="true">·</span>
-        <span>2025</span>
-        <span aria-hidden="true">·</span>
-        <span>6 min read</span>
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          6 min read
+        </span>
       </div>
       <div class="cs-actions">
         <a href="https://github.com/revawiki/aws-direct-connect-auto-failover" class="btn" target="_blank" rel="noopener">View the code on GitHub</a>
       </div>
     </header>
 
-    <div class="cs-stats">
-      <div class="cs-stat">
-        <span class="num">IDR 79B+</span>
-        <span class="label">yearly revenue loss prevented</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">0</span>
-        <span class="label">manual switchover steps</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">20+</span>
-        <span class="label">AWS accounts in scope</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">Python</span>
-        <span class="label">open-sourced approach</span>
-      </div>
-    </div>
-
-    <nav class="cs-toc" aria-label="On this page">
-      <span class="cs-toc-label">On this page</span>
-      <a href="#context">Context</a>
-      <a href="#problem">The problem</a>
-      <a href="#approach">Approach</a>
-      <a href="#outcome">Outcome</a>
-      <a href="#stack">Stack</a>
-      <a href="#lessons">Lessons</a>
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#context" data-section="context" class="story-nav-link">Context</a>
+      <a href="#challenge" data-section="challenge" class="story-nav-link">Challenge</a>
+      <a href="#action" data-section="action" class="story-nav-link">Action</a>
+      <a href="#results" data-section="results" class="story-nav-link">Results</a>
     </nav>
-
-    <!-- TODO(reva): the narrative below is written from what the CV and the public
-         repo state. Add the internal specifics you're comfortable publishing --
-         detection thresholds, BGP/route specifics, runbook integration. -->
 
     <section id="context" class="cs-section">
       <h2>Context</h2>
       <p>
-        The client runs Indonesia's largest telco cloud operation — production
-        workloads spread across 20+ AWS accounts and 10+ Kubernetes clusters,
-        reaching AWS over dedicated Direct Connect circuits rather than the
-        public internet.
+        Tech Mahindra runs cloud operations for Indonesia's largest telco,
+        production workloads spread across 20+ AWS accounts and 10+ Kubernetes
+        clusters, reaching AWS over dedicated Direct Connect circuits rather
+        than the public internet.
       </p>
       <p>
         Dedicated circuits are physical. They run through real fiber, in real
-        ground, alongside real construction work. Over the preceding period the
-        link had been severed repeatedly — each cut an unplanned outage on a
-        path that revenue-generating traffic depended on.
+        ground, and anything that can happen to real ground can happen to the
+        link: road work, construction digging where it shouldn't, even a rat
+        chewing through a cable. Over the preceding period the link had been
+        severed repeatedly by exactly these kinds of causes, each cut an
+        unplanned outage on a path that revenue-generating traffic depended on.
+      </p>
+      <p>
+        The hybrid setup had a redundant path for exactly this reason, but
+        redundancy on paper isn't redundancy in production. If the primary
+        Direct Connect link went down and traffic wasn't moved to the healthy
+        path fast enough, it kept trying to route over the same troubled link,
+        and every transaction riding on it was a transaction that could fail.
       </p>
     </section>
 
-    <section id="problem" class="cs-section">
-      <h2>The problem</h2>
+    <section id="challenge" class="cs-section">
+      <h2>Challenge</h2>
       <p>
         A redundant path existed. What did not exist was anything that moved
         traffic onto it without a person deciding to.
@@ -99,24 +91,34 @@
       <p>
         The switchover was a documented manual procedure: notice the incident,
         confirm it was physical rather than transient, then execute the cutover
-        by hand. That sequence is slow at 2pm and slower at 2am, and every minute
+        by hand. That sequence is slow at 2 PM and slower at 2 AM, and every minute
         of it was billable downtime on a link carrying production traffic.
+      </p>
+      <p>
+        Detecting the fault early didn't skip any of that. Cutting over still
+        needed sign-off before anyone touched the link, which in practice meant
+        an actual phone call to the client's representative, even if the fault
+        was caught at 3 AM. The bottleneck was never
+        how fast the incident could be noticed. It was how fast a human on the
+        other end could be reached and could say yes.
       </p>
       <div class="callout callout-warn">
         <p>
-          The failure mode was never "we don't have redundancy." It was "our
-          redundancy needs a human to be awake."
+          The redundant path already existed. The only thing missing was
+          something that could use it without waiting for a person to wake up
+          and say go.
         </p>
       </div>
     </section>
 
-    <section id="approach" class="cs-section">
-      <h2>Approach</h2>
+    <section id="action" class="cs-section">
+      <h2>Action</h2>
       <p>
-        I built an all-around automation for the failover path: detect the
-        physical-level incident, validate that it is genuinely a link failure
-        rather than a blip worth riding out, and execute the switchover to the
-        redundant path without waiting on a person.
+        Turned into a requirement, the challenge was simple to state and hard
+        to build: detect a physical-layer fault the moment it happens, confirm
+        it's genuinely a break rather than a transient blip, and cut over to
+        the healthy path immediately, all without a phone call standing
+        between the fault and the fix.
       </p>
       <ol class="step-list">
         <li>
@@ -129,7 +131,7 @@
         </li>
         <li>
           <h4>Switch</h4>
-          <p>Execute the cutover to the redundant path automatically — the same steps the runbook prescribed, minus the wait for a human to run them.</p>
+          <p>Execute the cutover to the redundant path automatically, the same steps the runbook prescribed, minus the wait for a human to run them.</p>
         </li>
         <li>
           <h4>Notify</h4>
@@ -137,36 +139,17 @@
         </li>
       </ol>
       <p>
-        The generalized approach is published as an open-source repo, separate
-        from any client-specific configuration.
+        My approach was to treat detection, validation, and execution as one
+        pipeline instead of three separate fixes. A fast detector paired with
+        a slow, manual validation step would just move the bottleneck instead
+        of removing it, so the whole path from fault to cutover had to run
+        without a human in the middle of it, not just at the start.
       </p>
-      <a href="https://github.com/revawiki/aws-direct-connect-auto-failover" class="inline-link" target="_blank" rel="noopener">github.com/revawiki/aws-direct-connect-auto-failover →</a>
-    </section>
-
-    <section id="outcome" class="cs-section">
-      <h2>Outcome</h2>
-      <p>
-        The manual switchover procedure was eliminated. Failover stopped
-        depending on who was on shift and how quickly they could confirm what
-        had happened.
-      </p>
-      <p>
-        Measured against the recurrent fiber-optic outage pattern that prompted
-        the work, the automation accounts for
-        <strong>IDR 79B+ in yearly revenue loss prevented</strong> — the
-        difference between an outage that ends when a human reacts and one that
-        ends when a system does.
-      </p>
-      <p>
-        It also became one of the initiatives cited in the client-acknowledged AI
-        enablement work that led to an
-        <a href="/index.html#recognition">Innovator of the Month award</a> in
-        June 2025.
-      </p>
-    </section>
-
-    <section id="stack" class="cs-section">
-      <h2>Stack</h2>
+      <figure class="cs-figure cs-figure-full">
+        <img src="/assets/dx-failover-architecture.svg" alt="Architecture diagram: CloudWatch composite alarms watch Link A and Link B health via a VPC monitoring instance, trigger a failover Lambda that brings down BGP on the affected Direct Connect VIF, records state to S3, is re-checked by an EventBridge rule, and notifies the ops team over SNS, with Site-1 and Site-2 routers on the corporate network side of both links" />
+        <figcaption>The failover system: CloudWatch alarms, a Lambda orchestrator, and the redundant Link A / Link B paths it switches between.</figcaption>
+      </figure>
+      <h3 class="stack-title">Tech Stack</h3>
       <div class="stack-grid">
         <div class="stack-row">
           <span class="stack-label">Language</span>
@@ -175,35 +158,94 @@
         <div class="stack-row">
           <span class="stack-label">AWS</span>
           <div class="badges">
-            <span class="badge">Direct Connect</span>
-            <span class="badge">CloudWatch</span>
-            <span class="badge">VPC / Transit Gateway</span>
+            <span class="badge">AWS Direct Connect</span>
+            <span class="badge">AWS Lambda</span>
+            <span class="badge">Amazon CloudWatch</span>
+            <span class="badge">Amazon EventBridge</span>
+            <span class="badge">Amazon S3</span>
+            <span class="badge">Amazon SNS</span>
+            <span class="badge">AWS Systems Manager Automation</span>
           </div>
         </div>
         <div class="stack-row">
-          <span class="stack-label">Operations</span>
-          <div class="badges">
-            <span class="badge">Runbook automation</span>
-            <span class="badge">Alerting</span>
-          </div>
+          <span class="stack-label">Tooling</span>
+          <div class="badges"><span class="badge">diagrams</span></div>
         </div>
+      </div>
+      <p>
+        AWS Direct Connect provides the redundant transit VIFs this system
+        watches over, fed by health metrics from a monitoring EC2 instance
+        provisioned through an AWS Systems Manager Automation runbook. Amazon
+        CloudWatch rolls those metrics into one composite alarm per link, and
+        when it fires, it invokes the AWS Lambda orchestrator, which calls the
+        Direct Connect API to bring BGP down on the affected VIF. Amazon S3
+        holds the last-known VIF state between invocations, so a re-trigger
+        can be told apart from a first run. Once the BGP failover test's own
+        wait period ends, an Amazon EventBridge rule re-invokes the Lambda to
+        recheck whether the link is still unhealthy: if it is, the failover
+        reruns; if it has recovered, the rule just passes. Amazon SNS sends
+        the operator a notification once the action is
+        taken. A second Lambda renders a CloudWatch dashboard widget using
+        the diagrams library, so the topology and its live BGP status stay
+        visible without leaving the console.
+      </p>
+    </section>
+
+    <section id="results" class="cs-section">
+      <h2>Results</h2>
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <span class="num">IDR 79B+</span>
+          <span class="label">yearly revenue loss prevented</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">0</span>
+          <span class="label">manual switchover steps</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">30+</span>
+          <span class="label">failovers performed, last known count</span>
+        </div>
+      </div>
+      <p>
+        The manual switchover procedure was eliminated. Failover stopped
+        depending on who was on shift and how quickly they could confirm what
+        had happened.
+      </p>
+      <p>
+        Measured against the recurrent fiber-optic outage pattern that prompted
+        the work, the automation accounts for
+        <strong>IDR 79B+ in yearly revenue loss prevented</strong>, the
+        difference between an outage that ends when a human reacts and one that
+        ends when a system does.
+      </p>
+      <p>
+        On the operations side, the bigger change is what stopped happening.
+        30+ of these link failures had occurred by the last time I had
+        visibility into the count, and not one of them required someone to be
+        pulled out of bed, confirm what was
+        going on, and approve a cutover by hand. The team's role shifted from
+        executing the switchover to reviewing what the system already did, an
+        SNS notification instead of a page demanding action. That consistency
+        matters as much as the speed: every failover now runs the same
+        validated sequence, instead of depending on which engineer picked up
+        the phone and how sharp they were at 3 AM.
+      </p>
+      <div class="callout callout-warn">
+        <p>
+          The client has since made this a hard requirement of its own: when
+          evaluating any cloud service provider, proving the same automated
+          failover capability for the hybrid connection is now a condition to
+          even be considered, not a nice-to-have on top of everything else.
+        </p>
       </div>
     </section>
 
-    <section id="lessons" class="cs-section">
-      <h2>Lessons</h2>
-      <ul class="lesson-list">
-        <li><strong>Redundancy that needs a human isn't redundancy yet.</strong> It's a documented recovery plan. The gap between those two is measured in revenue.</li>
-        <li><strong>Validate before you act.</strong> An automation that flaps on every transient blip creates a worse problem than the one it solves.</li>
-        <li><strong>Keep the human in the loop, not in the path.</strong> The team still reviews every failover — they just no longer have to perform it.</li>
-      </ul>
-    </section>
-
     <nav class="cs-next" aria-label="More case studies">
-      <a href="/case-study-copilot.html" class="cs-next-card">
+      <a href="/case-study-terraform.html" class="cs-next-card">
         <span class="cs-next-label">Next case study</span>
-        <strong>Unified AI Operations Ecosystem</strong>
-        <span>RAG + MCP + human-in-the-loop across 20+ AWS accounts</span>
+        <strong>YAML-based Terraform Standardization</strong>
+        <span>One codebase, YAML per environment</span>
       </a>
       <a href="/projects.html" class="cs-next-card">
         <span class="cs-next-label">Browse</span>
@@ -214,61 +256,39 @@
   </main>
 
   <div id="chat-widget" class="chat-widget">
-    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
       <div id="chat-log" class="chat-log"></div>
       <form id="chat-form">
-        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
-        <button type="submit">Send</button>
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
       </form>
     </div>
   </div>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/index.html" class="footer-logo">Reva Wiki</a>
-        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
-      </div>
-      <nav class="footer-nav" aria-label="Site map">
-        <div class="footer-col">
-          <h5>Explore</h5>
-          <a href="/index.html">Home</a>
-          <a href="/story.html">Story</a>
-          <a href="/about.html">About</a>
-          <a href="/index.html#experience">Experience</a>
-          <a href="/index.html#skills">Skills</a>
-        </div>
-        <div class="footer-col">
-          <h5>Work</h5>
-          <a href="/projects.html">All projects</a>
-          <a href="/case-study-copilot.html">Unified AI Ops</a>
-          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
-          <a href="/case-study-terraform.html">Terraform migration</a>
-          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
-        </div>
-        <div class="footer-col">
-          <h5>Writing</h5>
-          <a href="/articles.html">All articles</a>
-          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
-          <a href="/article-yaml-terraform.html">YAML over HCL</a>
-          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
-        </div>
-        <div class="footer-col">
-          <h5>Elsewhere</h5>
-          <a href="mailto:reva.wiki@gmail.com">Email</a>
-          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
-          <a href="/llms.txt">llms.txt</a>
-        </div>
-      </nav>
-    </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
-      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
     </div>
   </footer>
 
   <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
 </body>
 </html>

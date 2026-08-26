@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects — Reva Wiki</title>
-  <meta name="description" content="Case studies and lab experiments in AIOps, infrastructure-as-code, cloud cost, and observability — from national telco CloudOps to homelab monitoring stacks." />
+  <meta name="description" content="Case studies and lab experiments in AIOps, infrastructure-as-code, cloud cost, and observability, from national telco CloudOps to homelab monitoring stacks." />
   <link rel="canonical" href="https://revawiki.io/projects.html" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Projects — Reva Wiki" />
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="projects-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
@@ -20,12 +20,13 @@
     </nav>
 
     <header class="cs-header">
-      <p class="kicker">Signature work</p>
+      <p class="kicker">See the work</p>
       <h1>Projects</h1>
       <p class="cs-deck">
-        Production systems with write-ups, and the public repos where the
-        patterns get tried first. Each one started as a bottleneck somebody was
-        absorbing by hand.
+        This is where the stories from the case studies turn into actual
+        systems: the write-ups, the repos, the decisions behind them. Every
+        one of these started the same way, as a bottleneck somebody was
+        quietly absorbing by hand until I decided that had to stop.
       </p>
     </header>
 
@@ -34,99 +35,127 @@
       <div class="project-grid">
         <article class="project-card">
           <div class="project-card-head">
-            <h3>Unified AI Operations Ecosystem</h3>
-            <span class="tag tag-live">In production</span>
+            <h3>Unified L1 Copilot Platform</h3>
           </div>
-          <p class="project-org">Tech Mahindra · 2025 — present</p>
+          <p class="project-org">Tech Mahindra</p>
           <p>
-            RAG knowledge base, MCP servers, and human-in-the-loop governance
-            integrated into one CloudOps layer — anomaly detection plus
-            AI-assisted first-level RCA across 20+ AWS accounts and 10+
-            Kubernetes clusters.
+            An AI ecosystem combining RAG, memory, and MCP to unify automation workflows
+            across 20+ AWS accounts, 10+ Kubernetes clusters, turning reactive ops into
+            proactive, human-governed remediation.
           </p>
           <div class="stat-inline">
-            <span><strong>MTTD</strong> ~20 → ≤5 min</span>
-            <span><strong>MTTR</strong> ~30 → ≤10 min</span>
-            <span><strong>4+</strong> CRs/day</span>
+            <span><strong>MTTD</strong> ~20 to ≤5 min</span>
+            <span><strong>MTTR</strong> ~30 to ≤10 min</span>
           </div>
           <div class="badges">
-            <span class="badge">Amazon Bedrock</span>
-            <span class="badge">MCP</span>
-            <span class="badge">RAG</span>
-            <span class="badge">HITL</span>
+            <span class="tech-chip">AWS</span>
+            <span class="tech-chip">Azure</span>
+            <span class="tech-chip">Dify</span>
           </div>
           <a href="/case-study-copilot.html" class="inline-link">Read the case study →</a>
         </article>
 
         <article class="project-card">
           <div class="project-card-head">
-            <h3>AWS Direct Connect Auto-Failover</h3>
-            <span class="tag tag-live">In production</span>
+            <h3>AWS DX Auto-Failover</h3>
           </div>
-          <p class="project-org">Tech Mahindra · 2025</p>
+          <p class="project-org">Tech Mahindra</p>
           <p>
-            Automating Direct Connect failover during physical-layer network
-            incidents — removing the manual switchover that recurrent
-            fiber-optic outages used to demand.
+            Monitors AWS Direct Connect health, distinguishes a real fiber cut from
+            transient noise, then cuts over to the redundant circuit automatically:
+            no runbook, no on-call wakeup.
           </p>
           <div class="stat-inline">
-            <span><strong>IDR 79B+</strong> yearly loss prevented</span>
+            <span><strong>IDR 79B+</strong> yearly revenue loss prevented</span>
           </div>
           <div class="badges">
-            <span class="badge">Python</span>
-            <span class="badge">AWS Direct Connect</span>
-            <span class="badge">Network Automation</span>
+            <span class="tech-chip">AWS</span>
+            <span class="tech-chip">Python</span>
           </div>
-          <div class="role-links">
-            <a href="/case-study-dx-failover.html" class="inline-link">Read the case study →</a>
-            <a href="https://github.com/revawiki/aws-direct-connect-auto-failover" class="inline-link" target="_blank" rel="noopener">View code →</a>
-          </div>
+          <a href="/case-study-dx-failover.html" class="inline-link">Read the case study →</a>
         </article>
 
         <article class="project-card">
           <div class="project-card-head">
-            <h3>Console → Terraform at 40+ Accounts</h3>
-            <span class="tag">Shipped</span>
+            <h3>YAML-based Terraform Standardization</h3>
           </div>
-          <p class="project-org">PT HM Sampoerna Tbk. · 2024</p>
+          <p class="project-org">PT HM Sampoerna Tbk.</p>
           <p>
-            One Terraform codebase driven by per-environment YAML, replacing
-            click-ops across 40+ inherited AWS accounts while meeting Philip
-            Morris International's global compliance standards.
+            Console-based provisioning migrated to Terraform under a GitOps strategy:
+            one codebase driven by per-environment YAML, standardizing the company's
+            flagship application infrastructure.
           </p>
           <div class="stat-inline">
-            <span><strong>~55%</strong> SEA cost reduction</span>
-            <span><strong>40+</strong> accounts</span>
+            <span><strong>100%</strong> resource coverage</span>
           </div>
           <div class="badges">
-            <span class="badge">Terraform</span>
-            <span class="badge">GitOps</span>
-            <span class="badge">Jenkins</span>
+            <span class="tech-chip">AWS</span>
+            <span class="tech-chip">Terraform</span>
+            <span class="tech-chip">Bitbucket</span>
           </div>
           <a href="/case-study-terraform.html" class="inline-link">Read the case study →</a>
         </article>
 
         <article class="project-card">
           <div class="project-card-head">
-            <h3>Multi-Tenant ECS Platform</h3>
-            <span class="tag">Shipped</span>
+            <h3>Jenkins to CloudBees Pipeline Migration</h3>
           </div>
-          <p class="project-org">PT Telkom Indonesia Tbk · 2022 — 2024</p>
+          <p class="project-org">PT HM Sampoerna Tbk.</p>
           <p>
-            100+ monolithic EC2 deployments consolidated onto a shared AWS ECS
-            platform, combined with a Singapore → Jakarta regional
-            re-architecture.
+            Legacy Jenkins pipelines moved to CloudBees across dev, staging and
+            production, replacing hand-written Jenkinsfiles with a Jinja2-templated
+            standard.
+          </p>
+          <div class="stat-inline">
+            <span><strong>3</strong> environments migrated</span>
+          </div>
+          <div class="badges">
+            <span class="tech-chip">CloudBees</span>
+            <span class="tech-chip">Jenkins</span>
+            <span class="tech-chip">Jinja2</span>
+          </div>
+          <a href="/case-study-cloudbees.html" class="inline-link">Read the case study →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-head">
+            <h3>Multi-Tenant AWS ECS Platform Migration</h3>
+          </div>
+          <p class="project-org">PT Telkom Indonesia Tbk</p>
+          <p>
+            100+ monolithic EC2 deployments consolidated into a multi-tenant AWS ECS
+            platform, with a Singapore to Jakarta re-architecture and a CI/CD pipeline
+            built to OWASP DevSecOps standards.
           </p>
           <div class="stat-inline">
             <span><strong>~70%</strong> cost reduction</span>
-            <span><strong>2x</strong> faster deploys</span>
+            <span><strong>2x</strong> faster deployment</span>
           </div>
           <div class="badges">
-            <span class="badge">AWS ECS</span>
-            <span class="badge">Multi-Tenancy</span>
-            <span class="badge">Bitbucket CI/CD</span>
+            <span class="tech-chip">AWS</span>
+            <span class="tech-chip">Bitbucket</span>
           </div>
           <a href="/case-study-ecs.html" class="inline-link">Read the case study →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-head">
+            <h3>Dynamic EC2 Provisioning with Golden AMIs</h3>
+          </div>
+          <p class="project-org">PT Telkom Indonesia Tbk</p>
+          <p>
+            Pre-baked golden images provisioned through Bitbucket CI with Terraform
+            and Ansible, back when every client ran its own EC2 deployment.
+          </p>
+          <div class="stat-inline">
+            <span><strong>~40 to ~10 min</strong> deployment time</span>
+          </div>
+          <div class="badges">
+            <span class="tech-chip">Terraform</span>
+            <span class="tech-chip">Ansible</span>
+            <span class="tech-chip">Bitbucket</span>
+          </div>
+          <a href="/case-study-golden-ami.html" class="inline-link">Read the case study →</a>
         </article>
       </div>
     </section>
@@ -136,33 +165,25 @@
       <article class="project-card">
         <div class="project-card-head">
           <h3>revawiki.io</h3>
-          <span class="tag tag-live">Live</span>
         </div>
         <p>
           Interactive CV with a serverless Claude chatbot. Static frontend on
           S3/CloudFront, FastAPI on AWS Lambda behind API Gateway via Mangum,
-          API key in Secrets Manager — all provisioned with AWS CDK in Python.
+          API key in Secrets Manager, all provisioned with AWS CDK in Python.
           Deliberately built to demo the same three things it talks about:
           product, AI, and cloud.
         </p>
         <div class="badges">
-          <span class="badge">Python</span>
           <span class="badge">FastAPI</span>
           <span class="badge">AWS CDK</span>
-          <span class="badge">Lambda</span>
-          <span class="badge">CloudFront</span>
           <span class="badge">Claude API</span>
         </div>
-        <a href="https://github.com/revawiki" class="inline-link" target="_blank" rel="noopener">View code →</a>
+        <a href="https://github.com/revawiki/personal-website-advanced" class="inline-link" target="_blank" rel="noopener">View code →</a>
       </article>
     </section>
 
     <section class="sec">
       <h2 class="sec-title">Lab &amp; experiments</h2>
-      <p class="sec-lede">
-        Public repos — mostly observability stacks and provisioning experiments,
-        built to try a pattern end to end before it goes anywhere that matters.
-      </p>
       <div class="repo-grid">
         <a class="repo" href="https://github.com/revawiki/aws-direct-connect-auto-failover" target="_blank" rel="noopener">
           <span class="repo-name">aws-direct-connect-auto-failover</span>
@@ -174,114 +195,76 @@
           <span class="repo-lang">Python</span>
           <p>Prototype integrating an AWS API MCP server with a messaging application</p>
         </a>
-        <a class="repo" href="https://github.com/revawiki/prometheus-blackbox-exporter-api-availabillity-monitoring" target="_blank" rel="noopener">
-          <span class="repo-name">prometheus-blackbox-exporter</span>
+        <a class="repo" href="https://github.com/revawiki/preprovisioned-magento-on-minikube" target="_blank" rel="noopener">
+          <span class="repo-name">preprovisioned-magento-on-minikube</span>
           <span class="repo-lang">Shell</span>
-          <p>API availability monitoring — Prometheus + Blackbox Exporter with Grafana</p>
-        </a>
-        <a class="repo" href="https://github.com/revawiki/acs-stack-cpe-stats-monitoring" target="_blank" rel="noopener">
-          <span class="repo-name">acs-stack-cpe-stats-monitoring</span>
-          <span class="repo-lang">JavaScript</span>
-          <p>GenieACS-based automation and statistics collection for CPE devices</p>
+          <p>Magento2 stack on Minikube via Helm: MariaDB, OpenSearch, and Valkey, exposed via Ngrok</p>
         </a>
         <a class="repo" href="https://github.com/revawiki/tig-stack-routeros-monitoring" target="_blank" rel="noopener">
           <span class="repo-name">tig-stack-routeros-monitoring</span>
           <span class="repo-lang">RouterOS</span>
           <p>TIG stack with Telegraf HTTP listener monitoring RouterOS devices via webhook</p>
         </a>
-        <a class="repo" href="https://github.com/revawiki/preprovisioned-magento-on-minikube" target="_blank" rel="noopener">
-          <span class="repo-name">preprovisioned-magento-on-minikube</span>
-          <span class="repo-lang">Shell</span>
-          <p>Magento2 stack on Minikube via Helm — MariaDB + OpenSearch + Valkey, exposed via Ngrok</p>
-        </a>
-        <a class="repo" href="https://github.com/revawiki/prometheus-kong-monitoring" target="_blank" rel="noopener">
-          <span class="repo-name">prometheus-kong-monitoring</span>
-          <span class="repo-lang">Shell</span>
-          <p>Kong monitoring stack using the Prometheus plugin</p>
-        </a>
-        <a class="repo" href="https://github.com/revawiki/tig-stack-mongo-monitoring" target="_blank" rel="noopener">
-          <span class="repo-name">tig-stack-mongo-monitoring</span>
+        <a class="repo" href="https://github.com/revawiki/acs-stack-cpe-stats-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">acs-stack-cpe-stats-monitoring</span>
           <span class="repo-lang">JavaScript</span>
-          <p>MongoDB usage monitoring on a simple TIG stack schema</p>
+          <p>GenieACS-based automation and statistics collection for CPE devices</p>
         </a>
-        <a class="repo" href="https://github.com/revawiki/preprovisioned-grafana-mysql-data-viz" target="_blank" rel="noopener">
-          <span class="repo-name">preprovisioned-grafana-mysql-data-viz</span>
-          <span class="repo-lang">Dockerfile</span>
-          <p>Pre-configured Grafana visualization with MySQL as datasource</p>
+        <a class="repo" href="https://github.com/revawiki/prometheus-blackbox-exporter-api-availabillity-monitoring" target="_blank" rel="noopener">
+          <span class="repo-name">prometheus-blackbox-exporter</span>
+          <span class="repo-lang">Shell</span>
+          <p>API availability monitoring with Prometheus, Blackbox Exporter, and Grafana</p>
         </a>
       </div>
       <p class="sec-note">
-        Everything on <a href="https://github.com/revawiki" target="_blank" rel="noopener">github.com/revawiki</a>.
+        See more on <a href="https://github.com/revawiki" target="_blank" rel="noopener">github.com/revawiki</a>.
       </p>
     </section>
 
     <nav class="cs-next" aria-label="Keep exploring">
-      <a href="/articles.html" class="cs-next-card">
-        <span class="cs-next-label">Read</span>
-        <strong>Articles</strong>
-        <span>Write-ups on AIOps, IaC, and cloud cost</span>
+      <a href="/about.html" class="cs-next-card">
+        <span class="cs-next-label">Meet me</span>
+        <strong>About</strong>
+        <span>Background, work experience, and the FAQ people actually ask</span>
       </a>
-      <a href="/index.html#contact" class="cs-next-card">
-        <span class="cs-next-label">Get in touch</span>
-        <strong>Let's discuss</strong>
-        <span>Email, LinkedIn, or ask the chatbot</span>
+      <a href="/sessions.html" class="cs-next-card">
+        <span class="cs-next-label">Read the recap</span>
+        <strong>Sharing Sessions</strong>
+        <span>Talks and community sessions for various audiences</span>
       </a>
     </nav>
   </main>
 
   <div id="chat-widget" class="chat-widget">
-    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
       <div id="chat-log" class="chat-log"></div>
       <form id="chat-form">
-        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
-        <button type="submit">Send</button>
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
       </form>
     </div>
   </div>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/index.html" class="footer-logo">Reva Wiki</a>
-        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
-      </div>
-      <nav class="footer-nav" aria-label="Site map">
-        <div class="footer-col">
-          <h5>Explore</h5>
-          <a href="/index.html">Home</a>
-          <a href="/story.html">Story</a>
-          <a href="/about.html">About</a>
-          <a href="/index.html#experience">Experience</a>
-          <a href="/index.html#skills">Skills</a>
-        </div>
-        <div class="footer-col">
-          <h5>Work</h5>
-          <a href="/projects.html">All projects</a>
-          <a href="/case-study-copilot.html">Unified AI Ops</a>
-          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
-          <a href="/case-study-terraform.html">Terraform migration</a>
-          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
-        </div>
-        <div class="footer-col">
-          <h5>Writing</h5>
-          <a href="/articles.html">All articles</a>
-          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
-          <a href="/article-yaml-terraform.html">YAML over HCL</a>
-          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
-        </div>
-        <div class="footer-col">
-          <h5>Elsewhere</h5>
-          <a href="mailto:reva.wiki@gmail.com">Email</a>
-          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
-          <a href="/llms.txt">llms.txt</a>
-        </div>
-      </nav>
-    </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
-      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
     </div>
   </footer>
 

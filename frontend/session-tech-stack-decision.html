@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Optimal Decision Making Process for Choosing the Right Tech Stack &mdash; Reva Wiki</title>
+  <meta name="description" content="Internal engineering session on how to choose a tech stack: the factors that matter, an impact/effort priority matrix, and how to calculate whether an automation effort actually pays for itself." />
+  <link rel="canonical" href="https://revawiki.io/session-tech-stack-decision.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Optimal Decision Making Process for Choosing the Right Tech Stack &mdash; Reva Wiki" />
+  <meta property="og:description" content="Internal engineering session on how to choose a tech stack: the factors that matter, an impact/effort priority matrix, and how to calculate whether an automation effort actually pays for itself." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="case-study-main">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/sessions.html">Sessions</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Tech Stack Decisions</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Session &middot; Internal sharing &middot; Netmonk, Telkom Indonesia</p>
+      <h1>Optimal Decision Making Process for Choosing the Right Tech Stack</h1>
+      <p class="cs-deck">Choosing a tech stack is usually argued on preference. This session reframed it as a decision with a method behind it: weighted factors, an impact/effort matrix, and arithmetic that tells you whether the work pays for itself.</p>
+      <div class="cs-byline">
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          6 min read
+        </span>
+      </div>
+    </header>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">12</span>
+        <span class="label">factors to weigh</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">2&times;2</span>
+        <span class="label">impact/effort matrix</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">ROI</span>
+        <span class="label">before you build it</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">Gap</span>
+        <span class="label">analysis to roadmap</span>
+      </div>
+    </div>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#overview" data-section="overview" class="story-nav-link">Overview</a>
+      <a href="#takeaway" data-section="takeaway" class="story-nav-link">Key Takeaway</a>
+      <a href="#summary" data-section="summary" class="story-nav-link">Summary</a>
+    </nav>
+
+    <section id="overview" class="cs-section">
+      <h2>Overview</h2>
+      <p>An internal engineering session for the Netmonk team at Telkom Indonesia. Tech stack decisions were being made the way they usually are, on familiarity and preference, and I wanted to give the team a repeatable way to argue them instead.</p>
+      <p>The framing was deliberately non-technical to start with: a tech stack defines the team as much as the product. It sets hiring criteria, the learning curve for everyone who joins, and where the team's expertise concentrates. It also drives business outcomes: cost, longevity, and time to market. Get it wrong and you have made a hiring problem and a business problem, not just an engineering one.</p>
+    </section>
+
+    <section id="takeaway" class="cs-section">
+      <h2>Key Takeaway</h2>
+      <ul class="lesson-list">
+        <li><strong>Tech stack equals team composition.</strong> The moment you pick the stack you have picked your hiring pool, your onboarding curve, and where expertise will concentrate. That is a people decision wearing an engineering costume.</li>
+        <li><strong>Effort is only half the question.</strong> The priority matrix stops teams from spending months on low-impact work simply because it was easy to start, and from dismissing high-impact work because it looked expensive on day one.</li>
+        <li><strong>Automation has a break-even point, and you can compute it.</strong> Before building an automation, multiply the current time spent by how often it happens. If the build costs more than that, it is not automation, it is a hobby.</li>
+      </ul>
+    </section>
+
+    <section id="summary" class="cs-section">
+      <h2>Summary</h2>
+      <p>Four parts, moving from what to weigh, to how to prioritise, to whether it is worth doing at all.</p>
+      <ol class="step-list">
+        <li>
+          <h4>What a tech stack actually decides</h4>
+          <p>Team composition and business goals, not just architecture. Everyone should feel confident in the tools they are using, and the choice has a direct impact on how well the team scales. On the business side: cost, longevity, and time to market, because companies that adopt and adapt faster leave the competition behind.</p>
+        </li>
+        <li>
+          <h4>The factors to weigh</h4>
+          <p>Split into external and internal. <strong>External:</strong> functionality, scalability, maintenance and support, supported target platforms, security, cost, and maturity. <strong>Internal:</strong> project requirements, technical constraints, compliance and regulations, team expertise, and prototype testing and evaluation. The internal list is the one teams skip, and it is usually the one that kills the decision later.</p>
+        </li>
+        <li>
+          <h4>The action priority matrix</h4>
+          <p>Impact against effort, four quadrants. High impact + low effort is <em>Great</em>, execute it. High impact + high effort is <em>Good</em>, but only if conditions allow. Low impact + low effort is <em>Weak</em>, so try to increase the impact first. Low impact + high effort is <em>Bad</em>, so focus on other ideas.</p>
+        </li>
+        <li>
+          <h4>Does it actually pay for itself?</h4>
+          <p>The part that turns opinion into arithmetic. An effort is worth it when <em>time to complete the effort &lt; current time spent &times; frequency</em>, and the same inequality with cost substituted for time. We worked two live examples: a banking process taking 40 minutes weekly against a 10-hour build (break-even at 15 weeks), and Netmonk's own manual client fulfilment, 30 minutes each, 20 clients a day, against one week of automation work. 2400 &lt; 3000: worth proceeding.</p>
+        </li>
+      </ol>
+      <p>Closed on technology gap analysis, comparing the current condition against the desired outcome across what, when, why, and how, then turning the gap into a roadmap plan.</p>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/session-good-tech-startup.html" class="cs-next-card">
+        <span class="cs-next-label">Next session</span>
+        <strong>Making a &ldquo;Good&rdquo; Tech Start-Up</strong>
+        <span>Internal sharing at Netmonk, Telkom Indonesia</span>
+      </a>
+      <a href="/sessions.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>Sharing Sessions</strong>
+        <span>Talks and community sessions for various audiences</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
+</body>
+</html>

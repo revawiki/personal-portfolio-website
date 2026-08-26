@@ -3,122 +3,146 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Console → Terraform at 40+ AWS Accounts — Reva Wiki</title>
-  <meta name="description" content="Migrating critical application infrastructure from console-based provisioning to a YAML-driven Terraform codebase across 40+ AWS accounts, cutting SEA cloud cost ~55%." />
+  <title>YAML-based Terraform Standardization — Reva Wiki</title>
+  <meta name="description" content="Migrating the company's flagship application infrastructure from console-based provisioning to a YAML-driven Terraform codebase, config-driven and GitOps-compliant." />
   <link rel="canonical" href="https://revawiki.io/case-study-terraform.html" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Console → Terraform at 40+ AWS Accounts — Reva Wiki" />
+  <meta property="og:title" content="YAML-based Terraform Standardization — Reva Wiki" />
   <meta property="og:description" content="One Terraform codebase, per-environment YAML config, and engineers who never had to learn HCL." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="case-study-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
       <a href="/projects.html">Projects</a>
       <span aria-hidden="true">/</span>
-      <span class="crumb-current">Console → Terraform</span>
+      <span class="crumb-current">YAML-based Terraform Standardization</span>
     </nav>
 
     <header class="cs-header">
-      <p class="kicker">Case study · PT HM Sampoerna Tbk. (Philip Morris International)</p>
-      <h1>Console → Terraform at 40+ AWS Accounts</h1>
+      <p class="kicker">Case study · PT HM Sampoerna Tbk.</p>
+      <h1>YAML-based Terraform Standardization</h1>
       <p class="cs-deck">
-        Global compliance required GitOps-based provisioning. The estate we
-        inherited was click-ops across 40+ accounts, with naming drift and
+        Global compliance required GitOps-based provisioning. What we
+        inherited on the flagship application was click-ops: naming drift and
         environment-specific snowflakes everywhere. Both things had to be true
         at once, without stopping delivery.
       </p>
       <div class="cs-byline">
-        <span>Reva Wiki</span>
-        <span aria-hidden="true">·</span>
-        <span>2024</span>
-        <span aria-hidden="true">·</span>
-        <span>8 min read</span>
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          8 min read
+        </span>
       </div>
     </header>
 
-    <div class="cs-stats">
-      <div class="cs-stat">
-        <span class="num">~55%</span>
-        <span class="label">SEA infrastructure cost reduction</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">40+</span>
-        <span class="label">legacy AWS accounts standardized</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">1–2 h</span>
-        <span class="label">daily repetitive work eliminated</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">7</span>
-        <span class="label">engineers led through the migration</span>
-      </div>
-    </div>
-
-    <nav class="cs-toc" aria-label="On this page">
-      <span class="cs-toc-label">On this page</span>
-      <a href="#context">Context</a>
-      <a href="#problem">The problem</a>
-      <a href="#approach">The YAML approach</a>
-      <a href="#cost">Cost work</a>
-      <a href="#automation">Jenkins automation</a>
-      <a href="#outcome">Outcome</a>
-      <a href="#lessons">Lessons</a>
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#context" data-section="context" class="story-nav-link">Context</a>
+      <a href="#challenge" data-section="challenge" class="story-nav-link">Challenge</a>
+      <a href="#action" data-section="action" class="story-nav-link">Action</a>
+      <a href="#results" data-section="results" class="story-nav-link">Results</a>
     </nav>
 
     <section id="context" class="cs-section">
       <h2>Context</h2>
       <p>
         PT HM Sampoerna is part of Philip Morris International, which means its
-        cloud estate answers to PMI's global security and governance standards —
+        cloud estate answers to PMI's global security and governance standards,
         not just local ones. I joined as Senior DevOps Engineer owning SLAs for
-        the application portfolio, and led a team of 7 engineers through the
+        the application portfolio, and led a team of seven engineers through the
         migration.
       </p>
       <p>
-        The mandate: move highly critical application infrastructure off
-        console-based provisioning and onto Terraform, with a consistent GitOps
-        branching strategy across dev, staging, and production.
+        The mandate: move the company's flagship, revenue-critical
+        application off console-based provisioning and onto Terraform, with a
+        consistent GitOps branching strategy across dev, staging, and
+        production.
+      </p>
+      <p>
+        This was purely an IT-side activity. The business doesn't concern
+        itself with how infrastructure gets migrated, only that the
+        application keeps working. That framing makes any downtime a hard no,
+        even inside a scheduled maintenance window, because as far as the
+        business is concerned there's no such thing as an acceptable time for
+        the app to be unavailable.
       </p>
     </section>
 
-    <section id="problem" class="cs-section">
-      <h2>The problem</h2>
+    <section id="challenge" class="cs-section">
+      <h2>Challenge</h2>
       <p>
         Inherited estates are rarely clean. This one had accumulated years of
-        console-era decisions across 40+ accounts: inconsistent naming, stateful
-        configurations nobody wanted to touch, and environment-specific
-        variations that existed because someone once needed them on a Friday.
+        console-era decisions on the flagship application: inconsistent
+        naming, stateful or hard-to-replace resources like IAM roles and
+        policies, KMS encryption keys, and production databases, where an
+        unintended destroy-and-recreate cycle risked data loss or downtime.
+        Terraform's default behavior treats configuration drift as a trigger
+        to replace a resource, which conflicted directly with a zero-downtime
+        requirement from the business.
       </p>
       <p>
-        The obvious approach — write Terraform per environment — reproduces the
-        drift in code instead of removing it. You end up with three codebases
-        that diverge quietly, and a team where only two people can safely change
-        any of them.
+        Compounding this, resource existence itself was inconsistent across
+        environments: some resources existed in dev and staging but not
+        production, others only in one environment, a byproduct of ad hoc
+        provisioning from before the migration began. The obvious approach,
+        writing Terraform per environment, would have meant three times the
+        code and three times the drift risk. You end up with three codebases
+        that diverge quietly, and a team where only two people can safely
+        change any of them.
+      </p>
+      <p>
+        None of this happened against a frozen snapshot, either. Resource
+        creation on the legacy console-based side kept going the entire time,
+        change requests and feature development didn't pause just because a
+        migration was underway. Whatever the codebase looked like at the start
+        of the week wasn't a safe assumption by the end of it.
+      </p>
+      <p>
+        An as-is migration, lifting every inconsistency exactly as it stood
+        into Terraform, was technically possible. It just wasn't something
+        the team could live with going forward. Standardization couldn't be a
+        follow-up project promised for later; it had to be part of the
+        migration itself, or the same drift would just get a GitOps stamp on
+        it and keep going.
       </p>
       <div class="callout">
         <p>
-          Compliance wanted GitOps. Operations wanted to not be blocked. A
-          three-codebase HCL sprawl would have satisfied the first and destroyed
-          the second.
+          Compliance wanted every resource under GitOps, no exceptions.
+          Operations wanted to keep shipping against a moving target without
+          a freeze. A three-codebase HCL sprawl would have satisfied the
+          first and destroyed the second: three times the code, three times
+          the drift, chasing a legacy side that never stopped changing.
         </p>
       </div>
     </section>
 
-    <section id="approach" class="cs-section">
-      <h2>The YAML approach</h2>
+    <section id="action" class="cs-section">
+      <h2>Action</h2>
       <p>
-        Instead of per-environment Terraform, I built a single config-driven
-        codebase: one set of HCL, with per-environment YAML supplying the
-        differences.
+        Rather than hand-writing Terraform per environment, I proposed a
+        config-based approach: a single Terraform codebase driven by
+        per-environment YAML configuration, with each resource looped over
+        via <code>for_each</code> and filtered by a dedicated environment
+        flag, so the same reviewed HCL definition could serve every
+        environment instead of tripling the codebase, and the drift risk
+        that came with it.
       </p>
       <ol class="step-list">
         <li>
           <h4>One codebase</h4>
-          <p>A single Terraform module set describing every resource shape the portfolio needs — written once, reviewed once.</p>
+          <p>A single Terraform module set describing every resource shape the portfolio needs, written once, reviewed once.</p>
         </li>
         <li>
           <h4>Per-environment YAML</h4>
@@ -126,76 +150,138 @@
         </li>
         <li>
           <h4><code>for_each</code> + <code>TF_VAR_env</code></h4>
-          <p>Resources filter by environment flag through <code>for_each</code> loops, driven by <code>TF_VAR_env</code> injection at pipeline runtime — so the same plan command produces the right subset per environment.</p>
+          <p>Terraform Enterprise injects the active workspace's environment as a <code>TF_VAR_env</code> variable per its standard convention, which the codebase reads as <code>var.env</code> to filter which resources apply through a <code>for_each</code> loop. A dev-only resource is simply skipped once code promotes to staging, no code change required.</p>
         </li>
         <li>
           <h4>GitOps branching</h4>
           <p>Dev, staging and production map to branches with the review gates compliance required, making promotion a reviewable diff rather than a console action.</p>
         </li>
       </ol>
+      <div class="code-sample-grid">
+        <div class="code-sample">
+          <span class="code-sample-name">config.yaml [SAMPLE]</span>
+          <pre><code>buckets:
+  app-logs:
+    envs: ["dev", "staging", "prod"]
+    versioning: true
+  legacy-cache:
+    envs: ["staging", "prod"]
+    versioning: false
+  scratch-dev-only:
+    envs: ["dev"]
+    force_destroy: true</code></pre>
+        </div>
+        <div class="code-sample">
+          <span class="code-sample-name">main.tf [SAMPLE]</span>
+          <pre><code>variable "env" {
+  type        = string
+  description = "Target environment, injected by
+  Terraform Enterprise as TF_VAR_env per workspace"
+}
+
+locals {
+  config = yamldecode(file("${path.module}/config.yaml"))
+
+  buckets = {
+    for name, cfg in local.config.buckets :
+    name => cfg if contains(cfg.envs, var.env)
+  }
+}
+
+resource "aws_s3_bucket" "this" {
+  for_each = local.buckets
+
+  bucket        = "${each.key}-${var.env}"
+  force_destroy = try(each.value.force_destroy, false)
+
+  tags = {
+    Environment = var.env
+  }
+}</code></pre>
+        </div>
+      </div>
       <p>
-        The result that mattered most operationally: <strong>an engineer who
-        doesn't know HCL can still safely change infrastructure</strong>, because
-        the thing they edit is a YAML value with a reviewable diff.
+        The Terraform code itself only had to be written once, and a routine
+        change never touches a <code>.tf</code> file, only the YAML
+        configuration, cutting the chance of accidental breakage. The result
+        that mattered most operationally: <strong>an engineer who doesn't
+        know HCL can still safely change infrastructure</strong>, because the
+        thing they edit is a YAML value with a reviewable diff.
       </p>
-      <a href="/article-yaml-terraform.html" class="inline-link">Read: YAML over HCL, making Terraform safe for non-experts →</a>
+      <h3 class="stack-title">Tech Stack</h3>
+      <div class="stack-grid">
+        <div class="stack-row">
+          <span class="stack-label">IaC</span>
+          <div class="badges">
+            <span class="badge">Terraform</span>
+            <span class="badge">Terraform Enterprise</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Config</span>
+          <div class="badges">
+            <span class="badge">YAML</span>
+            <span class="badge">GitOps</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">CI/CD</span>
+          <div class="badges">
+            <span class="badge">Bitbucket</span>
+          </div>
+        </div>
+      </div>
+      <p>
+        In practice, a change starts as a YAML edit on a feature branch,
+        adding a bucket, adjusting a setting, whatever the request is.
+        Bitbucket is just the codebase: it hosts the repo and the pull
+        request. The pipeline itself runs on Terraform Enterprise, opening
+        that PR triggers a plan there against the target environment,
+        injecting the workspace's <code>TF_VAR_env</code> and scoping the
+        run to only the resources the YAML says belong to it. That plan is
+        where a human actually sits in the loop: Terraform Enterprise
+        surfaces the diff, and the PR only gets merged into dev, then
+        staging, then production, once someone has looked at that diff and
+        approved the pipeline. Creating a brand-new resource follows the
+        same path: add it to <code>config.yaml</code> with the environments
+        it should exist in, and the <code>for_each</code> loop picks it up
+        automatically, no new <code>.tf</code> file to write or review.
+      </p>
     </section>
 
-    <section id="cost" class="cs-section">
-      <h2>Cost work</h2>
+    <section id="results" class="cs-section">
+      <h2>Results</h2>
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <span class="num">100%</span>
+          <span class="label">of the flagship application's resources on Terraform</span>
+        </div>
+      </div>
       <p>
-        Standardization surfaces waste. Once every account was described the same
-        way, the redundant and simply-forgotten resources became visible as a
-        list rather than a rumour.
+        Every resource on the flagship application, across dev, staging, and
+        production, now lives in the same GitOps-managed Terraform codebase.
+        Nothing was left running off console-based provisioning as an
+        exception to migrate later.
       </p>
-      <p>
-        Rightsizing, reservation optimization, and elimination of redundant and
-        unused resources cut
-        <strong>AWS infrastructure cost for the SEA region by ~55%</strong>.
-      </p>
-    </section>
-
-    <section id="automation" class="cs-section">
-      <h2>Jenkins automation</h2>
-      <p>
-        Separately from the migration, the team was absorbing 1–2 hours per day
-        of repetitive service-request work — the kind of task that's individually
-        trivial and collectively a whole headcount.
-      </p>
-      <p>
-        Targeted Jenkins automations removed that entirely, freeing team capacity
-        for the migration itself rather than the ticket queue around it.
-      </p>
-    </section>
-
-    <section id="outcome" class="cs-section">
-      <h2>Outcome</h2>
-      <p>
-        Compliance achieved without blocking operations. 40+ legacy accounts
-        aligned to PMI global standards, SEA cloud spend down ~55%, and 1–2 hours
-        of daily toil removed from the team's day.
-      </p>
-      <p>
-        The durable win is the one that doesn't appear in a metric: the team no
-        longer needed a Terraform specialist in the room to make a safe change.
-      </p>
-    </section>
-
-    <section id="lessons" class="cs-section">
-      <h2>Lessons</h2>
       <ul class="lesson-list">
-        <li><strong>Don't encode drift.</strong> Writing per-environment Terraform preserves exactly the inconsistency you migrated to escape.</li>
-        <li><strong>Configuration is an interface.</strong> Choosing YAML over HCL as the edit surface decided who on the team could contribute — that's an org outcome, not a syntax preference.</li>
-        <li><strong>Standardize first, then optimize.</strong> The ~55% cost reduction was only findable after everything was described consistently.</li>
-        <li><strong>Compliance deadlines are not an excuse to ship sprawl.</strong> The constraint made the design better, not worse.</li>
+        <li><strong>Compliance was met without blocking the business.</strong><br>Every environment runs the same Terraform Enterprise GitOps flow, with no environment-specific Terraform code required to get there.</li>
+        <li><strong>Standardization became its own deliberate initiative.</strong><br>Enforcing consistent settings across every resource was tackled on its own terms, instead of something rushed and bundled into the migration.</li>
+        <li><strong>Naming conventions turned out to matter more than expected.</strong><br>Once every resource followed the same predictable pattern, other resources could reference them by that pattern instead of a hardcoded ID or ARN baked into the code.</li>
+        <li><strong>The codebase became genuinely dynamic.</strong><br>A bucket name, a role name, a security group, each is something the codebase can derive and cross-reference on its own, rather than a value someone typed in once and everyone else copies.</li>
       </ul>
+      <div class="callout">
+        <p>
+          The lasting change: the team no longer needed a Terraform
+          specialist in the room to make a safe change.
+        </p>
+      </div>
     </section>
 
     <nav class="cs-next" aria-label="More case studies">
-      <a href="/case-study-ecs.html" class="cs-next-card">
+      <a href="/case-study-cloudbees.html" class="cs-next-card">
         <span class="cs-next-label">Next case study</span>
-        <strong>Multi-Tenant ECS Platform</strong>
-        <span>100+ EC2 instances → shared ECS, ~70% cost reduction</span>
+        <strong>Jenkins to CloudBees Pipeline Migration</strong>
+        <span>One Jenkinsfile template, rendered per application</span>
       </a>
       <a href="/projects.html" class="cs-next-card">
         <span class="cs-next-label">Browse</span>
@@ -206,61 +292,39 @@
   </main>
 
   <div id="chat-widget" class="chat-widget">
-    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
       <div id="chat-log" class="chat-log"></div>
       <form id="chat-form">
-        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
-        <button type="submit">Send</button>
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
       </form>
     </div>
   </div>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/index.html" class="footer-logo">Reva Wiki</a>
-        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
-      </div>
-      <nav class="footer-nav" aria-label="Site map">
-        <div class="footer-col">
-          <h5>Explore</h5>
-          <a href="/index.html">Home</a>
-          <a href="/story.html">Story</a>
-          <a href="/about.html">About</a>
-          <a href="/index.html#experience">Experience</a>
-          <a href="/index.html#skills">Skills</a>
-        </div>
-        <div class="footer-col">
-          <h5>Work</h5>
-          <a href="/projects.html">All projects</a>
-          <a href="/case-study-copilot.html">Unified AI Ops</a>
-          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
-          <a href="/case-study-terraform.html">Terraform migration</a>
-          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
-        </div>
-        <div class="footer-col">
-          <h5>Writing</h5>
-          <a href="/articles.html">All articles</a>
-          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
-          <a href="/article-yaml-terraform.html">YAML over HCL</a>
-          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
-        </div>
-        <div class="footer-col">
-          <h5>Elsewhere</h5>
-          <a href="mailto:reva.wiki@gmail.com">Email</a>
-          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
-          <a href="/llms.txt">llms.txt</a>
-        </div>
-      </nav>
-    </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
-      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
     </div>
   </footer>
 
   <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
 </body>
 </html>

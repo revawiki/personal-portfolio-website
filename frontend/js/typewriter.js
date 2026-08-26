@@ -12,8 +12,8 @@
 
   const roles = [
     { text: "AIOps Builder", domain: "aiops" },
-    { text: "DevOps Expert", domain: "devops" },
     { text: "Cloud Specialist", domain: "cloud" },
+    { text: "DevOps Expert", domain: "devops" },
   ];
   const TYPE_MS = 55;
   const DELETE_MS = 30;

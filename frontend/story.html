@@ -4,15 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Story — Reva Wiki</title>
-  <meta name="description" content="From a vocational school in Bogor and a lab of broken HPC nodes to directing AIOps R&D for Indonesia's largest telco cloud operation — the long version." />
+  <meta name="description" content="The CV is the professional version. This is the honest one, from a curious kid in a village in Bogor to the engineer he dreamed of becoming." />
   <link rel="canonical" href="https://revawiki.io/story.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="The Story — Reva Wiki" />
-  <meta property="og:description" content="From a vocational school in Bogor to directing AIOps R&D for a national telco." />
+  <meta property="og:description" content="The CV is the professional version. This is the honest one." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="story-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
@@ -20,249 +20,345 @@
     </nav>
 
     <header class="cs-header">
-      <p class="kicker">The long version</p>
-      <h1>Seven years of making infrastructure quieter</h1>
+      <p class="kicker">The Origin</p>
+      <h1>Nobody bet on that kid. Turns out he was the safest bet in the room</h1>
       <p class="cs-deck">
-        The CV version is six bullet points and some percentages. This is the
-        one with the parts those bullets have to leave out — including the year
-        I spent fixing machines nobody wanted to fund replacements for.
+        The CV is the professional version. This is the honest one.
+        The one about a nerdy kid from a rural village in
+        Bogor who wanted something nobody around him could name, chose the
+        road everyone doubted, and kept walking it until the doubt ran out.
       </p>
       <div class="cs-byline">
-        <span>Reva Wiki</span>
-        <span aria-hidden="true">·</span>
-        <span>Bogor, Indonesia</span>
-        <span aria-hidden="true">·</span>
-        <span>10 min read</span>
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          10 min read
+        </span>
       </div>
     </header>
 
-    <nav class="cs-toc" aria-label="On this page">
-      <span class="cs-toc-label">On this page</span>
-      <a href="#start">Where it started</a>
-      <a href="#broken">A lab full of broken nodes</a>
-      <a href="#pager">Meeting the pager</a>
-      <a href="#lead">Being handed a team</a>
-      <a href="#enterprise">Enterprise scale</a>
-      <a href="#ai">The turn toward AI</a>
-      <a href="#next">What's next</a>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#roots" data-section="roots" class="story-nav-link">Growing up</a>
+      <a href="#vocational" data-section="vocational" class="story-nav-link">Choosing the trade</a>
+      <a href="#campus" data-section="campus" class="story-nav-link">A degree, the long way round</a>
+      <a href="#early-career" data-section="early-career" class="story-nav-link">Learning on the front line</a>
+      <a href="#now" data-section="now" class="story-nav-link">The mountaintop, now in view</a>
+      <a href="#next" data-section="next" class="story-nav-link">What&rsquo;s next</a>
     </nav>
 
-    <!-- TODO(reva): this is written from your CV timeline. The emotional beats
-         are inferred -- rewrite anything that doesn't sound like you. -->
-
-    <section id="start" class="cs-section">
-      <h2>Where it started</h2>
+    <section id="roots" class="cs-section">
+      <h2>Growing up</h2>
+      <figure class="cs-figure">
+        <img src="/assets/story-childhood.jpg" alt="Reva as a toddler, sitting on a chair, grinning under an oversized cap" />
+        <figcaption>Home, a long time ago.</figcaption>
+      </figure>
       <p>
-        I finished a vocational diploma in computer networks at SMKN 3 Bogor in
-        2016. Not a computer science degree — a trade qualification, the kind
-        that teaches you to crimp a cable properly and read a switch
-        configuration before it teaches you what an algorithm is.
+        I grew up in a small village in Bogor, the kind people around there
+        knew as the cassava farmer village. Ask any kid what they wanted to be
+        and the answer was police, doctor, teacher, or military, in whatever
+        order that week's cartoon put them in. Ask any parent what they wanted
+        for their kid and the answer was simpler: PNS, a civil servant job,
+        the one everyone's mother considered proof you'd made it. Nobody said
+        engineer. Nobody had a reason to.
       </p>
       <p>
-        My first real responsibility came in 2018, leading a team of five keeping
-        50+ end-devices alive through the Asian Games. Big event, unglamorous
-        work, and a very clear definition of success: nobody notices you exist.
+        My first real contact with technology was a Siemens phone, a
+        hand-me-down with more scratches than screen. I didn't care much that
+        it was a phone. I cared about what was inside the menus, how the
+        settings changed things, why the ringtone editor worked the way it
+        did. It was the first object I'd ever held that had that many hidden
+        layers, and I went looking for every one of them.
+      </p>
+      <p>
+        Then came a PlayStation 1, and that was the moment it stopped being
+        curiosity and turned into love. I wasn't just playing the games, I was
+        studying them: memory cards, cheat codes, why one disc loaded slower
+        than another. Nobody had to tell me to pay attention. I just couldn't
+        stop.
+      </p>
+      <p>
+        By primary school I had a small reputation: fastest typer in class,
+        the one the computer lab teacher pointed to when someone needed help.
+        I was also the one classmates lined up for when they wanted a
+        Facebook account, as if that required a specialist. When I finally got
+        my own PC and a dial-up connection, the kind that announced itself
+        with that dying modem tut-tut-tut, I broke it constantly. I installed
+        everything I could find until the machine caught a virus that
+        corrupted half of it, then spent days figuring out how to fix it
+        myself rather than tell anyone it happened.
+      </p>
+      <p>
+        That same PC gave me my first taste of local fame. Pet Society, a
+        Facebook game everyone in school was addicted to, had ways around its
+        own rules if you knew where to dig, and I dug. For a while I was the
+        kid who could hack your pet's stats, a strange kind of celebrity to
+        have in primary school, but I took it. It was the first time being
+        good at something on a screen made me popular somewhere other than
+        the screen.
       </p>
       <div class="callout">
         <p>
-          That turned out to be the whole career in miniature. The best
-          infrastructure work is invisible. You only get attention when something
-          breaks.
+          Nobody around me was pointing toward the industry I'd eventually
+          work in. I found the door myself, first in a scratched Siemens
+          phone, then in a PlayStation 1, and once I saw what was on the
+          other side, I never really looked away.
         </p>
       </div>
     </section>
 
-    <section id="broken" class="cs-section">
-      <h2>A lab full of broken nodes</h2>
+    <section id="vocational" class="cs-section">
+      <h2>Choosing the trade</h2>
+      <figure class="cs-figure cs-figure-left">
+        <img src="/assets/story-vocational.jpg" alt="Reva in his vocational school uniform, dozing off against a wall" />
+        <figcaption>Dozing off in class, paying off a late night of learning to tame a Python.</figcaption>
+      </figure>
       <p>
-        In 2019 I joined BRIN — Indonesia's national research agency — as a
-        junior system administrator on the HPC lab. Two things defined that
-        period.
+        Junior school is where it stopped being just play. I found Python,
+        and for the first time technology wasn't something to poke at, it was
+        something with a shape, a logic, a future I could picture myself
+        walking into. I fell in love with dismantling PC hardware for its own
+        sake, not just to fix what had broken. I taught myself Excel macros
+        because typing the same formula twice felt like an insult. I picked
+        up Adobe Photoshop and Illustrator. I learned how to crack PC games, less
+        for the free copy and more because breaking the lock taught me more
+        than the game itself ever did.
+      </p>
+      <p style="clear: right;">
+        In 2013 I chose IT, and it is hard to overstate how little that choice
+        impressed anyone. Back then, "IT" meant "the guy who fixes the
+        printer." My family pushed back from the start. Oil, economics, law;
+        those were the real careers, the ones with "better prospects." It's a
+        special kind of lonely, explaining a dream to people who love you and
+        genuinely cannot see it.
       </p>
       <p>
-        The first: I repaired <strong>20+ broken nodes</strong> rather than
-        replacing them. There was no budget for new hardware, so the choice was
-        fix what exists or run degraded. I learned more about how machines
-        actually fail in that year than in any subsequent one.
+        I enrolled in the vocational school anyway. Computer networks, SMKN 3
+        Bogor, class of 2016, and this is where it all locked in. The OSI
+        layers, the seven-layer model everyone complains about and I couldn't
+        get enough of. Crimping a cable until the crimp was right, not just
+        working, right, the color order still tattooed into my memory: white
+        orange, orange, white green, blue, white blue, green, white brown,
+        brown. Late nights on Cisco Packet Tracer because I wanted to see the
+        packets actually move. Dismantling a PC stopped being a fix-it chore
+        and became something closer to an art form. On-the-job training put
+        me in front of my first real website build and my first real Linux
+        box.
+      </p>
+      <div class="callout">
+        <p>
+          To my family it looked like settling. To me it was the first door
+          that actually opened, and somewhere between the cable crimps and
+          the packet traces, I stopped thinking of this as a subject I was
+          good at. It was the way of life I was built for. The true love.
+        </p>
+      </div>
+    </section>
+
+    <section id="campus" class="cs-section">
+      <h2>A degree, the long way round</h2>
+      <figure class="cs-figure cs-figure-wide">
+        <img src="/assets/story-graduation.jpg" alt="Reva in cap and gown at his graduation, surrounded by his mother, sisters, and father, all holding flowers" />
+        <figcaption>Graduation day. The whole family showed up.</figcaption>
+      </figure>
+      <p>
+        The degree came later, and out of order. I completed a Bachelor of
+        Computer Science at UIN Syarif Hidayatullah Jakarta in 2023, years
+        into full-time work, studying at night around a job that didn't slow
+        down for exams. I didn't go back to school because I needed it for
+        the work, I was already doing the work. I went back because my Mom
+        wanted me to be sarjana, a university graduate, and in her eyes that
+        title still mattered more than any job title I could point to. So I
+        enrolled anyway, less to prove something to myself and more to give
+        her the piece of paper she'd been waiting for.
       </p>
       <p>
-        The second: with <strong>40+ HPC nodes</strong> to keep consistent, doing
-        it by hand stopped being viable. I implemented Puppet for configuration
-        management — my first real encounter with the idea that infrastructure
-        should be <em>described</em> rather than <em>administered</em>.
+        Wanting the degree didn't mean she trusted the work that was already
+        paying for it. Those years came with a soundtrack. Remote work was
+        still a foreign concept before Covid, so while I sat at home keeping
+        production systems alive, my Mom would pass by with the daily
+        questions: "Are you
+        really working?" "Why don't you go outside and find real work?" She
+        wasn't being cruel. From where she stood, work was something you left
+        the house for, and a son at a keyboard all day looked like a son going
+        nowhere. She was worried. That's the version of doubt that's hardest
+        to hear, because it comes from love.
       </p>
       <p>
-        I didn't have the vocabulary for it then. But that's where the through-line
-        of everything since actually starts.
+        I never had a clean way to defend it in the moment. I just kept
+        showing up: production shift by day, lecture hall by night, an exam
+        schedule I had to negotiate around on-call rotations, assignments
+        written between incident tickets. There was no dramatic turning
+        point where she suddenly understood. It was slower than that, more
+        like the questions changing shape on their own, from "are you really
+        working" to "how's the studying going," without either of us
+        announcing the shift.
+      </p>
+      <p>
+        By the time I sat in those lectures I'd already run production
+        incidents. The theory landed differently when I'd felt the thing it
+        described break at 3 AM. I wasn't learning what a system was for the
+        first time, I was finally getting the vocabulary for something I'd
+        already lived through, which made four years of night classes feel
+        less like catching up and more like closing a loop.
+      </p>
+      <div class="callout">
+        <p>
+          The degree didn't launch anything. The career had already started
+          without it. What it did was put a name on the stubbornness, and
+          give my family a stage where they could finally watch it pay off in
+          public, cap and gown and all.
+        </p>
+      </div>
+    </section>
+
+    <section id="early-career" class="cs-section">
+      <h2>Learning on the front line</h2>
+      <figure class="cs-figure cs-figure-left">
+        <img src="/assets/story-asiangames.jpg" alt="Reva and his team posing on the field at the 18th Asian Games, teal staff shirts and lanyards" />
+        <figcaption>First job, and I was already leading the team.</figcaption>
+      </figure>
+      <p>
+        The strange thing about that graduation is what my family was really
+        applauding. By the time I wore the cap and gown, the career they'd
+        doubted had been running for five years and paying the bills for
+        most of them. They were catching up to a story already in motion.
+        So rewind to where that story actually starts.
+      </p>
+      <p>
+        My first real responsibility came in 2018, leading a small team
+        keeping things running through the Asian Games. Big event, invisible
+        work, and one clear measure of success: nobody notices you exist.
+        That turned out to be the whole career in miniature.
+      </p>
+      <p style="clear: left;">
+        In 2019 I joined BRIN, Indonesia's national research agency,
+        repairing what was broken in an under-funded HPC lab. What I actually
+        found there was a shift in how I thought about systems: infrastructure
+        works better described than babysat. I didn't have the words for it
+        yet, but that's where everything since really starts.
+      </p>
+      <p>
+        Late 2020 put me on the front line of Netmonk at Telkom Indonesia.
+        Deployments were slow and manual, incidents were slow to even
+        understand. What I discovered was simple: most of the pain wasn't the
+        systems failing, it was nobody being able to see them clearly.
+        Fixing that visibility problem mattered more than any single tool I
+        used to do it.
+      </p>
+      <p>
+        In 2022 I was promoted to lead the DevOps initiative, inheriting a
+        platform that had quietly outgrown its own architecture, one client
+        deployment at a time. The real discovery wasn't the migration itself,
+        it was realizing architectures expire silently, and somebody has to
+        be willing to notice before it becomes a crisis.
+      </p>
+      <figure class="cs-figure">
+        <img src="/assets/story-event.jpg" alt="Reva at an IT community event, lanyard on, posing with a peace sign" />
+        <figcaption>Professional lanyard collector, full-time merch hunter.</figcaption>
+      </figure>
+      <p>
+        And running under all those years, one constant habit: showing up to
+        meetups and community days, collecting lanyards, cheering for
+        whoever was on stage. I liked being the guy in the crowd. Keep that
+        picture in mind, because it's about to flip.
       </p>
     </section>
 
-    <section id="pager" class="cs-section">
-      <h2>Meeting the pager</h2>
+    <section id="now" class="cs-section">
+      <h2>The mountaintop, now in view</h2>
       <p>
-        In late 2020 I joined PT Telkom Indonesia as a technical support engineer
-        on Netmonk, their network monitoring product. Client installations,
-        troubleshooting, incidents — the front line.
+        2024 took me to PT HM Sampoerna, one of Indonesia's largest tobacco
+        companies and part of Philip Morris International, as a senior
+        DevOps engineer leading seven people. This was a different kind of
+        pressure: a global multinational, an estate built through years of
+        console clicks, and compliance standards where a mistake doesn't
+        stay local, it echoes across every country the company touches.
+        Cleaning that up quietly, without breaking anything an auditor would
+        notice, taught me more about discipline than any outage ever did.
       </p>
-      <p>
-        Two things bothered me enough to fix them. Deployments took around 40
-        minutes of manual steps, so I built Terraform + Ansible provisioned
-        pipelines and got it to <strong>~10</strong>. And incidents took around
-        30 minutes to resolve largely because nobody could see what was happening,
-        so I implemented Grafana-based observability and got MTTR to
-        <strong>~15</strong>.
-      </p>
-      <p>
-        Nobody assigned me either of those. They were just the parts of the job
-        that felt stupid to keep doing by hand.
-      </p>
-    </section>
-
-    <section id="lead" class="cs-section">
-      <h2>Being handed a team</h2>
-      <p>
-        In 2022 I was promoted to lead the DevOps initiative — four engineers,
-        and a platform that had quietly grown into 100+ monolithic EC2
-        deployments, roughly one per client.
-      </p>
-      <p>
-        That architecture wasn't wrong when it was chosen. It became wrong
-        somewhere around client thirty, and nobody had a reason to stop and say
-        so. We re-architected onto a multi-tenant AWS ECS platform and combined
-        it with the Singapore → Jakarta regional move, which together cut
-        infrastructure cost <strong>~70%</strong>.
-      </p>
-      <p>
-        The lesson that stuck wasn't technical. It was that architectures expire
-        silently, and someone has to be willing to go looking.
-      </p>
-      <a href="/case-study-ecs.html" class="inline-link">Read the full case study →</a>
-    </section>
-
-    <section id="enterprise" class="cs-section">
-      <h2>Enterprise scale</h2>
-      <p>
-        2024 took me to PT HM Sampoerna — part of Philip Morris International —
-        as a senior DevOps engineer leading seven engineers. Different world:
-        global compliance standards, 40+ inherited AWS accounts, and an estate
-        built through years of console clicks.
-      </p>
-      <p>
-        We migrated it onto Terraform with a GitOps branching strategy. The
-        design decision I'm still proudest of is deliberately boring: one
-        codebase, per-environment YAML, so an engineer who doesn't know HCL can
-        still make a safe change. Standardizing the estate also exposed enough
-        waste to cut SEA cloud spend <strong>~55%</strong>.
-      </p>
-      <a href="/case-study-terraform.html" class="inline-link">Read the full case study →</a>
-    </section>
-
-    <section id="ai" class="cs-section">
-      <h2>The turn toward AI</h2>
       <p>
         In January 2025 I joined Tech Mahindra to direct AIOps R&amp;D for
-        Indonesia's largest telco cloud operation — 20+ AWS accounts, 10+
-        Kubernetes clusters, a team of four, and a mandate to make SLA attainment
-        stop depending on how many experienced people happen to be awake.
-      </p>
-      <p>
-        It's the same instinct from the HPC lab, pointed at a harder problem.
-        Anomaly detection took MTTD from ~20 minutes to ≤5. AI-assisted
-        first-level RCA took MTTR from ~30 to ≤10. A Method-of-Procedure checker
-        roughly tripled change throughput. And a Direct Connect failover
-        automation removed a manual switchover that recurrent fiber cuts kept
-        demanding — accounting for IDR 79B+ in yearly revenue loss prevented.
-      </p>
-      <p>
-        In June 2025 that work was recognized as
-        <a href="/index.html#recognition">Innovator of the Month</a> by the Chief
-        People Officer.
+        Indonesia's largest telco cloud operation, a system sitting under
+        millions of people's phones, prepaid balances, and daily
+        connectivity. At that scale an incident isn't an inconvenience, it's
+        measured in billions of rupiah lost per hour, and a headline if it
+        drags on long enough. The mandate was simple to say and hard to do:
+        stop SLA attainment from depending on how many experienced people
+        happened to be awake at 3 AM. It's the same instinct from the HPC
+        lab, pointed at a much harder, much more expensive problem.
       </p>
       <div class="callout callout-warn">
         <p>
-          The thing I care about isn't that AI does the work. It's that the
-          human stays in the loop and out of the path — reviewing decisions
-          instead of executing steps.
+          The work that matters most at this scale is usually invisible.
+          Nobody notices the outage that didn't happen, the audit that
+          passed without a fight, the 3 AM page that never went out. Same
+          instinct from the Asian Games, just with a lot more zeros behind
+          it now.
         </p>
       </div>
-      <a href="/article-aiops-hitl.html" class="inline-link">Read: why AIOps needs human-in-the-loop →</a>
+      <figure class="cs-figure cs-figure-left">
+        <img src="/assets/story-now.jpg" alt="Reva delivering a talk at a podium, microphone in hand, in front of a presentation screen" />
+        <figcaption>The mic, finally in my own hand.</figcaption>
+      </figure>
+      <p>
+        And the guy in the crowd? Somewhere along the way the community
+        handed him a mic. These days I get invited to share what I've
+        learned at the same kind of events I used to attend just for the
+        lanyards, standing where the people I once cheered for stood,
+        looking out at some quiet kid in the audience and knowing exactly
+        what's going on in his head.
+      </p>
     </section>
 
     <section id="next" class="cs-section">
       <h2>What's next</h2>
       <p>
-        From crimping cables in Bogor to architecting agentic operations for a
-        national telco, and it still feels early. The problems keep getting
-        bigger — more scale, more industries, more of the decision-making moving
-        into systems that need to be governed properly.
+        Twelve years in, I can finally see the ladder I didn't know I was
+        climbing. From dismantling PCs to managing fault-tolerant cloud
+        infrastructure. From connecting LAN cables to orchestrating
+        microservices. From fixing Windows installations to configuring
+        agentic AI. Every rung looked ordinary while I was on it. Only from
+        here does it look like a staircase.
       </p>
       <p>
-        Which is the part I actually want. Bigger fleets, harder failures, and
-        the ongoing question of how much you can safely automate before you need
-        a human to say yes.
+        The awkward village kid ended up working remotely for a global
+        multinational, a sentence nobody back home would have put money on.
+        The family that once asked when I'd find real work now asks how the
+        real work is going. I never needed them to be wrong. I just needed
+        enough time to show them what I saw.
       </p>
-    </section>
-
-    <section class="cs-section">
-      <h2>Timeline</h2>
-      <ol class="timeline">
-        <li>
-          <span class="tl-date">2016</span>
-          <div>
-            <h4>Vocational diploma, computer networks</h4>
-            <p>SMKN 3 Bogor. Trade qualification, not a CS degree.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2018</span>
-          <div>
-            <h4>Asian Games — first team lead</h4>
-            <p>PT Griya Mitra Persada. Five people, 50+ devices, zero drama.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2019</span>
-          <div>
-            <h4>HPC lab, and the first taste of IaC</h4>
-            <p>BRIN. Repaired 20+ nodes; Puppet across 40+ of them.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2020</span>
-          <div>
-            <h4>Front line at Telkom</h4>
-            <p>Deploys ~40 → ~10 min with Terraform + Ansible. MTTR ~30 → ~15 with Grafana.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2022</span>
-          <div>
-            <h4>Promoted to DevOps Lead</h4>
-            <p>100+ EC2 deployments → multi-tenant ECS. ~70% cost reduction.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2023</span>
-          <div>
-            <h4>Bachelor of Computer Science</h4>
-            <p>UIN Syarif Hidayatullah Jakarta, completed alongside full-time work.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2024</span>
-          <div>
-            <h4>Compliance-grade GitOps at PMI scale</h4>
-            <p>PT HM Sampoerna. 40+ accounts standardized, ~55% SEA cost reduction.</p>
-          </div>
-        </li>
-        <li>
-          <span class="tl-date">2025</span>
-          <div>
-            <h4>Directing AIOps R&amp;D</h4>
-            <p>Tech Mahindra. MTTD 4x, MTTR 3x, IDR 79B+ prevented. Innovator of the Month.</p>
-          </div>
-        </li>
-      </ol>
+      <p>
+        There's still a long road ahead. I won't pretend to be a prophet
+        about where AI takes this industry, nobody honest is one. But the
+        problems keep getting bigger: more scale, more industries, more
+        decisions moving into systems somebody has to govern properly. To me
+        that's not a warning. That's an invitation with my name on it.
+      </p>
+      <p>
+        Mostly, though, I'm grateful. For the journey, for the people who
+        walked parts of it with me, and for the privilege of belonging to
+        this industry at all. Somewhere in a village in Bogor there's still a
+        quiet boy taking a machine apart to see what's inside. I do my best
+        work on the days I remember I'm still him.
+      </p>
+      <p>
+        So whatever comes next, agentic AI, automation eating half of what I
+        do today, an industry that won't recognize itself in five years,
+        bring all of it. Nobody bet on the village kid either, and he became
+        the safest bet in the room. The unknown doesn't frighten me. I was
+        built there. And you don't fear the thing that built you: you take
+        it apart to see what's inside.
+      </p>
     </section>
 
     <nav class="cs-next" aria-label="Keep exploring">
@@ -271,70 +367,48 @@
         <strong>Projects</strong>
         <span>Case studies with the numbers behind them</span>
       </a>
-      <a href="/index.html#contact" class="cs-next-card">
-        <span class="cs-next-label">Get in touch</span>
-        <strong>Let's discuss</strong>
-        <span>Email, LinkedIn, or ask the chatbot</span>
+      <a href="/sessions.html" class="cs-next-card">
+        <span class="cs-next-label">Read the recap</span>
+        <strong>Sharing Sessions</strong>
+        <span>Talks and community sessions for various audiences</span>
       </a>
     </nav>
   </main>
 
   <div id="chat-widget" class="chat-widget">
-    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
       <div id="chat-log" class="chat-log"></div>
       <form id="chat-form">
-        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
-        <button type="submit">Send</button>
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
       </form>
     </div>
   </div>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/index.html" class="footer-logo">Reva Wiki</a>
-        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
-      </div>
-      <nav class="footer-nav" aria-label="Site map">
-        <div class="footer-col">
-          <h5>Explore</h5>
-          <a href="/index.html">Home</a>
-          <a href="/story.html">Story</a>
-          <a href="/about.html">About</a>
-          <a href="/index.html#experience">Experience</a>
-          <a href="/index.html#skills">Skills</a>
-        </div>
-        <div class="footer-col">
-          <h5>Work</h5>
-          <a href="/projects.html">All projects</a>
-          <a href="/case-study-copilot.html">Unified AI Ops</a>
-          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
-          <a href="/case-study-terraform.html">Terraform migration</a>
-          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
-        </div>
-        <div class="footer-col">
-          <h5>Writing</h5>
-          <a href="/articles.html">All articles</a>
-          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
-          <a href="/article-yaml-terraform.html">YAML over HCL</a>
-          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
-        </div>
-        <div class="footer-col">
-          <h5>Elsewhere</h5>
-          <a href="mailto:reva.wiki@gmail.com">Email</a>
-          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
-          <a href="/llms.txt">llms.txt</a>
-        </div>
-      </nav>
-    </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
-      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
     </div>
   </footer>
 
+  <script src="/js/story-nav.js"></script>
   <script src="/js/chat.js"></script>
 </body>
 </html>

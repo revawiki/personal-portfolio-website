@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jenkins to CloudBees Pipeline Migration &mdash; Reva Wiki</title>
+  <meta name="description" content="Migrating legacy Jenkins pipelines to CloudBees across dev, staging and production, replacing hand-written Jenkinsfiles with Jinja2-templated standards." />
+  <link rel="canonical" href="https://revawiki.io/case-study-cloudbees.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Jenkins to CloudBees Pipeline Migration &mdash; Reva Wiki" />
+  <meta property="og:description" content="Replacing unstandardized Jenkinsfiles with a Jinja2-templated pipeline standard on CloudBees." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="case-study-main">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/projects.html">Projects</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">CloudBees Migration</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Case study &middot; PT HM Sampoerna Tbk.</p>
+      <h1>Jenkins to CloudBees Pipeline Migration</h1>
+      <p class="cs-deck">Every pipeline was a hand-written Jenkinsfile, and no two looked alike. Migrating to CloudBees was the deadline; standardizing what got migrated was the actual work.</p>
+      <div class="cs-byline">
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          5 min read
+        </span>
+      </div>
+    </header>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#context" data-section="context" class="story-nav-link">Context</a>
+      <a href="#challenge" data-section="challenge" class="story-nav-link">Challenge</a>
+      <a href="#action" data-section="action" class="story-nav-link">Action</a>
+      <a href="#results" data-section="results" class="story-nav-link">Results</a>
+    </nav>
+
+    <section id="context" class="cs-section">
+      <h2>Context</h2>
+      <p>At PT HM Sampoerna, part of Philip Morris International, the application portfolio ran its CI/CD on legacy Jenkins, and the organization was moving to CloudBees for enterprise support and governance. Pipelines had accumulated organically over the years, each application carrying its own Jenkinsfile, written by whoever set that application up, in whatever style they preferred at the time.</p>
+      <p>The move to CloudBees was the deadline. Everything was going to be touched anyway, which made it the right, and cheapest, moment to standardize what got carried across.</p>
+      <p>None of this happened on a paused estate, either. Application teams kept shipping features and change requests against Jenkins the entire time the migration was underway. That left no room for the move itself to cause any impact: a pipeline in flight couldn't miss a build, and a team mid-release couldn't be blocked, just because the platform underneath it was changing.</p>
+    </section>
+
+    <section id="challenge" class="cs-section">
+      <h2>Challenge</h2>
+      <p>Two problems stacked on top of each other, and solving only the first would have wasted the migration. The first was the migration itself: pipelines had to move from legacy Jenkins to CloudBees across dev, staging, and production without stalling delivery.</p>
+      <p>The second was the inconsistency underneath. Jenkinsfiles had no shared structure: stage names, credential handling, and notification logic all differed per application. Lifting that as-is would have carried years of drift onto the new platform.</p>
+      <p>Part of why it drifted that far: applications didn't share a vendor stack either. Different teams built against different CI plugins, different deployment targets, different credential stores, whatever their application's own tooling called for. A Jenkinsfile written against one vendor's requirements wasn't just styled differently from another, it was structurally incompatible with it. Standardizing meant reconciling that vendor and tooling spread too, not just tidying up formatting.</p>
+      <div class="callout callout-warn"><p>Every application had built its own Jenkinsfile around its own vendor stack, and none of that development would pause for the migration. Carrying that spread onto CloudBees as-is wouldn't have modernized anything, it would have rebuilt the exact same drift on newer infrastructure.</p></div>
+    </section>
+
+    <section id="action" class="cs-section">
+      <h2>Action</h2>
+      <p>The initial plan was to move applications one by one: port the Jenkinsfile, test it on CloudBees, fix whatever broke, check it off, move to the next. At the size of this estate that cycle repeated for every single application, with no part of the work from one carrying over to the next, and it was on track to take months. Templating collapsed that repetition: rather than porting each Jenkinsfile by hand, the pipeline definition became a generated artifact, one canonical template, rendered per application from its own config, so fixing it once fixed it everywhere instead of once per app.</p>
+      <ol class="step-list">
+        <li><h4>Audit the existing pipelines</h4><p>Inventory every application's Jenkinsfile and separate the variation that mattered, build tooling, deploy targets, approval gates, from the incidental differences that were just personal style.</p></li>
+        <li><h4>Extract the canonical shape</h4><p>Identify the stages every pipeline genuinely shares, and separate them from the per-application values that only look like structure.</p></li>
+        <li><h4>Template it with Jinja2</h4><p>One Jenkinsfile template, rendered per application from declarative config, the same reasoning behind the <a href="/case-study-terraform.html">YAML-driven Terraform work</a>: keep one reviewed definition, let configuration carry the differences.</p></li>
+        <li><h4>Migrate environment by environment</h4><p>Roll out dev first, then staging, then production, so each environment validated the template before the next inherited it, with the previous platform still available as a fallback until each cutover was confirmed.</p></li>
+      </ol>
+      <div class="code-sample-grid">
+        <div class="code-sample">
+          <span class="code-sample-name">config.yaml [SAMPLE]</span>
+          <pre><code>app: payment-api
+stages: ["build", "test", "deploy"]
+deploy_target: ecs
+credentials_id: payment-api-creds</code></pre>
+        </div>
+        <div class="code-sample">
+          <span class="code-sample-name">Jenkinsfile.j2 [SAMPLE]</span>
+          <pre><code>pipeline {
+  agent any
+  environment {
+    CREDENTIALS_ID = '{{ credentials_id }}'
+  }
+  stages {
+    {% for stage in stages %}
+    stage('{{ stage }}') {
+      steps {
+        sh './ci/{{ stage }}.sh --target={{ deploy_target }}'
+      }
+    }
+    {% endfor %}
+  }
+}</code></pre>
+        </div>
+      </div>
+      <p>What that template actually renders: a small per-application config feeding one shared Jenkinsfile.j2, instead of a Groovy file copy-pasted and hand-edited for each application. The <code>{% for stage in stages %}</code> loop generates one stage block per entry in <code>config.yaml</code>, so adding or dropping a stage is a one-line config change instead of a Groovy edit. Credentials and the deploy target follow the same pattern: values the template reads from config, not values hardcoded per application. Change the config, re-render, and the Jenkinsfile that comes out is correct by construction, the same template every application shares.</p>
+      <h3 class="stack-title">Tech Stack</h3>
+      <div class="stack-grid">
+        <div class="stack-row"><span class="stack-label">CI/CD</span><div class="badges"><span class="badge">CloudBees</span><span class="badge">Jenkins</span></div></div>
+        <div class="stack-row"><span class="stack-label">Templating</span><div class="badges"><span class="badge">Jinja2</span><span class="badge">Groovy</span></div></div>
+        <div class="stack-row"><span class="stack-label">Automation</span><div class="badges"><span class="badge">Python</span></div></div>
+      </div>
+      <p>Running the four migration steps by hand, per application, was still the same repetition templating was supposed to remove. So I wrote a Python migration script to carry it out in one pass: it works through each environment in order, dev, then staging, then production, and within each environment, one pipeline at a time. For every pipeline it pulls the existing Jenkinsfile, renders it against the new Jinja2 template, pushes the build to CloudBees, and runs the test suite. If that passes, it moves to the next pipeline. If it doesn't, the script stops there, and the fix goes into that specific pipeline's config rather than into the shared template, so one application's edge case never leaks into every other application's build.</p>
+    </section>
+
+    <section id="results" class="cs-section">
+      <h2>Results</h2>
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <span class="num">3</span>
+          <span class="label">environments migrated (dev, staging, prod)</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">4 weeks</span>
+          <span class="label">to migrate, down from a 12-week manual plan</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">100+</span>
+          <span class="label">pipelines migrated across environments</span>
+        </div>
+      </div>
+      <p>The estate landed on CloudBees across all three environments, standardized rather than merely relocated. Structurally, a pipeline change is now a config change reviewed against one template, instead of an edit to one of many independently-written Groovy files, so onboarding a new application means filling in config rather than authoring a pipeline from scratch. The time saved came directly from replacing the port-test-fix-checkmark cycle with the migration script: four weeks against an original 12-week manual plan, across 100+ pipelines. Human error dropped for the same reason. A hand-edited Groovy file can typo a stage name or drop a credential reference and nobody notices until it fails in production. A rendered template can't drift that way, since the same reviewed logic generates every pipeline, so a mistake in config surfaces as an immediate test failure instead of a silent inconsistency somebody finds later.</p>
+      <div class="callout"><p>The template made the pipelines consistent. The migration script is what made 100+ of them achievable in four weeks instead of twelve.</p></div>
+    </section>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="/case-study-ecs.html" class="cs-next-card">
+        <span class="cs-next-label">Next case study</span>
+        <strong>Multi-Tenant AWS ECS Platform Migration</strong>
+        <span>100+ EC2 deployments, one shared ECS platform</span>
+      </a>
+      <a href="/projects.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>All projects</strong>
+        <span>Every case study and lab experiment in one place</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
+</body>
+</html>

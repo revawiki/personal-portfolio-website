@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevOps Jargon Explained: A Clear and Concise Breakdown &mdash; Reva Wiki</title>
+  <meta name="description" content="Tech talk on the Tegal Dev Discord covering DevOps terminology and core concepts, co-presented with Wisnu Yumna Y." />
+  <link rel="canonical" href="https://revawiki.io/session-tegal-dev.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="DevOps Jargon Explained: A Clear and Concise Breakdown &mdash; Reva Wiki" />
+  <meta property="og:description" content="An introduction to DevOps and the terminology that trips people up early." />
+  <meta property="og:image" content="https://revawiki.io/assets/talks/talk-2.jpg" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="case-study-main">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/sessions.html">Sessions</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Tegal Dev Tech Talk</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Session &middot; Tegal Dev Tech Talk</p>
+      <h1>DevOps Jargon Explained: A Clear and Concise Breakdown</h1>
+      <p class="cs-deck">DevOps has a vocabulary problem. Newcomers hit a wall of terms that all sound adjacent and mean specific things. This session took the jargon apart and put it back together in plain language.</p>
+      <div class="cs-byline">
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          6 min read
+        </span>
+      </div>
+    </header>
+
+    <figure class="session-flyer">
+      <img src="/assets/talks/talk-2.jpg" alt="Tegal Dev Tech Talk session flyer" loading="lazy"
+           onerror="this.closest('.session-flyer').style.display='none'" />
+    </figure>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">Feb 2025</span>
+        <span class="label">Tegal Dev Tech Talk</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">Online</span>
+        <span class="label">Tegal Dev Discord</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">2</span>
+        <span class="label">co-presenters</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">3</span>
+        <span class="label">outline sections</span>
+      </div>
+    </div>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#overview" data-section="overview" class="story-nav-link">Overview</a>
+      <a href="#takeaway" data-section="takeaway" class="story-nav-link">Key Takeaway</a>
+      <a href="#summary" data-section="summary" class="story-nav-link">Summary</a>
+    </nav>
+
+    <section id="overview" class="cs-section">
+      <h2>Overview</h2>
+      <p>Tegal Dev is an Indonesian developer community. This Tech Talk ran on their Discord server on Saturday 1 February 2025 at 20:00 WIB, co-presented with Wisnu Yumna Y from the Tegal Dev core team, with PurwokertoDev, Web Programming UNPAS and Meetap as media partners.</p>
+      <p>I opened with my own route in, because it makes the point better than a definition does: I started in IT support and actively disliked coding. A data-centre job suited me, I liked machines more than people. Then the first AWS event in Indonesia showed me cloud work could be done remotely, a previous boss offered a raise if I'd start coding, and DevOps turned out to be a field with far more demand than qualified engineers. Ops (2018 to 2022), DevOps (2022 to 2024), SRE from 2025. Nobody on that path starts by understanding the vocabulary.</p>
+    </section>
+
+    <section id="takeaway" class="cs-section">
+      <h2>Key Takeaway</h2>
+      <ul class="lesson-list">
+        <li><strong>"DevOps Engineer" isn't really a job, DevOps is a culture.</strong> The title exists because companies need something to put on a req, but what's being described is a way of working across Dev and Ops, not a separate role bolted between them.</li>
+        <li><strong>The vocabulary is a barrier, not the substance.</strong> Once containers, pipelines, IaC, and observability are explained in plain terms, what's left is a small set of ideas: automate the repetitive, shorten the feedback loop, make it reproducible.</li>
+        <li><strong>A concrete starter pack beats a roadmap.</strong> Pick one major cloud and go deep, learn Docker + Linux + Kubernetes, pick one high-level language, understand the CI/CD paradigm, learn Terraform, and default to automation first.</li>
+      </ul>
+    </section>
+
+    <section id="summary" class="cs-section">
+      <h2>Summary</h2>
+      <p>Three parts, moving from where the word came from, to the principles, to the terminology people actually trip over.</p>
+      <ol class="step-list">
+        <li>
+          <h4>Where DevOps came from</h4>
+          <p>The origin story, because it explains the gap DevOps exists to close. Patrick Debois noticed in 2007 that Agile still left Dev and Ops separated. In 2008 he turned up to an "Agile Infrastructure" session at the Agile Conference in Canada that Andrew Clay Shafer had proposed, and was the only attendee, Shafer himself not having shown. He tracked Shafer down anyway. In 2009, after watching Paul Hammond and John Allspaw's "10+ Deploys a Day: Dev and Ops Cooperation at Flickr", he organised the first DevOpsDays that October.</p>
+        </li>
+        <li>
+          <h4>The Three Ways</h4>
+          <p>From <em>The DevOps Handbook</em>. <strong>Systems Thinking</strong>: treat the system as one thing, not silos, the only goal is delivering to the customer, engineering ego doesn't matter, and CI/CD exists to make the process visible. <strong>Amplify Feedback Loops</strong>: fast feedback beats perfect feedback, fail fast to succeed faster, shift left, define compliance and test cases explicitly. <strong>Culture of Continual Learning</strong>: iteration is a prerequisite to mastery, tech debt has to be paid, and, the line that got the most reaction, don't wait for it to break before you touch it. Wrapped up with CALMS: Culture, Automation, Lean, Measurement, Sharing.</p>
+        </li>
+        <li>
+          <h4>The terminology, unpacked</h4>
+          <p>Containers via an analogy that sticks: the artifact is the goods, the container is the packaged goods, orchestration is the logistics company, and the artifact registry is the hub warehouse. Then automation (anything can be automated, everything should be, because machine error is predictable and human error isn't), CI/CD pipelines, Infrastructure as Code ("what you write is what you get"), and observability. Closed on what the job is actually measured by: DORA metrics, deployment frequency and lead time for change on the throughput side, change failure rate and MTTR on the stability side, plus the DevOps and Observability maturity models.</p>
+        </li>
+      </ol>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/session-aws-community-day.html" class="cs-next-card">
+        <span class="cs-next-label">Next session</span>
+        <strong>Chatting with Your AWS Infrastructure On-the-Go</strong>
+        <span>AWS Community Day Indonesia, October 2025</span>
+      </a>
+      <a href="/sessions.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>Sharing Sessions</strong>
+        <span>Talks and community sessions for various audiences</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
+</body>
+</html>

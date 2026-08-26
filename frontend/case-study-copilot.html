@@ -3,74 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unified AI Operations Ecosystem — Reva Wiki</title>
-  <meta name="description" content="RAG knowledge base, MCP servers and human-in-the-loop governance unified into one CloudOps layer across 20+ AWS accounts — MTTD ~20→≤5 min, MTTR ~30→≤10 min." />
+  <title>Unified L1 Copilot Platform — Reva Wiki</title>
+  <meta name="description" content="RAG knowledge base, MCP servers and human-in-the-loop governance unified into one CloudOps layer across 20+ AWS accounts and 10+ Kubernetes clusters, MTTD ~20 to ≤5 min, MTTR ~30 to ≤10 min." />
   <link rel="canonical" href="https://revawiki.io/case-study-copilot.html" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Unified AI Operations Ecosystem — Reva Wiki" />
+  <meta property="og:title" content="Unified L1 Copilot Platform — Reva Wiki" />
   <meta property="og:description" content="Anomaly detection plus AI-assisted first-level RCA across 20+ AWS accounts and 10+ Kubernetes clusters." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="case-study-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
       <a href="/projects.html">Projects</a>
       <span aria-hidden="true">/</span>
-      <span class="crumb-current">Unified AI Operations Ecosystem</span>
+      <span class="crumb-current">Unified L1 Copilot Platform</span>
     </nav>
 
     <header class="cs-header">
       <p class="kicker">Case study · Tech Mahindra</p>
-      <h1>Unified AI Operations Ecosystem</h1>
+      <h1>Unified L1 Copilot Platform</h1>
       <p class="cs-deck">
         Cloud operations for a national telco meant humans watching dashboards,
-        reading runbooks, and hand-checking change procedures across 20+ AWS
-        accounts. The work was necessary. Almost none of it needed to be manual.
+        reading runbooks, and hand-checking change procedures across the
+        estate. The work was necessary. Almost none of it needed to be manual.
       </p>
       <div class="cs-byline">
-        <span>Reva Wiki</span>
-        <span aria-hidden="true">·</span>
-        <span>2025 — present</span>
-        <span aria-hidden="true">·</span>
-        <span>9 min read</span>
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          9 min read
+        </span>
       </div>
     </header>
 
-    <div class="cs-stats">
-      <div class="cs-stat">
-        <span class="num">4x</span>
-        <span class="label">faster detection — MTTD ~20 → ≤5 min</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">3x</span>
-        <span class="label">faster resolution — MTTR ~30 → ≤10 min</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">4+</span>
-        <span class="label">change requests/day, up from 1–2</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">20+</span>
-        <span class="label">AWS accounts · 10+ K8s clusters</span>
-      </div>
-    </div>
-
-    <nav class="cs-toc" aria-label="On this page">
-      <span class="cs-toc-label">On this page</span>
-      <a href="#context">Context</a>
-      <a href="#problem">The problem</a>
-      <a href="#detection">Anomaly detection</a>
-      <a href="#rca">AI-assisted RCA</a>
-      <a href="#mop">MOP checker</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#outcome">Outcome</a>
-      <a href="#lessons">Lessons</a>
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#context" data-section="context" class="story-nav-link">Context</a>
+      <a href="#challenge" data-section="challenge" class="story-nav-link">Challenge</a>
+      <a href="#action" data-section="action" class="story-nav-link">Action</a>
+      <a href="#results" data-section="results" class="story-nav-link">Results</a>
     </nav>
-
-    <!-- TODO(reva): add the internal detail you're comfortable publishing --
-         model choices, retrieval design, guardrail specifics, eval approach. -->
 
     <section id="context" class="cs-section">
       <h2>Context</h2>
@@ -81,91 +63,61 @@
         do not bend.
       </p>
       <p>
-        I was brought in to direct AIOps R&amp;D — leading a team of 4 engineers
-        with a mandate to streamline day-to-day operations through AI and
-        automation, so SLA attainment stops depending on how many experienced
-        people happen to be awake.
+        That estate ran on a small, rotating bench of L1 engineers covering it
+        24/7. Coverage never stopped, but depth did: whoever was on shift had to
+        carry the same breadth of knowledge as the whole team, at 3 AM as much
+        as at 3 PM, with no room to specialize and no backup a few minutes away.
+      </p>
+      <p>
+        I was brought in to direct AIOps R&amp;D, leading a team of four
+        engineers with a mandate to streamline day-to-day operations through AI
+        and automation, so SLA attainment stops depending on how many
+        experienced people happen to be awake.
       </p>
     </section>
 
-    <section id="problem" class="cs-section">
-      <h2>The problem</h2>
+    <section id="challenge" class="cs-section">
+      <h2>Challenge</h2>
       <p>
-        Three distinct bottlenecks, each absorbed manually by the ops team:
+        Enterprise IT operations rarely fail from a single cause. The team was
+        stretched across multiple concurrent workloads, running with limited
+        headcount, and pushed to process a high volume of daily change requests,
+        all while gaps in observability oversight made problems harder to catch
+        early. Three bottlenecks compounded on top of each other.
       </p>
       <ul class="lesson-list">
-        <li><strong>Detection lag.</strong> Infrastructure anomalies surfaced through downstream symptoms — a service alarm, a customer report — rather than at the source. Mean time to detect sat around 20 minutes.</li>
-        <li><strong>Triage lag.</strong> Once detected, first-level root cause analysis meant an engineer correlating monitoring, CMDB, and documentation by hand. Mean time to resolve sat around 30 minutes.</li>
-        <li><strong>Change-review lag.</strong> Every Method-of-Procedure was reviewed manually before deployment, ~60 minutes per cycle, capping the team at 1–2 change requests per day.</li>
+        <li><strong>Detection lag.</strong><br>Infrastructure anomalies surfaced through downstream symptoms, a service alarm, a customer report, rather than at the source, giving a small, contained fault time to cascade into a customer-visible outage before anyone even knew to look. Mean time to detect sat around 20 minutes.</li>
+        <li><strong>Triage lag.</strong><br>Once detected, first-level root cause analysis meant an engineer correlating monitoring, CMDB, and documentation by hand, so every incident's resolution depended on whoever happened to be on shift knowing where to look, with no consistent floor on how fast that correlation actually happened. Mean time to resolve sat around 30 minutes.</li>
+        <li><strong>Change-review lag.</strong><br>Every Method-of-Procedure was reviewed manually before deployment, ~60 minutes per cycle, capping the team at 1–2 change requests per day and building a backlog that pressured reviewers to rush, exactly the condition under which a bad deployment slips through.</li>
       </ul>
       <div class="callout">
         <p>
           None of these were knowledge problems. The team knew exactly what to
-          do. They were throughput problems — the knowledge lived in people's
-          heads and documents, and had to be retrieved by hand every time.
+          do. They were throughput problems, the knowledge lived in people's
+          heads and documents, and had to be retrieved by hand every time. Left
+          alone, that compounding manual triage fatigue risks business
+          continuity if a critical incident slips through unnoticed.
         </p>
       </div>
     </section>
 
-    <section id="detection" class="cs-section">
-      <h2>Automatic anomaly detection</h2>
+    <section id="action" class="cs-section">
+      <h2>Action</h2>
       <p>
-        The first build watched infrastructure signals directly instead of
-        waiting for downstream symptoms to appear. Anomalies get surfaced at the
-        source, with the context needed to act on them attached.
+        To tackle these challenges, I architected a centralized AIOps engine
+        that brings IT infrastructure monitoring, ITSM, CMDB, and internal
+        documentation together into a single correlation layer, instead of
+        leaving them as disconnected tools each engineer has to check
+        separately. Telemetry and tickets feed one AI model that cross-references
+        a knowledge base and memory store for context, then executes through an
+        MCP-connected automation layer.
       </p>
+      <figure class="cs-figure cs-figure-full">
+        <img src="/assets/copilot-architecture.jpg" alt="AIOps engine architecture diagram: Discovery, Collection, Correlation, and Action phases connecting IT infrastructure, ITSM/CMDB, and internal documents through an AI model with MCP, memory, and a knowledge base, gated by a human approve/reject flow before reaching users" />
+        <figcaption>The AIOps engine: discovery, collection, correlation, and action, gated by a human approve/reject step.</figcaption>
+      </figure>
       <p>
-        <strong>MTTD dropped from ~20 minutes to ≤5.</strong> That alone changed
-        the shape of incidents — a problem caught in five minutes is frequently
-        still a problem contained to one component.
-      </p>
-    </section>
-
-    <section id="rca" class="cs-section">
-      <h2>AI-assisted first-level RCA</h2>
-      <p>
-        The next iteration added AI-assisted first-level root cause analysis on
-        top of detection. Rather than an engineer manually correlating
-        monitoring data, CMDB records, and runbook documentation, the system
-        performs that correlation and presents a first-pass hypothesis.
-      </p>
-      <p>
-        <strong>MTTR dropped from ~30 minutes to ≤10.</strong> The engineer still
-        makes the call — the system does the retrieval and the correlation that
-        used to eat the first twenty minutes of every incident.
-      </p>
-    </section>
-
-    <section id="mop" class="cs-section">
-      <h2>Automatic MOP checker</h2>
-      <p>
-        Separately, I introduced an automatic Method-of-Procedure checker that
-        flags invalid steps <em>before</em> deployment rather than surfacing them
-        during a review meeting — or worse, during execution.
-      </p>
-      <div class="cs-stats">
-        <div class="cs-stat">
-          <span class="num">~60 → ~20 min</span>
-          <span class="label">review cycle time</span>
-        </div>
-        <div class="cs-stat">
-          <span class="num">1–2 → 4+</span>
-          <span class="label">change requests per day</span>
-        </div>
-      </div>
-      <p>
-        Roughly tripling change throughput without adding headcount, and without
-        removing the review — just removing the parts of it a machine can do
-        more reliably than a tired human at the end of a shift.
-      </p>
-    </section>
-
-    <section id="architecture" class="cs-section">
-      <h2>Architecture</h2>
-      <p>
-        The individual wins were useful. Making them compound required treating
-        them as one ecosystem rather than three tools, so I architected a unified
-        AI operations layer with three pillars:
+        Three pillars hold that engine up:
       </p>
       <ol class="step-list">
         <li>
@@ -178,23 +130,91 @@
         </li>
         <li>
           <h4>Human-in-the-loop governance</h4>
-          <p>An explicit approval gate before anything touches production. The system analyzes and proposes; a human decides. That boundary is the design, not a limitation of it.</p>
+          <p>Every action the system proposes is still routed through an approve/reject step before reaching production. The system closes blind spots in observability without giving up institutional control over what actually runs.</p>
         </li>
       </ol>
       <p>
-        The result is a scalable foundation rather than a set of point solutions
-        — new CloudOps AI capability plugs into existing retrieval, tooling, and
-        governance instead of rebuilding all three.
+        That's the "unified" part: this engine doesn't just handle detection
+        and RCA, it consolidates the automation workflows that used to live as
+        separate tools into one platform, triaging alerts, recommending a
+        first-pass fix, generating reports, and reviewing Method-of-Procedure
+        steps before deployment, catching invalid steps before they reach a
+        review meeting, or worse, execution. The result is a scalable
+        foundation rather than a set of point solutions: new CloudOps AI
+        capability plugs into the same retrieval, tooling, and governance
+        instead of standing up its own.
       </p>
-      <a href="/article-aiops-hitl.html" class="inline-link">Read: why AIOps needs human-in-the-loop →</a>
+      <h3 class="stack-title">Tech Stack</h3>
+      <div class="stack-grid">
+        <div class="stack-row">
+          <span class="stack-label">AI / Agentic</span>
+          <div class="badges">
+            <span class="badge">Amazon Bedrock</span>
+            <span class="badge">Dify</span>
+            <span class="badge">Microsoft Azure AI Foundry</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">AWS</span>
+          <div class="badges">
+            <span class="badge">Amazon API Gateway</span>
+            <span class="badge">Amazon DynamoDB</span>
+            <span class="badge">Amazon OpenSearch Service</span>
+            <span class="badge">Amazon S3</span>
+            <span class="badge">AWS ECS</span>
+            <span class="badge">AWS Lambda</span>
+            <span class="badge">AWS Systems Manager Automation</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Integration</span>
+          <div class="badges">
+            <span class="badge">Datadog</span>
+            <span class="badge">Microsoft Teams</span>
+          </div>
+        </div>
+      </div>
+      <p>
+        Microsoft Azure AI Foundry powers the frontend chatbot interface,
+        integrated with Microsoft Teams. Amazon API Gateway is the backend
+        entry point, routing each request to the right automation or
+        workflow. MCP itself runs on AWS ECS, with Amazon OpenSearch Service
+        behind the RAG layer, Amazon DynamoDB holding short-term memory and
+        Amazon S3 holding long-term memory. Amazon Bedrock serves the
+        underlying AI model, and AWS Lambda and AWS Systems Manager
+        Automation execute the automations it decides on. Datadog is the
+        observability layer everything gets correlated against, and Dify
+        handles orchestration whenever a complex agentic process needs
+        coordinating.
+      </p>
     </section>
 
-    <section id="outcome" class="cs-section">
-      <h2>Outcome</h2>
+    <section id="results" class="cs-section">
+      <h2>Results</h2>
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <span class="num">4x</span>
+          <span class="label">faster detection: MTTD ~20 to ≤5 min</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">3x</span>
+          <span class="label">faster resolution: MTTR ~30 to ≤10 min</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">~2x</span>
+          <span class="label">change throughput: 1–2 to 4+ CRs/day</span>
+        </div>
+        <div class="cs-stat">
+          <span class="num">20%</span>
+          <span class="label">weekly engineering time reclaimed, via automated reporting</span>
+        </div>
+      </div>
       <p>
-        Detection 4x faster, resolution 3x faster, change throughput roughly
-        tripled — and a foundation the team continues to build on rather than
-        around.
+        Detection four times faster, resolution three times faster, change
+        throughput roughly doubled, and close to a full day of engineering
+        time reclaimed every week through automated report generation. That's
+        what it actually took to relieve the fatigue that small, rotating
+        bench of L1 engineers was carrying every shift.
       </p>
       <div class="callout callout-warn">
         <p>
@@ -205,20 +225,10 @@
       </div>
     </section>
 
-    <section id="lessons" class="cs-section">
-      <h2>Lessons</h2>
-      <ul class="lesson-list">
-        <li><strong>Detection and resolution are separate problems.</strong> Solving MTTD did nothing for MTTR — they needed different builds, shipped in sequence.</li>
-        <li><strong>Retrieval beats fine-tuning for ops knowledge.</strong> Runbooks change weekly. A RAG layer tracks that; a trained-in snapshot doesn't.</li>
-        <li><strong>The approval gate is a feature.</strong> Nobody signs off on autonomous production changes in a telco. Designing for human approval from day one is what made adoption possible.</li>
-        <li><strong>Throughput wins are quieter than outage wins, and often bigger.</strong> Tripling change capacity compounds every single day, not just during incidents.</li>
-      </ul>
-    </section>
-
     <nav class="cs-next" aria-label="More case studies">
       <a href="/case-study-dx-failover.html" class="cs-next-card">
         <span class="cs-next-label">Next case study</span>
-        <strong>AWS Direct Connect Auto-Failover</strong>
+        <strong>AWS DX Auto-Failover</strong>
         <span>IDR 79B+ in yearly revenue loss prevented</span>
       </a>
       <a href="/projects.html" class="cs-next-card">
@@ -230,61 +240,39 @@
   </main>
 
   <div id="chat-widget" class="chat-widget">
-    <button id="chat-toggle" class="chat-toggle" type="button">Ask me anything</button>
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
       <div id="chat-log" class="chat-log"></div>
       <form id="chat-form">
-        <input id="chat-input" type="text" placeholder="Ask about my projects..." autocomplete="off" />
-        <button type="submit">Send</button>
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
       </form>
     </div>
   </div>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/index.html" class="footer-logo">Reva Wiki</a>
-        <p>IT Infrastructure &amp; AIOps Specialist<br />Bogor, Indonesia</p>
-      </div>
-      <nav class="footer-nav" aria-label="Site map">
-        <div class="footer-col">
-          <h5>Explore</h5>
-          <a href="/index.html">Home</a>
-          <a href="/story.html">Story</a>
-          <a href="/about.html">About</a>
-          <a href="/index.html#experience">Experience</a>
-          <a href="/index.html#skills">Skills</a>
-        </div>
-        <div class="footer-col">
-          <h5>Work</h5>
-          <a href="/projects.html">All projects</a>
-          <a href="/case-study-copilot.html">Unified AI Ops</a>
-          <a href="/case-study-dx-failover.html">Direct Connect failover</a>
-          <a href="/case-study-terraform.html">Terraform migration</a>
-          <a href="/case-study-ecs.html">Multi-tenant ECS</a>
-        </div>
-        <div class="footer-col">
-          <h5>Writing</h5>
-          <a href="/articles.html">All articles</a>
-          <a href="/article-aiops-hitl.html">AIOps &amp; HITL</a>
-          <a href="/article-yaml-terraform.html">YAML over HCL</a>
-          <a href="/article-instance-per-client.html">Instance-per-client cost</a>
-        </div>
-        <div class="footer-col">
-          <h5>Elsewhere</h5>
-          <a href="mailto:reva.wiki@gmail.com">Email</a>
-          <a href="https://linkedin.com/in/revawiki" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/revawiki" target="_blank" rel="noopener">GitHub</a>
-          <a href="/llms.txt">llms.txt</a>
-        </div>
-      </nav>
-    </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Reva Hristo Wiki Fonseca</p>
-      <p>Built with FastAPI on Lambda, S3/CloudFront, and AWS CDK.</p>
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
     </div>
   </footer>
 
   <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
 </body>
 </html>

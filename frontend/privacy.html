@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy &mdash; Reva Wiki</title>
+  <meta name="description" content="How revawiki.io handles visitor data, analytics, and chatbot conversations." />
+  <link rel="canonical" href="https://revawiki.io/privacy.html" />
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Privacy</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Legal</p>
+      <h1>Privacy</h1>
+      <p class="cs-deck">
+        This is a personal portfolio site. It collects as little as possible.
+        The summary below explains what happens when you visit or use the chat.
+      </p>
+      <div class="cs-byline">
+        <span>Last updated {{MONTH YEAR}}</span>
+      </div>
+    </header>
+
+    <!-- TODO(reva): PLACEHOLDER PAGE. Confirm each section against what the
+         deployed stack actually does before launch -- in particular whether
+         any analytics is enabled, how long CloudFront/Lambda logs are kept,
+         and the retention policy for chat messages sent to the model
+         provider. Replace every {{...}} marker. -->
+
+    <section class="cs-section">
+      <h2>What this site collects</h2>
+      <p>{{Confirm and describe: the site is static (S3/CloudFront) and does not use cookies for tracking. Note any request logs CloudFront keeps, what fields they contain (IP, user agent, referrer), and how long they are retained.}}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Analytics</h2>
+      <p>{{State plainly whether any analytics product is in use. If none, say so. If one is added later, name it and link its privacy policy.}}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>The chat assistant</h2>
+      <p>{{Describe the chat flow: messages you type are sent to an API running on AWS Lambda, which forwards them to a model provider to generate a reply. State whether conversations are stored, for how long, and who can read them. Name the model provider and link their policy. Advise visitors not to send personal or confidential information.}}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Links out</h2>
+      <p>
+        This site links to third-party services including LinkedIn, GitHub,
+        Credly, and Microsoft Learn. Once you follow one of those links, that
+        service&rsquo;s own privacy policy applies &mdash; not this one.
+      </p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Contact</h2>
+      <p>
+        Questions about anything above, or want data removed?
+        Email <a href="mailto:reva.wiki@gmail.com">reva.wiki@gmail.com</a>.
+      </p>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/index.html" class="cs-next-card">
+        <span class="cs-next-label">Back to</span>
+        <strong>Homepage</strong>
+        <span>Experience, work, and sessions</span>
+      </a>
+      <a href="/index.html#contact" class="cs-next-card">
+        <span class="cs-next-label">Get in touch</span>
+        <strong>Let&rsquo;s talk</strong>
+        <span>Email or LinkedIn</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+</body>
+</html>

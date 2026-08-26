@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chatting with Your AWS Infrastructure On-the-Go &mdash; Reva Wiki</title>
+  <meta name="description" content="Session at AWS Community Day Indonesia on using the AWS API MCP Server to query and operate AWS infrastructure conversationally." />
+  <link rel="canonical" href="https://revawiki.io/session-aws-community-day.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chatting with Your AWS Infrastructure On-the-Go &mdash; Reva Wiki" />
+  <meta property="og:description" content="Using an MCP server to talk to your AWS infrastructure, and where that fits alongside existing tooling." />
+  <meta property="og:image" content="https://revawiki.io/assets/talks/talk-1.jpg" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="case-study-main">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/sessions.html">Sessions</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">AWS Community Day</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Session &middot; AWS Community Day Indonesia</p>
+      <h1>Chatting with Your AWS Infrastructure On-the-Go</h1>
+      <p class="cs-deck">Operating AWS usually means a console tab, a CLI, or a runbook. This session looked at what changes when the interface becomes a conversation instead, and where that genuinely helps versus where it just looks clever.</p>
+      <div class="cs-byline">
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          7 min read
+        </span>
+      </div>
+      <div class="cs-actions">
+        <a href="https://github.com/revawiki/aws-api-mcp-chatbot-integration" class="btn" target="_blank" rel="noopener">View the code on GitHub</a>
+      </div>
+    </header>
+
+    <figure class="session-flyer">
+      <img src="/assets/talks/talk-1.jpg" alt="AWS Community Day Indonesia session flyer" loading="lazy"
+           onerror="this.closest('.session-flyer').style.display='none'" />
+    </figure>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">Oct 2025</span>
+        <span class="label">AWS Community Day Indonesia</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">BINUS</span>
+        <span class="label">Auditorium @Alam Sutera, Tangerang</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">MCP</span>
+        <span class="label">AWS API MCP Server</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">200</span>
+        <span class="label">Cloud Operation, intermediate level</span>
+      </div>
+    </div>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#overview" data-section="overview" class="story-nav-link">Overview</a>
+      <a href="#takeaway" data-section="takeaway" class="story-nav-link">Key Takeaway</a>
+      <a href="#summary" data-section="summary" class="story-nav-link">Summary</a>
+    </nav>
+
+    <section id="overview" class="cs-section">
+      <h2>Overview</h2>
+      <p>AWS Community Day Indonesia is the AWS User Group Indonesia's annual community conference. The 2025 edition ran at Auditorium BINUS @Alam Sutera in Tangerang, with BINUS University as venue partner and BINUS School of Computer Science and Indonesia Cloud Community as media partners.</p>
+      <p>I pitched it as a Cloud Operation 200-level talk, aimed at people who already run things on AWS and were starting to hear "MCP" without a clear picture of what it actually does. It lines up with the AIOps work I do at Tech Mahindra, where MCP servers are one of the pieces connecting an assistant to real infrastructure rather than a chat box that only talks about it.</p>
+    </section>
+
+    <section id="takeaway" class="cs-section">
+      <h2>Key Takeaway</h2>
+      <ul class="lesson-list">
+        <li><strong>MCP is plumbing, not magic.</strong> Once you see it as JSON-RPC over stdio or HTTP with a tool-discovery handshake, the mystery goes away and you can reason about what it can and can't do.</li>
+        <li><strong>The CLI bridge is the practical unlock.</strong> Because the server drives the AWS CLI, it reaches services the model was never trained on, so the API surface stays current without waiting for a new model.</li>
+        <li><strong>Command selection is the real time-saver.</strong> Most of the friction in day-to-day AWS work isn't running the command, it's remembering the exact one; that's what <code>suggest_aws_commands</code> removes.</li>
+      </ul>
+    </section>
+
+    <section id="summary" class="cs-section">
+      <h2>Summary</h2>
+      <p>Four parts, working from the protocol itself down to a live demo.</p>
+      <ol class="step-list">
+        <li>
+          <h4>Model Context Protocol</h4>
+          <p>MCP is an open standard for connecting AI applications to external systems, data sources, tools, and workflows, so a model can access real context instead of guessing. I covered the architecture (an MCP host holding one client per server, each on its own one-to-one connection), the two layers underneath it (a JSON-RPC data layer, and a transport layer that is either stdio for a local process or streamable HTTP for remote), and the session flow: initialize, tool discovery, then tool execution.</p>
+        </li>
+        <li>
+          <h4>AWS MCP Servers</h4>
+          <p>AWS publishes a suite of purpose-built MCP servers, around 60 at the time of the talk, grouped by what they touch: documentation, infrastructure and deployment, AI/ML, data and analytics, developer tooling, integration and messaging, cost and operations, and healthcare.</p>
+        </li>
+        <li>
+          <h4>AWS API MCP Server</h4>
+          <p>The one this talk centred on. It bridges an assistant to AWS services through AWS CLI commands, so you can create, update, and manage resources across services conversationally. The useful side effect: it helps with command selection and reaches current AWS API surface, including services released after the model's own knowledge cutoff. Three tools do the work: <code>call_aws</code> executes CLI commands with validation and error handling, <code>suggest_aws_commands</code> maps a natural-language query to candidate commands, and the experimental <code>get_execution_plan</code> lays out step-by-step guidance for multi-stage tasks.</p>
+        </li>
+        <li>
+          <h4>Live demo</h4>
+          <p>Querying and operating real AWS infrastructure through a chat interface, using the integration in the companion repo linked at the top.</p>
+        </li>
+      </ol>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/session-tegal-dev.html" class="cs-next-card">
+        <span class="cs-next-label">Next session</span>
+        <strong>DevOps Jargon Explained</strong>
+        <span>Tegal Dev Tech Talk, February 2025</span>
+      </a>
+      <a href="/sessions.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>Sharing Sessions</strong>
+        <span>Talks and community sessions for various audiences</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
+</body>
+</html>

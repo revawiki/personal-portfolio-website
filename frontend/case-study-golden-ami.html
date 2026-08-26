@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dynamic EC2 Provisioning with Golden AMIs &mdash; Reva Wiki</title>
+  <meta name="description" content="Golden AMIs built by an automated image pipeline, then provisioned through Bitbucket CI with Terraform and Ansible - cutting deployment from ~40 to ~10 minutes." />
+  <link rel="canonical" href="https://revawiki.io/case-study-golden-ami.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Dynamic EC2 Provisioning with Golden AMIs &mdash; Reva Wiki" />
+  <meta property="og:description" content="AMI builder to golden image to Terraform + Ansible provisioning via Bitbucket CI." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="case-study-main">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/projects.html">Projects</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Dynamic AWS EC2 Provisioning</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Case study &middot; PT Telkom Indonesia Tbk</p>
+      <h1>Dynamic EC2 Provisioning with Golden AMIs</h1>
+      <p class="cs-deck">Before the platform went multi-tenant, every client got their own EC2 deployment. Making that repeatable meant the image had to stop being assembled by hand at deploy time.</p>
+      <div class="cs-byline">
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          5 min read
+        </span>
+      </div>
+    </header>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#context" data-section="context" class="story-nav-link">Context</a>
+      <a href="#challenge" data-section="challenge" class="story-nav-link">Challenge</a>
+      <a href="#action" data-section="action" class="story-nav-link">Action</a>
+      <a href="#results" data-section="results" class="story-nav-link">Results</a>
+    </nav>
+
+    <section id="context" class="cs-section">
+      <h2>Context</h2>
+      <p>This is the era before the <a href="/case-study-ecs.html">multi-tenant ECS migration</a>. The product ran one dedicated EC2 deployment per client, and onboarding a new client meant provisioning new infrastructure from scratch, an instance stood up, an OS configured, a runtime and dependencies installed, and the application laid on top, largely by hand.</p>
+      <p>As the client base grew, that per-client setup was being repeated often enough that its cost stopped being incidental and started being the bottleneck.</p>
+    </section>
+
+    <section id="challenge" class="cs-section">
+      <h2>Challenge</h2>
+      <p>Deployments took roughly 40 minutes, and most of that was spent doing the same setup work over and over on a fresh instance: package installation, dependency downloads, configuration, and the manual verification steps in between, each an opportunity for a fresh deployment to drift subtly from the last one.</p>
+      <div class="callout"><p>Every one of those 40 minutes was work that had already been done, verified, and then done again on the last deployment. When the exact same install and configuration steps run on every rollout, that isn't deployment work anymore, it's setup work sitting in the wrong place. Move it into the image once, verify it once, and it stops costing anything on every deploy after that.</p></div>
+    </section>
+
+    <section id="action" class="cs-section">
+      <h2>Action</h2>
+      <p>Split the work into two phases: bake once, provision many. Anything identical across clients moved into the image; anything client-specific stayed in provisioning.</p>
+      <ol class="step-list">
+        <li><h4>Build the golden image</h4><p>An AMI builder pipeline produces a pre-baked image with the OS hardening, runtime, and dependencies already installed and verified.</p></li>
+        <li><h4>Provision infrastructure with Terraform</h4><p>Instances, networking, and supporting AWS resources declared as code rather than created by hand per client.</p></li>
+        <li><h4>Configure with Ansible</h4><p>Client-specific configuration applied on top of the golden image, the layer that genuinely differs between deployments.</p></li>
+        <li><h4>Drive it from Bitbucket CI</h4><p>The whole sequence runs from the pipeline, so a deployment is a triggered job rather than a person following a runbook.</p></li>
+      </ol>
+      <h3 class="stack-title">Tech Stack</h3>
+      <div class="stack-grid">
+        <div class="stack-row"><span class="stack-label">Imaging</span><div class="badges"><span class="badge">AMI Builder</span></div></div>
+        <div class="stack-row"><span class="stack-label">IaC</span><div class="badges"><span class="badge">Terraform</span><span class="badge">Ansible</span></div></div>
+        <div class="stack-row"><span class="stack-label">CI/CD</span><div class="badges"><span class="badge">Bitbucket Pipelines</span></div></div>
+        <div class="stack-row"><span class="stack-label">AWS</span><div class="badges"><span class="badge">EC2</span><span class="badge">VPC</span></div></div>
+      </div>
+      <p>The AMI Builder pipeline produces the golden image itself, OS hardening, runtime, and dependencies baked in and verified once rather than re-verified on every deploy. Terraform provisions everything around it, instances, networking, and supporting AWS resources, as code instead of by hand. Ansible applies the one layer that's genuinely client-specific on top of that shared image. Bitbucket Pipelines ties the whole sequence together, so a deployment is a single triggered job instead of someone working through a runbook step by step.</p>
+    </section>
+
+    <section id="results" class="cs-section">
+      <h2>Results</h2>
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <span class="num">~40 to ~10 min</span>
+          <span class="label">deployment time</span>
+        </div>
+      </div>
+      <p>Deployment time dropped from roughly 40 minutes to about 10, and the remaining ten minutes were mostly waiting on infrastructure provisioning rather than performing manual steps. The manual verification checklist that used to catch, or miss, drift between deployments went away along with it, because there was no longer a place for drift to enter: the image was verified once at build time instead of being re-verified by hand on every rollout. The deeper effect was that client environments became reproducible, not just similar: two deployments from the same AMI and the same Terraform state start identical.</p>
+      <div class="callout"><p>Reproducibility isn't a nice-to-have here, it's a prerequisite for everything that came after it. Consolidating client environments onto shared infrastructure, the move this work quietly set up, only works if those environments are identical to begin with. You can't merge deployments that already drifted apart from each other; you can only merge deployments that were built the same way from the start. That's what this work actually bought, not just a faster deploy, but the identical baseline the next migration needed to even be possible.</p></div>
+    </section>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="/case-study-copilot.html" class="cs-next-card">
+        <span class="cs-next-label">Next case study</span>
+        <strong>Unified L1 Copilot Platform</strong>
+        <span>RAG + MCP + human-in-the-loop across 20+ AWS accounts</span>
+      </a>
+      <a href="/projects.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>All projects</strong>
+        <span>Every case study and lab experiment in one place</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
+</body>
+</html>

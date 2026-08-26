@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keeping Up Your Infra 24/7: Machine Perspective &mdash; Reva Wiki</title>
+  <meta name="description" content="Session on SRE core principles and how each one translates into concrete infrastructure decisions: redundancy, SLO-driven design, toil detection, monitoring, and safe releases." />
+  <link rel="canonical" href="https://revawiki.io/session-infra-24-7.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Keeping Up Your Infra 24/7: Machine Perspective &mdash; Reva Wiki" />
+  <meta property="og:description" content="Session on SRE core principles and how each one translates into concrete infrastructure decisions: redundancy, SLO-driven design, toil detection, monitoring, and safe releases." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="case-study-main">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/sessions.html">Sessions</a>
+      <span aria-hidden="true">/</span>
+      <span class="crumb-current">Infra 24/7</span>
+    </nav>
+
+    <header class="cs-header">
+      <p class="kicker">Session &middot; Guest session &middot; RevoU</p>
+      <h1>Keeping Up Your Infra 24/7: Machine Perspective</h1>
+      <p class="cs-deck">SRE principles are usually taught as culture. This session took the seven core principles and asked a narrower question of each one: what does this actually mean for the machines?</p>
+      <div class="cs-byline">
+        <span class="byline-item">
+          <img src="/assets/avatar.jpg" alt="" class="cs-byline-avatar" />
+          Reva Wiki
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          August 2026
+        </span>
+        <span aria-hidden="true">&middot;</span>
+        <span class="byline-item">
+          <svg class="byline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          7 min read
+        </span>
+      </div>
+    </header>
+
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <span class="num">7</span>
+        <span class="label">SRE core principles</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">52.6</span>
+        <span class="label">minutes of error budget a year at 99.99%</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">4</span>
+        <span class="label">golden signals</span>
+      </div>
+      <div class="cs-stat">
+        <span class="num">SPOF</span>
+        <span class="label">the thing to design out</span>
+      </div>
+    </div>
+
+    <nav class="story-nav" aria-label="On this page">
+      <a href="#overview" data-section="overview" class="story-nav-link">Overview</a>
+      <a href="#takeaway" data-section="takeaway" class="story-nav-link">Key Takeaway</a>
+      <a href="#summary" data-section="summary" class="story-nav-link">Summary</a>
+    </nav>
+
+    <section id="overview" class="cs-section">
+      <h2>Overview</h2>
+      <p>A guest session for RevoU. The audience was people learning infrastructure rather than running it yet, so the framing had to start with why availability matters commercially before it could get to how you engineer for it.</p>
+      <p>The opening argument: with the internet embedded in daily life, slight latency becomes outrage, an application error becomes a social media post, and downtime becomes a one-star rating. It impacts reputation, and reputation always impacts business.</p>
+      <p>The counterweight came immediately after: systems are destined to fail. Software and distributed systems eventually break because something can always go wrong. You accept that and design for resilience, test accordingly, and think through the edge cases. To run 24/7 you prepare for the worst case, not the expected one.</p>
+    </section>
+
+    <section id="takeaway" class="cs-section">
+      <h2>Key Takeaway</h2>
+      <ul class="lesson-list">
+        <li><strong>The error budget makes reliability a decision, not an aspiration.</strong> Once you have 52.6 minutes a year written down, arguments about whether to ship stop being philosophical and start being arithmetic.</li>
+        <li><strong>Build the system around the SLI you actually committed to.</strong> Response-time SLOs and error-rate SLOs point at completely different engineering work. Knowing which one you are on tells you where to spend.</li>
+        <li><strong>Redundancy beats reliability-per-component.</strong> Two cheap cars beat one expensive one. Removing single points of failure buys more availability than making any single component more perfect.</li>
+        <li><strong>Verify the manual process before you automate it.</strong> A machine executes a wrong instruction faster and more consistently than a human ever would.</li>
+      </ul>
+    </section>
+
+    <section id="summary" class="cs-section">
+      <h2>Summary</h2>
+      <p>The seven SRE core principles, each one stated first as a principle and then re-stated from the machine's point of view.</p>
+      <ol class="step-list">
+        <li>
+          <h4>Embracing risk</h4>
+          <p>100% reliability is unrealistic and unnecessary, because as reliability approaches 100%, reducing the remaining risk gets exponentially harder and more expensive. Hence the error budget: 99.99% over a year still allows 52.6 minutes of downtime, and that is budget you are allowed to spend. <strong>Machine view:</strong> even the most expensive car can throw a rod, so buy two cheap cars instead. The whole job is designing out the single point of failure, via disaster recovery sites, cross-region sites, A-B failover, or HA. Redundancy is the mechanism.</p>
+        </li>
+        <li>
+          <h4>Service level objectives</h4>
+          <p>An SLO is a measurable quality target, expressed through SLIs: commonly availability, query rate, error rate, and response time. <strong>Machine view:</strong> build the system around whichever SLI you committed to. If the SLO is about response time, engineer for throughput: geo-proximity routing, CDN, caching. If it is about error rate, engineer for stability: horizontal and vertical scaling, orchestration, automation.</p>
+        </li>
+        <li>
+          <h4>Eliminating toil</h4>
+          <p>Toil is manual work that scales linearly, repeats, and leaves the system no better than before, plus cognitive toil, the time lost re-reading guidance for something that keeps recurring, which is what standard documentation is for. <strong>Machine view:</strong> find toil by looking for patterns. When does traffic peak? Does the issue always appear at a specific utilisation percentage? Does the same fix always work? A confirmed pattern is an automation candidate.</p>
+        </li>
+        <li>
+          <h4>Monitoring</h4>
+          <p>Monitoring means looking at meaningful, actionable data and deciding from it. Too much data means no insight at all. Follow the four golden signals: latency, traffic, errors, saturation. <strong>Machine view:</strong> leave no stone unturned, everything gets an agent. Optimise logging by dropping the level to WARN/ERROR rather than drowning in INFO. Alert on critical metrics at defined thresholds.</p>
+        </li>
+        <li>
+          <h4>Automation</h4>
+          <p>The point is freeing engineers from repetitive work that adds no value, so they can do the things automation cannot: creation, ideation, large-scale guidance. It also reduces human error, increases execution speed, and enforces consistency. <strong>Machine view:</strong> verify the manual task 100% first, because the machine will follow a wrong instruction faithfully. Confirm integration is actually supported rather than assuming an approach that worked on system A ports to system B. Plan logic, concurrency, and capacity deliberately.</p>
+        </li>
+        <li>
+          <h4>Release engineering</h4>
+          <p>Built in from the beginning rather than assigned at the last minute, on four key points: automation and self-service, velocity, identical builds, and a unified standard. <strong>Machine view:</strong> rolling deployment, blue/green, or canary. Designing a system that can release autonomously is important; designing one that can roll back is mandatory. And keep a manual approval gate for production-level change.</p>
+        </li>
+        <li>
+          <h4>Simplicity</h4>
+          <p>The least complex system that still does the job, because simpler systems are easier to monitor, repair, and improve, and that includes the tooling the team uses. <strong>Machine view:</strong> avoid duplicate tech stacks, because more tools means never-ending integration work. Compare overlapping tools and keep the one that fits. For open-source, check it is still actively maintained. Flashy tools often do not meet the business objective, so put business first.</p>
+        </li>
+      </ol>
+    </section>
+
+    <nav class="cs-next" aria-label="Keep exploring">
+      <a href="/session-aws-community-day.html" class="cs-next-card">
+        <span class="cs-next-label">Next session</span>
+        <strong>Chatting with Your AWS Infrastructure On-the-Go</strong>
+        <span>AWS Community Day Indonesia, October 2025</span>
+      </a>
+      <a href="/sessions.html" class="cs-next-card">
+        <span class="cs-next-label">Browse</span>
+        <strong>Sharing Sessions</strong>
+        <span>Talks and community sessions for various audiences</span>
+      </a>
+    </nav>
+  </main>
+
+  <div id="chat-widget" class="chat-widget">
+    <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Ask me anything">
+      <span class="chat-avatar-wrap">
+        <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+        <span class="chat-status" aria-hidden="true"></span>
+      </span>
+      <svg class="chat-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <header class="chat-header">
+        <span class="chat-avatar-wrap chat-avatar-sm">
+          <img src="/assets/avatar.jpg" alt="" class="chat-avatar" />
+          <span class="chat-status" aria-hidden="true"></span>
+        </span>
+        <span class="chat-header-text">
+          <strong>revawiki</strong>
+          <span>Ask me to know me better</span>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Reva Hristo Wiki Fonseca. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/js/chat.js"></script>
+  <script src="/js/story-nav.js"></script>
+</body>
+</html>

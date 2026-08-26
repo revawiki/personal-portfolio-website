@@ -21,3 +21,6 @@ Thumbs.db
 
 # Windows/Cygwin crash dumps
 *.stackdump
+
+# Claude Code local tooling config
+.claude/
