@@ -1,12 +1,20 @@
-"""CDK stack for the personal site.
+"""CDK stacks for the personal site (wiki-sandbox account, Jakarta).
 
-Layout:
+Naming: every resource carries the `wiki-` prefix, matching how the sandbox
+account is organized.
+
+Layout (SiteStack, ap-southeast-3):
   S3 bucket (static frontend, private, OAC-only access)
   Lambda (FastAPI chatbot via Mangum) behind an HTTP API (API Gateway v2)
+  Secrets Manager secret holding the chat provider's API key (value set
+    out-of-band in the console, never in code) with read access granted to
+    the Lambda
   CloudFront: default behavior -> S3, "/api/*" -> HTTP API
-  Secrets Manager secret holding the Anthropic API key (value set out-of-band,
-    see README) with read access granted to the Lambda
-  Optional Route53 + ACM custom domain, enabled by passing domain_name
+
+CertificateStack (us-east-1, only when a domain is passed): CloudFront only
+accepts ACM certificates from us-east-1, regardless of where the rest of the
+stack lives, so the cert gets its own stack wired over with
+cross_region_references.
 
 Requires backend/build/ to already exist (run backend/build.sh first) --
 that's the Lambda asset this stack deploys.
@@ -21,6 +29,7 @@ from aws_cdk import (
     aws_certificatemanager as acm,
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as origins,
+    aws_iam as iam,
     aws_lambda as _lambda,
     aws_route53 as route53,
     aws_route53_targets as route53_targets,
@@ -32,7 +41,37 @@ from constructs import Construct
 
 FRONTEND_DIR = "../frontend"
 LAMBDA_ASSET_DIR = "../backend/build"
-ANTHROPIC_SECRET_NAME = "personal-site/anthropic-api-key"
+PREFIX = "wiki-personal-site"
+
+# Must match backend/app/claude_client.py defaults.
+CHAT_PROVIDER = "anthropic"
+CHAT_MODEL = "claude-haiku-4-5-20251001"
+
+
+class CertificateStack(Stack):
+    """us-east-1 holder for the CloudFront certificate (CloudFront requirement)."""
+
+    def __init__(
+        self,
+        scope: Construct,
+        construct_id: str,
+        *,
+        domain_name: str,
+        **kwargs,
+    ) -> None:
+        super().__init__(scope, construct_id, **kwargs)
+
+        hosted_zone = route53.HostedZone.from_lookup(
+            self, "HostedZone", domain_name=domain_name
+        )
+        self.certificate = acm.Certificate(
+            self,
+            "SiteCertificate",
+            certificate_name=f"{PREFIX}-cert",
+            domain_name=domain_name,
+            subject_alternative_names=[f"www.{domain_name}"],
+            validation=acm.CertificateValidation.from_dns(hosted_zone),
+        )
 
 
 class SiteStack(Stack):
@@ -42,36 +81,53 @@ class SiteStack(Stack):
         construct_id: str,
         *,
         domain_name: str | None = None,
+        certificate: acm.ICertificate | None = None,
         **kwargs,
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        api_key_secret = secretsmanager.Secret(
-            self,
-            "AnthropicApiKeySecret",
-            secret_name=ANTHROPIC_SECRET_NAME,
-            description="Anthropic API key used by the portfolio chatbot Lambda",
-        )
-
         site_bucket = s3.Bucket(
             self,
             "SiteBucket",
+            bucket_name=f"{PREFIX}-frontend-{self.account}",
             removal_policy=RemovalPolicy.DESTROY,
             auto_delete_objects=True,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
         )
 
+        api_key_secret = secretsmanager.Secret(
+            self,
+            "ChatApiKeySecret",
+            secret_name=f"{PREFIX}/chat-api-key",
+            description="Chat provider API key used by the portfolio chatbot Lambda",
+        )
+
+        chat_role = iam.Role(
+            self,
+            "ChatFunctionRole",
+            role_name=f"{PREFIX}-chat-role",
+            assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
+            managed_policies=[
+                iam.ManagedPolicy.from_aws_managed_policy_name(
+                    "service-role/AWSLambdaBasicExecutionRole"
+                )
+            ],
+        )
+
         chat_fn = _lambda.Function(
             self,
             "ChatFunction",
+            function_name=f"{PREFIX}-chat",
             runtime=_lambda.Runtime.PYTHON_3_12,
             handler="app.main.handler",
             code=_lambda.Code.from_asset(LAMBDA_ASSET_DIR),
+            role=chat_role,
             timeout=Duration.seconds(30),
             memory_size=256,
             environment={
-                "ANTHROPIC_SECRET_ARN": api_key_secret.secret_arn,
-                "CLAUDE_MODEL": "claude-sonnet-5",
+                "CHAT_PROVIDER": CHAT_PROVIDER,
+                "CHAT_SECRET_ARN": api_key_secret.secret_arn,
+                "CHAT_MODEL": CHAT_MODEL,
             },
         )
         api_key_secret.grant_read(chat_fn)
@@ -79,6 +135,7 @@ class SiteStack(Stack):
         http_api = apigwv2.HttpApi(
             self,
             "ChatHttpApi",
+            api_name=f"{PREFIX}-chat-api",
             cors_preflight=apigwv2.CorsPreflightOptions(
                 allow_methods=[apigwv2.CorsHttpMethod.POST, apigwv2.CorsHttpMethod.OPTIONS],
                 allow_origins=["*"],
@@ -91,21 +148,10 @@ class SiteStack(Stack):
             integration=apigwv2_integrations.HttpLambdaIntegration("ChatIntegration", chat_fn),
         )
 
-        certificate = None
-        hosted_zone = None
-        if domain_name:
-            hosted_zone = route53.HostedZone.from_lookup(self, "HostedZone", domain_name=domain_name)
-            certificate = acm.Certificate(
-                self,
-                "SiteCertificate",
-                domain_name=domain_name,
-                subject_alternative_names=[f"www.{domain_name}"],
-                validation=acm.CertificateValidation.from_dns(hosted_zone),
-            )
-
         distribution = cloudfront.Distribution(
             self,
             "SiteDistribution",
+            comment=PREFIX,
             default_root_object="index.html",
             # S3 behind OAC answers 403 (not 404) for objects that don't exist,
             # so both have to be mapped for frontend/404.html to ever show.
@@ -151,7 +197,10 @@ class SiteStack(Stack):
             distribution_paths=["/*"],
         )
 
-        if domain_name and hosted_zone:
+        if domain_name:
+            hosted_zone = route53.HostedZone.from_lookup(
+                self, "HostedZone", domain_name=domain_name
+            )
             route53.ARecord(
                 self,
                 "AliasRecord",
@@ -168,4 +217,4 @@ class SiteStack(Stack):
 
         CfnOutput(self, "DistributionDomainName", value=distribution.distribution_domain_name)
         CfnOutput(self, "ChatApiEndpoint", value=http_api.api_endpoint)
-        CfnOutput(self, "AnthropicSecretName", value=api_key_secret.secret_name)
+        CfnOutput(self, "ChatSecretName", value=api_key_secret.secret_name)
