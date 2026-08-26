@@ -1,88 +1,80 @@
-# Personal Website — Scaffold
+# Personal Portfolio Website
 
-Static portfolio site + serverless AI chatbot, deployed on AWS with CDK (Python).
+This repository contains my personal portfolio website, [revawiki.dev](https://revawiki.dev) - a static site with an embedded AI version of me that visitors can chat with. The whole thing runs serverless on AWS in the Jakarta region, deployed automatically from this repository via GitHub Actions.
 
-## Stack
+> [!NOTE]
+> The chatbot answers only from [`frontend/llms.txt`](frontend/llms.txt) - the same curated summary served to AI crawlers - so the bot and the crawler-facing profile can never drift apart. If it's not written there, the bot says it doesn't know.
 
-- **Frontend** (`frontend/`): plain HTML/CSS/JS, no build step. Deployed to S3, served via CloudFront.
-- **Backend** (`backend/`): FastAPI app wrapped with [Mangum](https://github.com/jordaneremieff/mangum) for Lambda. Exposes `/api/chat` and `/api/health`. Calls the Anthropic API for chatbot replies, using an API key stored in AWS Secrets Manager.
-- **Infra** (`infra/`): AWS CDK (Python) stack defining S3, CloudFront, API Gateway (HTTP API), Lambda, Secrets Manager, and optional Route53 + ACM for a custom domain.
+## Architecture
 
-Routing: CloudFront default behavior → S3 (static pages). `/api/*` behavior → API Gateway → Lambda (chatbot).
+![Architecture diagram](docs/architecture.drawio.svg)
 
-## Local development (no AWS needed)
+| Piece | What it does |
+|---|---|
+| `frontend/` | Plain HTML/CSS/JS, no build step. Case studies, session recaps, the story page, and the chat widget |
+| `backend/app/` | FastAPI chat API: grounding prompt, conversation history, deflection/contact markers, error mapping |
+| `infra/` | AWS CDK (Python): S3 + CloudFront, HTTP API + Lambda, IAM, and a us-east-1 certificate stack for the custom domain |
+| `.github/workflows/` | Push to `master` → build Lambda bundle → `cdk deploy --all`, authenticated with GitHub OIDC (no stored keys) |
 
-`backend/app/local_dev.py` serves the frontend and the chatbot API from one process on one port, so `frontend/js/chat.js`'s relative `/api` calls just work.
+## The chatbot
+
+The widget on every page talks to `/api/chat`, which answers as "the AI version of Reva":
+
+- **Grounded**: every fact comes from `llms.txt`; metrics are quoted exactly as written, never derived or rounded up.
+- **Conversion-oriented**: hiring or collaboration intent triggers a direct-contact card immediately; repeated out-of-scope questions trigger it after two deflections.
+- **Cost-guarded**: 7 messages per rolling window per tab, then a randomized "catching my breath" cooldown answers locally for 90 seconds before the window reopens.
+- **Degrades gracefully**: with no API key configured, a keyword-matched local simulator keeps the widget working end to end.
+
+## Getting Started
+
+These instructions cover running the site locally and deploying your own copy.
+
+### Local development (no AWS needed)
+
+`backend/app/local_dev.py` serves the frontend and the chat API from one process on one origin, so the widget's relative `/api` calls just work.
 
 ```bash
 cd backend
-python -m venv .venv && source .venv/bin/activate   # or .venv\Scripts\Activate.ps1 on Windows
+python -m venv .venv && source .venv/bin/activate   # .venv\Scripts\Activate.ps1 on Windows
 pip install -r requirements-dev.txt
-export ANTHROPIC_API_KEY=sk-ant-...                  # or $env:ANTHROPIC_API_KEY on PowerShell
+export ANTHROPIC_API_KEY=...                        # optional - without it, a dummy reply proves the plumbing
 python -m app.local_dev
 ```
 
-Open http://127.0.0.1:8000/ — chatbot calls hit `http://127.0.0.1:8000/api/chat` directly on the same origin. Edit `frontend/*.html`/`css`/`js` or `backend/app/*.py` and refresh (`--reload` isn't wired up here — restart `local_dev.py` to pick up backend changes).
+Open http://127.0.0.1:8000/ and chat.
 
-This path never touches AWS: `ANTHROPIC_API_KEY` is read directly, bypassing Secrets Manager entirely (see `backend/app/claude_client.py`).
+### Deploying to AWS
 
-## AWS deploy (do this later)
+1. **Bootstrap CDK** (first time per account/region - the site region and `us-east-1` for the CloudFront certificate):
+   ```bash
+   npx aws-cdk bootstrap aws://ACCOUNT_ID/ap-southeast-3
+   npx aws-cdk bootstrap aws://ACCOUNT_ID/us-east-1
+   ```
 
-## Prerequisites
+2. **Build the Lambda bundle.** The script pins manylinux wheels so bundles built on Windows/macOS still load on Lambda:
+   ```bash
+   bash backend/build.sh
+   ```
 
-- Python 3.12+
-- AWS CLI configured (`aws configure`) with credentials that can deploy CDK stacks
-- AWS CDK CLI: `npm install -g aws-cdk`
-- (First time in this AWS account/region) `cdk bootstrap`
+3. **Create the API key parameter** (CloudFormation cannot create SecureStrings, so this is out-of-band and free on the standard tier):
+   ```bash
+   aws ssm put-parameter --name /wiki-personal-site/chat-api-key \
+     --type SecureString --value "YOUR_ANTHROPIC_KEY" --region ap-southeast-3
+   ```
 
-## 1. Build the Lambda package
+4. **Deploy:**
+   ```bash
+   cd infra
+   pip install -r requirements.txt
+   npx aws-cdk deploy --all -c domainName=yourdomain.dev   # omit -c for the CloudFront URL only
+   ```
 
-```bash
-cd backend
-python -m venv .venv && source .venv/bin/activate   # or .venv\Scripts\activate on Windows
-pip install -r requirements.txt
-./build.sh
-```
-
-This installs deps into `backend/build/` alongside the app code — that folder is what CDK deploys as the Lambda asset.
-
-## 2. Deploy infra
-
-```bash
-cd infra
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cdk deploy
-```
-
-To attach a custom domain (must already have a Route53 hosted zone for it):
-
-```bash
-cdk deploy -c domainName=yourdomain.com
-```
-
-## 3. Set the Anthropic API key
-
-The stack creates an empty secret named `personal-site/anthropic-api-key`. Fill it after deploy:
-
-```bash
-aws secretsmanager put-secret-value \
-  --secret-id personal-site/anthropic-api-key \
-  --secret-string "sk-ant-..."
-```
-
-## 4. Edit content
-
-Replace `{{Your Name}}` placeholders in `frontend/*.html` and fill in real project details on `projects.html`.
+After the first manual deploy, every push to `master` redeploys automatically through the GitHub Actions workflow (OIDC role, no long-lived AWS credentials anywhere).
 
 ## Cost
 
-At low traffic: S3 + CloudFront + API Gateway + Lambda all fall within (or near) AWS free tier. Rough steady cost: **$0–2/mo** plus ~$12/yr if you buy a domain through Route53.
+At portfolio traffic levels: S3 + CloudFront + HTTP API + Lambda sit within or near the AWS free tier, the SSM parameter is free, and chat replies on Claude Haiku cost fractions of a cent per conversation. Rough steady state: **$0-2/month** plus the domain's yearly registration.
 
-## Redeploying after frontend edits
+## Acknowledgments
 
-`cdk deploy` re-syncs `frontend/` to S3 and invalidates CloudFront automatically (via `BucketDeployment`).
-
-## Redeploying after backend edits
-
-Re-run `backend/build.sh`, then `cdk deploy` from `infra/`.
+- Chat widget UX (greeting-first thread, quick-question chips, direct-contact card) inspired by [santifer/cv-santiago](https://github.com/santifer/cv-santiago).

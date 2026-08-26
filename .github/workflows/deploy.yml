@@ -21,6 +21,12 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # The environment makes deployments show on the repo front page, and
+    # changes the OIDC sub claim to the environment form -- the deploy
+    # role's trust policy accepts both.
+    environment:
+      name: production
+      url: https://revawiki.dev
     steps:
       - uses: actions/checkout@v4
 
