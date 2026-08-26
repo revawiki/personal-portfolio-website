@@ -525,6 +525,26 @@ footer {
   box-shadow: 0 6px 20px rgba(255, 59, 68, 0.35);
 }
 
+/* attention ping: an expanding ring radiating from the launcher, looping
+   until the panel is opened. Runs on ::before so it never blocks clicks. */
+.chat-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--accent);
+  animation: chat-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+@keyframes chat-ping {
+  0% { transform: scale(1); opacity: 0.8; }
+  70%, 100% { transform: scale(1.45); opacity: 0; }
+}
+.chat-widget.is-open .chat-toggle::before { animation: none; opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .chat-toggle::before { animation: none; opacity: 0; }
+}
+
 .chat-avatar-wrap {
   position: relative;
   display: block;
@@ -629,6 +649,9 @@ footer {
   line-height: 1.5;
   max-width: 85%;
   word-wrap: break-word;
+  /* Replies arrive as plain text with \n\n paragraph breaks; without this
+     they collapse into one dense wall, which reads terribly in a bubble. */
+  white-space: pre-line;
 }
 
 .chat-user {
@@ -647,30 +670,116 @@ footer {
 
 /* starter-question chips shown while the log is empty */
 .chat-starters {
+  padding: 0.25rem 0.85rem 0.45rem;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.chat-starters-bar {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: auto;
-}
-.chat-starters-intro {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
   color: var(--text-dim);
-  font-size: 0.82rem;
-  margin: 0 0 0.15rem;
-}
-.chat-starter {
-  text-align: left;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text);
-  font-size: 0.86rem;
-  padding: 0.6rem 0.8rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.1rem;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.chat-starters-bar svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+.chat-starters.collapsed .chat-starters-bar svg { transform: rotate(180deg); }
+.chat-starters-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  padding-top: 0.15rem;
+}
+.chat-starters.collapsed .chat-starters-chips { display: none; }
+.chat-starter {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.82rem;
+  padding: 0.45rem 0.6rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.chat-starter svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-text);
+  flex-shrink: 0;
 }
 .chat-starter:hover {
-  border-color: var(--accent);
-  background: rgba(255, 59, 68, 0.08);
+  background: rgba(255, 59, 68, 0.12);
+}
+
+.chat-msg a {
+  color: var(--accent-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+.chat-msg a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.chat-msg strong { font-weight: 600; }
+.chat-msg em { font-style: italic; }
+.chat-msg del { opacity: 0.65; }
+.chat-msg code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.82em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.08em 0.35em;
+  border-radius: 5px;
+}
+
+/* direct-contact CTA, rendered in the log after repeated deflections */
+.chat-cta {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.9rem;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+.chat-cta p {
+  margin: 0 0 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.chat-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--accent-gradient);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+}
+.chat-cta-btn svg {
+  width: 14px;
+  height: 14px;
+}
+.chat-cta-btn:hover {
+  color: #fff;
+  filter: brightness(1.1);
 }
 
 /* three-dot typing indicator */

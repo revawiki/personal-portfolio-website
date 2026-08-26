@@ -40,18 +40,18 @@ Led AIOps R&D for a major Indonesian telco.
 - Case study: https://revawiki.io/case-study-copilot.html
 
 ### PT HM Sampoerna Tbk. (2024) — Senior DevOps Engineer
-Philip Morris International group. Owned SLAs while migrating legacy AWS accounts
-onto compliant GitOps provisioning.
-- Led a team of 7 engineers through the console-to-Terraform migration across dev/staging/production
+Philip Morris International group (tobacco industry, not pharma). Owned SLAs
+while migrating legacy AWS accounts onto compliant GitOps provisioning.
+- Led a team of 7 engineers through the console-to-Terraform migration of the company's flagship application across dev/staging/production
 - Replaced per-environment HCL with one codebase driven by per-environment YAML (for_each + TF_VAR_env)
-- Standardized inherited legacy AWS configurations across 40+ accounts to PMI global compliance
+- Standardized inherited legacy AWS account configurations to PMI global compliance
 - Reduced AWS infrastructure cost for the SEA region ~55% via rightsizing, reservation optimization and eliminating redundant resources
 - Eliminated 1-2 hours of daily repetitive service-request work through targeted Jenkins automations
 - Case study: https://revawiki.io/case-study-terraform.html
 
 ### PT Telkom Indonesia Tbk (2022 - 2024) — DevOps Lead
-Netmonk product. Promoted to lead the DevOps team.
-- Architected a multi-tenant AWS ECS platform replacing 100+ single-tenant EC2 instances
+Netmonk product. Promoted to lead the DevOps team of 4 engineers.
+- Architected a multi-tenant AWS ECS platform replacing 100+ single-tenant EC2 instances, leading the team of 4 through the re-architecture
 - Cut AWS infrastructure cost ~70%
 - Migrated from AWS Singapore to the new AWS Jakarta region
 - Halved deploy time (10 -> 5 min) via DevSecOps-integrated Bitbucket pipeline
@@ -115,8 +115,10 @@ Netmonk product. Promoted to lead the DevOps team.
 
 - [Unified L1 Copilot Platform](https://revawiki.io/case-study-copilot.html): RAG + MCP + human-in-the-loop across 20+ AWS accounts. MTTD ~20 -> <=5 min, MTTR ~30 -> <=10 min, change throughput 1-2 -> 4+/day
 - [AWS DX Auto-Failover](https://revawiki.io/case-study-dx-failover.html): automated physical-layer failover, IDR 79B+ yearly revenue loss prevented. Code: github.com/revawiki/aws-direct-connect-auto-failover
-- [YAML-based Terraform Standardization](https://revawiki.io/case-study-terraform.html): one codebase, per-environment YAML config, ~55% SEA cost reduction
+- [YAML-based Terraform Standardization](https://revawiki.io/case-study-terraform.html): one codebase, per-environment YAML config, 100% of the flagship application's resources on Terraform, routine changes without touching HCL
 - [Multi-Tenant AWS ECS Platform Migration](https://revawiki.io/case-study-ecs.html): 100+ EC2 deployments consolidated, ~70% cost reduction, 2x faster deploys
+- [Jenkins to CloudBees Pipeline Migration](https://revawiki.io/case-study-cloudbees.html): 100+ pipelines migrated across 3 environments in 4 weeks (vs a 12-week manual plan) via a Jinja2 Jenkinsfile template and a Python migration script
+- [Dynamic EC2 Provisioning with Golden AMIs](https://revawiki.io/case-study-golden-ami.html): golden AMI pipeline + Terraform/Ansible provisioning via Bitbucket CI, deployment cut from ~40 to ~10 minutes
 
 ## Sharing Sessions
 
@@ -130,7 +132,8 @@ Netmonk product. Promoted to lead the DevOps team.
 
 Interactive CV with a serverless Claude chatbot. Static frontend on S3/CloudFront,
 FastAPI on AWS Lambda behind API Gateway (via Mangum), API key in Secrets Manager,
-all provisioned with AWS CDK in Python. Source: https://github.com/revawiki
+all provisioned with AWS CDK in Python.
+Source: https://github.com/revawiki/personal-portfolio-website
 
 ## What I'm Looking For
 
