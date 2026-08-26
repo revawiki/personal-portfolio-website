@@ -1,4 +1,4 @@
-// Text-list sidebar nav for story.html (.story-nav in story.html). Same
+// Text-list sidebar nav for story.html (.section-nav in story.html). Same
 // active-tracking algorithm as js/section-rail.js: the active link is the
 // last section (in page order) whose top has scrolled past a fixed reference
 // line, clamped so a section near the end of the page can still activate
@@ -7,10 +7,10 @@
 // nav is a different component (always-visible text list, not an icon dock)
 // targeting different classes.
 (function () {
-  const nav = document.querySelector(".story-nav");
+  const nav = document.querySelector(".section-nav");
   if (!nav) return;
 
-  const links = Array.from(nav.querySelectorAll(".story-nav-link[data-section]"));
+  const links = Array.from(nav.querySelectorAll(".section-nav-link[data-section]"));
   const byId = new Map();
   const sections = [];
 

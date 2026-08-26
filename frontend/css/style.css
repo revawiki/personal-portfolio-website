@@ -987,7 +987,8 @@ main > section + section.sec {
 .sec-header + .skills-layout,
 .sec-title + .project-grid,
 .sec-title + .repo-grid,
-.sec-title + .project-card {
+.sec-title + .project-card,
+.sec-title + .talk-list {
   margin-top: 0.875rem;
 }
 
@@ -1482,8 +1483,13 @@ main > section + section.sec {
 }
 
 .talk-meta { color: var(--text-dim); font-size: 0.84rem; margin-bottom: 0.35rem; }
-.talk h4 { margin: 0 0 0.45rem; font-size: 1.1rem; }
+.talk h4 { margin: 0 0 0.75rem; font-size: 1.1rem; }
 .talk p { margin: 0; color: var(--text-dim); font-size: 0.95rem; line-height: 1.58; }
+
+.talk-list-3col { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .talk-list-3col { grid-template-columns: 1fr; }
+}
 
 /* education + certifications */
 .edu-list { display: grid; gap: 1rem; }
@@ -2085,7 +2091,7 @@ a.repo:hover { border-color: var(--accent); color: inherit; }
 .talk-with-photo.no-photo img { display: none; }
 .talk-with-photo.no-photo .photo-fallback { display: flex; }
 
-.talk-body h4 { margin: 0 0 0.45rem; font-size: 1.1rem; }
+.talk-body h4 { margin: 0 0 0.75rem; font-size: 1.1rem; }
 
 @media (max-width: 620px) {
   .talk-with-photo { grid-template-columns: 1fr; }
@@ -2095,7 +2101,7 @@ a.repo:hover { border-color: var(--accent); color: inherit; }
 /* flyer image on a session detail page -- capped so a square event poster
    doesn't dominate the fold, hidden entirely if the file is missing */
 .session-flyer {
-  margin: 0 0 2rem;
+  margin: 2rem 0;
   text-align: center;
 }
 
@@ -2291,14 +2297,14 @@ a.repo:hover { border-color: var(--accent); color: inherit; }
    this only floats on viewports wide enough to fit beside the 960px content
    column without overlapping it; narrower viewports fall back to the plain
    in-flow list. */
-.story-nav {
+.section-nav {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
   margin: 2.5rem 0;
 }
 
-.story-nav-link {
+.section-nav-link {
   padding: 0.6rem 0.85rem;
   border-radius: var(--radius);
   color: var(--text-dim);
@@ -2308,16 +2314,16 @@ a.repo:hover { border-color: var(--accent); color: inherit; }
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.story-nav-link:hover { color: var(--text); }
+.section-nav-link:hover { color: var(--text); }
 
-.story-nav-link.is-active {
+.section-nav-link.is-active {
   background: rgba(255, 59, 68, 0.14);
   color: var(--accent-text);
   font-weight: 600;
 }
 
 @media (min-width: 1400px) {
-  .story-nav {
+  .section-nav {
     position: fixed;
     left: 1.25rem;
     top: 50%;
@@ -2374,6 +2380,7 @@ a.repo:hover { border-color: var(--accent); color: inherit; }
 .story-main .cs-section p { max-width: none; text-align: justify; }
 .story-main .cs-deck { max-width: none; }
 .projects-main .cs-deck { max-width: none; }
+.sessions-main .cs-deck { max-width: none; }
 .story-main .callout { max-width: none; }
 
 .case-study-main .cs-header h1 { max-width: none; }

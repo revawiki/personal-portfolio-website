@@ -50,11 +50,11 @@
       </div>
     </header>
 
-    <nav class="story-nav" aria-label="On this page">
-      <a href="#context" data-section="context" class="story-nav-link">Context</a>
-      <a href="#challenge" data-section="challenge" class="story-nav-link">Challenge</a>
-      <a href="#action" data-section="action" class="story-nav-link">Action</a>
-      <a href="#results" data-section="results" class="story-nav-link">Results</a>
+    <nav class="section-nav" aria-label="On this page">
+      <a href="#context" data-section="context" class="section-nav-link">Context</a>
+      <a href="#challenge" data-section="challenge" class="section-nav-link">Challenge</a>
+      <a href="#action" data-section="action" class="section-nav-link">Action</a>
+      <a href="#results" data-section="results" class="section-nav-link">Results</a>
     </nav>
 
     <section id="context" class="cs-section">
@@ -146,7 +146,7 @@
         without a human in the middle of it, not just at the start.
       </p>
       <figure class="cs-figure cs-figure-full">
-        <img src="/assets/dx-failover-architecture.svg" alt="Architecture diagram: CloudWatch composite alarms watch Link A and Link B health via a VPC monitoring instance, trigger a failover Lambda that brings down BGP on the affected Direct Connect VIF, records state to S3, is re-checked by an EventBridge rule, and notifies the ops team over SNS, with Site-1 and Site-2 routers on the corporate network side of both links" />
+        <img src="/assets/case-studies/dx-failover-architecture.svg" alt="Architecture diagram: CloudWatch composite alarms watch Link A and Link B health via a VPC monitoring instance, trigger a failover Lambda that brings down BGP on the affected Direct Connect VIF, records state to S3, is re-checked by an EventBridge rule, and notifies the ops team over SNS, with Site-1 and Site-2 routers on the corporate network side of both links" />
         <figcaption>The failover system: CloudWatch alarms, a Lambda orchestrator, and the redundant Link A / Link B paths it switches between.</figcaption>
       </figure>
       <h3 class="stack-title">Tech Stack</h3>
@@ -249,8 +249,8 @@
       </a>
       <a href="/projects.html" class="cs-next-card">
         <span class="cs-next-label">Browse</span>
-        <strong>All projects</strong>
-        <span>Every case study and lab experiment in one place</span>
+        <strong>Projects</strong>
+        <span>Case studies with the numbers behind them</span>
       </a>
     </nav>
   </main>
@@ -289,6 +289,6 @@
   </footer>
 
   <script src="/js/chat.js"></script>
-  <script src="/js/story-nav.js"></script>
+  <script src="/js/section-nav.js"></script>
 </body>
 </html>

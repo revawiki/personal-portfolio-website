@@ -9,7 +9,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Chatting with Your AWS Infrastructure On-the-Go &mdash; Reva Wiki" />
   <meta property="og:description" content="Using an MCP server to talk to your AWS infrastructure, and where that fits alongside existing tooling." />
-  <meta property="og:image" content="https://revawiki.io/assets/talks/talk-1.jpg" />
+  <meta property="og:image" content="https://revawiki.io/assets/sessions/aws-community-day-flyer.jpg" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -48,33 +48,14 @@
     </header>
 
     <figure class="session-flyer">
-      <img src="/assets/talks/talk-1.jpg" alt="AWS Community Day Indonesia session flyer" loading="lazy"
+      <img src="/assets/sessions/aws-community-day-flyer.jpg" alt="AWS Community Day Indonesia session flyer" loading="lazy"
            onerror="this.closest('.session-flyer').style.display='none'" />
     </figure>
 
-    <div class="cs-stats">
-      <div class="cs-stat">
-        <span class="num">Oct 2025</span>
-        <span class="label">AWS Community Day Indonesia</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">BINUS</span>
-        <span class="label">Auditorium @Alam Sutera, Tangerang</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">MCP</span>
-        <span class="label">AWS API MCP Server</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">200</span>
-        <span class="label">Cloud Operation, intermediate level</span>
-      </div>
-    </div>
-
-    <nav class="story-nav" aria-label="On this page">
-      <a href="#overview" data-section="overview" class="story-nav-link">Overview</a>
-      <a href="#takeaway" data-section="takeaway" class="story-nav-link">Key Takeaway</a>
-      <a href="#summary" data-section="summary" class="story-nav-link">Summary</a>
+    <nav class="section-nav" aria-label="On this page">
+      <a href="#overview" data-section="overview" class="section-nav-link">Overview</a>
+      <a href="#takeaway" data-section="takeaway" class="section-nav-link">Key Takeaway</a>
+      <a href="#summary" data-section="summary" class="section-nav-link">Summary</a>
     </nav>
 
     <section id="overview" class="cs-section">
@@ -86,9 +67,9 @@
     <section id="takeaway" class="cs-section">
       <h2>Key Takeaway</h2>
       <ul class="lesson-list">
-        <li><strong>MCP is plumbing, not magic.</strong> Once you see it as JSON-RPC over stdio or HTTP with a tool-discovery handshake, the mystery goes away and you can reason about what it can and can't do.</li>
-        <li><strong>The CLI bridge is the practical unlock.</strong> Because the server drives the AWS CLI, it reaches services the model was never trained on, so the API surface stays current without waiting for a new model.</li>
-        <li><strong>Command selection is the real time-saver.</strong> Most of the friction in day-to-day AWS work isn't running the command, it's remembering the exact one; that's what <code>suggest_aws_commands</code> removes.</li>
+        <li><strong>MCP is plumbing, not magic.</strong><br>Once you see it as JSON-RPC over stdio or HTTP with a tool-discovery handshake, the mystery goes away and you can reason about what it can and can't do.</li>
+        <li><strong>The CLI bridge is the practical unlock.</strong><br>Because the server drives the AWS CLI, it reaches services the model was never trained on, so the API surface stays current without waiting for a new model.</li>
+        <li><strong>Command selection is the real time-saver.</strong><br>Most of the friction in day-to-day AWS work isn't running the command, it's remembering the exact one; that's what <code>suggest_aws_commands</code> removes.</li>
       </ul>
     </section>
 
@@ -163,6 +144,6 @@
   </footer>
 
   <script src="/js/chat.js"></script>
-  <script src="/js/story-nav.js"></script>
+  <script src="/js/section-nav.js"></script>
 </body>
 </html>

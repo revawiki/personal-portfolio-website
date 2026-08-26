@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <main>
+  <main class="sessions-main">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
       <span aria-hidden="true">/</span>
@@ -20,55 +20,44 @@
     </nav>
 
     <header class="cs-header">
-      <p class="kicker">Speaking</p>
+      <p class="kicker">Read the recap</p>
       <h1>Sharing Sessions</h1>
       <p class="cs-deck">
-        Talks at community events and developer meetups. Mostly about the things
-        I was building at the time, explained to the people who might build them
-        next.
+        Most of these started as something I had just finished building and
+        wanted to explain while the details were still fresh. Community
+        meetups, developer conferences, internal sessions for teams I was
+        leading. Different rooms, same reason: explaining it once beats
+        watching the next person work it out from scratch.
       </p>
     </header>
-
-    <!-- TODO(reva): PLACEHOLDER PAGE. The two sessions below are real; add the
-         rest, swap in the LinkedIn post URLs (currently "#"), and drop any
-         additional flyers at /assets/talks/. -->
 
     <section class="sec">
       <h2 class="sec-title">Talks</h2>
       <div class="talk-list">
         <article class="talk talk-with-photo" id="aws-community-day">
           <div class="talk-photo">
-            <img src="/assets/talks/talk-1.jpg" alt="AWS Community Day Indonesia session flyer" loading="lazy"
+            <img src="/assets/sessions/aws-community-day-flyer.jpg" alt="AWS Community Day Indonesia session flyer" loading="lazy"
                  onerror="this.closest('.talk-with-photo').classList.add('no-photo')" />
             <span class="photo-fallback">Photo</span>
           </div>
           <div class="talk-body">
-            <div class="talk-meta">Oct 2025 · AWS Community Day Indonesia</div>
             <h4>Chatting with Your AWS Infrastructure On-the-Go: The Power of AWS API MCP Server</h4>
-            <p>
-              Session at AWS Community Day Indonesia, Auditorium BINUS @Alam Sutera,
-              Tangerang. Walked through using an MCP server to query and operate AWS
-              infrastructure conversationally, and where that fits alongside existing
-              tooling.
-            </p>
+            <div class="talk-meta">AWS Community Day Indonesia</div>
+              <p>Day-to-day AWS work still means juggling the console, the CLI, and runbooks. At Auditorium BINUS @Alam Sutera, Tangerang, I showed the AWS User Group Indonesia community how the AWS API MCP Server turns that into a conversation: querying and operating infrastructure in plain language, with a clear-eyed look at where it genuinely helps and where it doesn't.</p>
             <a href="/session-aws-community-day.html" class="inline-link">Read the recap →</a>
           </div>
         </article>
 
         <article class="talk talk-with-photo" id="tegal-dev">
           <div class="talk-photo">
-            <img src="/assets/talks/talk-2.jpg" alt="Tegal Dev Tech Talk session flyer" loading="lazy"
+            <img src="/assets/sessions/tegal-dev-flyer.jpg" alt="Tegal Dev Tech Talk session flyer" loading="lazy"
                  onerror="this.closest('.talk-with-photo').classList.add('no-photo')" />
             <span class="photo-fallback">Photo</span>
           </div>
           <div class="talk-body">
-            <div class="talk-meta">Feb 2025 · Tegal Dev Tech Talk</div>
             <h4>DevOps Jargon Explained: A Clear and Concise Breakdown</h4>
-            <p>
-              Tech talk on the Tegal Dev Discord, co-presented with Wisnu Yumna Y.
-              Covered an introduction to DevOps, the terminology that trips people up
-              early, and the core concepts underneath it.
-            </p>
+            <div class="talk-meta">Tegal Dev Tech Talk</div>
+              <p>DevOps terminology is one of the first roadblocks newcomers hit: lots of terms, all sounding alike, rarely explained. Co-presenting with Wisnu Yumna Y on the Tegal Dev Discord, I broke it down for developers just entering the space: what DevOps actually solves, the terms people mix up, and the core concepts behind them.</p>
             <a href="/session-tegal-dev.html" class="inline-link">Read the recap →</a>
           </div>
         </article>
@@ -77,39 +66,25 @@
 
     <section class="sec">
       <h2 class="sec-title">Internal &amp; guest sessions</h2>
-      <div class="talk-list">
+      <div class="talk-list talk-list-3col">
         <article class="talk" id="infra-24-7">
-          <div class="talk-meta">RevoU &middot; Guest session</div>
           <h4>Keeping Up Your Infra 24/7: Machine Perspective</h4>
-          <p>
-            SRE principles are usually taught as culture. This one took the seven
-            core principles &mdash; embracing risk, SLOs, eliminating toil,
-            monitoring, automation, release engineering, simplicity &mdash; and
-            asked a narrower question of each: what does this mean for the machines?
-          </p>
+          <div class="talk-meta">RevoU</div>
+          <p>SRE principles are usually taught as culture, abstract and hard to act on. For this guest session at RevoU, I took the seven core principles, embracing risk, SLOs, eliminating toil, monitoring, automation, release engineering, and simplicity, and asked a narrower question of each: what does this actually mean for the machines running the system?</p>
           <a href="/session-infra-24-7.html" class="inline-link">Read the recap →</a>
         </article>
 
         <article class="talk" id="tech-stack-decision">
-          <div class="talk-meta">Netmonk, Telkom Indonesia &middot; Internal sharing</div>
           <h4>Optimal Decision Making Process for Choosing the Right Tech Stack</h4>
-          <p>
-            Tech stack choices usually get argued on preference. This session gave
-            the team a method instead: the external and internal factors worth
-            weighing, an impact/effort priority matrix, and the arithmetic that
-            tells you whether an automation effort actually pays for itself.
-          </p>
+          <div class="talk-meta">Netmonk, Telkom Indonesia</div>
+          <p>Tech stack choices usually get argued on preference. For this internal session at Netmonk, I gave the team a method instead: the external and internal factors worth weighing, an impact/effort priority matrix, and the arithmetic that tells you whether an automation effort actually pays for itself.</p>
           <a href="/session-tech-stack-decision.html" class="inline-link">Read the recap →</a>
         </article>
 
         <article class="talk" id="good-tech-startup">
-          <div class="talk-meta">Netmonk, Telkom Indonesia &middot; Internal sharing</div>
           <h4>Making a &ldquo;Good&rdquo; Tech Start-Up</h4>
-          <p>
-            A good product is not enough &mdash; you also need a good go-to-market
-            and a good culture. And when the product is sold to engineers, the
-            engineers themselves become part of how it gets judged.
-          </p>
+          <div class="talk-meta">Netmonk, Telkom Indonesia</div>
+          <p>A good product is not enough. For this internal sharing at Netmonk, I made the case that you also need a good go-to-market and a good culture, and that when the product is sold to engineers, the engineers themselves become part of how it gets judged.</p>
           <a href="/session-good-tech-startup.html" class="inline-link">Read the recap →</a>
         </article>
       </div>

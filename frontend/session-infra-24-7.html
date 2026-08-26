@@ -43,29 +43,10 @@
       </div>
     </header>
 
-    <div class="cs-stats">
-      <div class="cs-stat">
-        <span class="num">7</span>
-        <span class="label">SRE core principles</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">52.6</span>
-        <span class="label">minutes of error budget a year at 99.99%</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">4</span>
-        <span class="label">golden signals</span>
-      </div>
-      <div class="cs-stat">
-        <span class="num">SPOF</span>
-        <span class="label">the thing to design out</span>
-      </div>
-    </div>
-
-    <nav class="story-nav" aria-label="On this page">
-      <a href="#overview" data-section="overview" class="story-nav-link">Overview</a>
-      <a href="#takeaway" data-section="takeaway" class="story-nav-link">Key Takeaway</a>
-      <a href="#summary" data-section="summary" class="story-nav-link">Summary</a>
+    <nav class="section-nav" aria-label="On this page">
+      <a href="#overview" data-section="overview" class="section-nav-link">Overview</a>
+      <a href="#takeaway" data-section="takeaway" class="section-nav-link">Key Takeaway</a>
+      <a href="#summary" data-section="summary" class="section-nav-link">Summary</a>
     </nav>
 
     <section id="overview" class="cs-section">
@@ -78,10 +59,10 @@
     <section id="takeaway" class="cs-section">
       <h2>Key Takeaway</h2>
       <ul class="lesson-list">
-        <li><strong>The error budget makes reliability a decision, not an aspiration.</strong> Once you have 52.6 minutes a year written down, arguments about whether to ship stop being philosophical and start being arithmetic.</li>
-        <li><strong>Build the system around the SLI you actually committed to.</strong> Response-time SLOs and error-rate SLOs point at completely different engineering work. Knowing which one you are on tells you where to spend.</li>
-        <li><strong>Redundancy beats reliability-per-component.</strong> Two cheap cars beat one expensive one. Removing single points of failure buys more availability than making any single component more perfect.</li>
-        <li><strong>Verify the manual process before you automate it.</strong> A machine executes a wrong instruction faster and more consistently than a human ever would.</li>
+        <li><strong>The error budget makes reliability a decision, not an aspiration.</strong><br>Once you have 52.6 minutes a year written down, arguments about whether to ship stop being philosophical and start being arithmetic.</li>
+        <li><strong>Build the system around the SLI you actually committed to.</strong><br>Response-time SLOs and error-rate SLOs point at completely different engineering work. Knowing which one you are on tells you where to spend.</li>
+        <li><strong>Redundancy beats reliability-per-component.</strong><br>Two cheap cars beat one expensive one. Removing single points of failure buys more availability than making any single component more perfect.</li>
+        <li><strong>Verify the manual process before you automate it.</strong><br>A machine executes a wrong instruction faster and more consistently than a human ever would.</li>
       </ul>
     </section>
 
@@ -121,10 +102,10 @@
     </section>
 
     <nav class="cs-next" aria-label="Keep exploring">
-      <a href="/session-aws-community-day.html" class="cs-next-card">
+      <a href="/session-tech-stack-decision.html" class="cs-next-card">
         <span class="cs-next-label">Next session</span>
-        <strong>Chatting with Your AWS Infrastructure On-the-Go</strong>
-        <span>AWS Community Day Indonesia, October 2025</span>
+        <strong>Optimal Decision Making Process for Choosing the Right Tech Stack</strong>
+        <span>Internal sharing at Netmonk, Telkom Indonesia</span>
       </a>
       <a href="/sessions.html" class="cs-next-card">
         <span class="cs-next-label">Browse</span>
@@ -168,6 +149,6 @@
   </footer>
 
   <script src="/js/chat.js"></script>
-  <script src="/js/story-nav.js"></script>
+  <script src="/js/section-nav.js"></script>
 </body>
 </html>
