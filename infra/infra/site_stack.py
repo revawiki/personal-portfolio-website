@@ -128,7 +128,10 @@ class SiteStack(Stack):
             code=_lambda.Code.from_asset(LAMBDA_ASSET_DIR),
             role=chat_role,
             timeout=Duration.seconds(30),
-            memory_size=256,
+            # 512MB buys proportionally more CPU during cold init, roughly
+            # halving the ~3.3s import+SSM startup a sparse-traffic function
+            # pays on most real visits; still well inside the free tier.
+            memory_size=512,
             log_group=chat_log_group,
             environment={
                 "CHAT_PROVIDER": CHAT_PROVIDER,
