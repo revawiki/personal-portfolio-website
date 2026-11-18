@@ -24,3 +24,4 @@ Thumbs.db
 
 # Claude Code local tooling config
 .claude/
+.taste-skill/
