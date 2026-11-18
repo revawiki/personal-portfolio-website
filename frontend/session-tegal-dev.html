@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>DevOps Jargon Explained: A Clear and Concise Breakdown &mdash; Reva Wiki</title>
   <meta name="description" content="Tech talk on the Tegal Dev Discord covering DevOps terminology and core concepts, co-presented with Wisnu Yumna Y." />
   <link rel="canonical" href="https://revawiki.dev/session-tegal-dev.html" />
@@ -69,7 +70,7 @@
       <ul class="lesson-list">
         <li><strong>"DevOps Engineer" isn't really a job, DevOps is a culture.</strong><br>The title exists because companies need something to put on a req, but what's being described is a way of working across Dev and Ops, not a separate role bolted between them.</li>
         <li><strong>The vocabulary is a barrier, not the substance.</strong><br>Once containers, pipelines, IaC, and observability are explained in plain terms, what's left is a small set of ideas: automate the repetitive, shorten the feedback loop, make it reproducible.</li>
-        <li><strong>A concrete starter pack beats a roadmap.</strong><br>Pick one major cloud and go deep, learn Docker + Linux + Kubernetes, pick one high-level language, understand the CI/CD paradigm, learn Terraform, and default to automation first.</li>
+        <li><strong>A concrete starter pack beats a roadmap.</strong><br>Pick one major cloud and go deep, learn Docker + Linux + Kubernetes, pick one high-level language, understand how CI/CD works, learn Terraform, and default to automation first.</li>
       </ul>
     </section>
 
@@ -78,15 +79,15 @@
       <p>Three parts, moving from where the word came from, to the principles, to the terminology people actually trip over.</p>
       <ol class="step-list">
         <li>
-          <h4>Where DevOps came from</h4>
+          <h3>Where DevOps came from</h3>
           <p>The origin story, because it explains the gap DevOps exists to close. Patrick Debois noticed in 2007 that Agile still left Dev and Ops separated. In 2008 he turned up to an "Agile Infrastructure" session at the Agile Conference in Canada that Andrew Clay Shafer had proposed, and was the only attendee, Shafer himself not having shown. He tracked Shafer down anyway. In 2009, after watching Paul Hammond and John Allspaw's "10+ Deploys a Day: Dev and Ops Cooperation at Flickr", he organised the first DevOpsDays that October.</p>
         </li>
         <li>
-          <h4>The Three Ways</h4>
+          <h3>The Three Ways</h3>
           <p>From <em>The DevOps Handbook</em>. <strong>Systems Thinking</strong>: treat the system as one thing, not silos, the only goal is delivering to the customer, engineering ego doesn't matter, and CI/CD exists to make the process visible. <strong>Amplify Feedback Loops</strong>: fast feedback beats perfect feedback, fail fast to succeed faster, shift left, define compliance and test cases explicitly. <strong>Culture of Continual Learning</strong>: iteration is a prerequisite to mastery, tech debt has to be paid, and, the line that got the most reaction, don't wait for it to break before you touch it. Wrapped up with CALMS: Culture, Automation, Lean, Measurement, Sharing.</p>
         </li>
         <li>
-          <h4>The terminology, unpacked</h4>
+          <h3>The terminology, unpacked</h3>
           <p>Containers via an analogy that sticks: the artifact is the goods, the container is the packaged goods, orchestration is the logistics company, and the artifact registry is the hub warehouse. Then automation (anything can be automated, everything should be, because machine error is predictable and human error isn't), CI/CD pipelines, Infrastructure as Code ("what you write is what you get"), and observability. Closed on what the job is actually measured by: DORA metrics, deployment frequency and lead time for change on the throughput side, change failure rate and MTTR on the stability side, plus the DevOps and Observability maturity models.</p>
         </li>
       </ol>

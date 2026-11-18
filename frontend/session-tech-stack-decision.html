@@ -3,12 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Optimal Decision Making Process for Choosing the Right Tech Stack &mdash; Reva Wiki</title>
   <meta name="description" content="Internal engineering session on how to choose a tech stack: the factors that matter, an impact/effort priority matrix, and how to calculate whether an automation effort actually pays for itself." />
   <link rel="canonical" href="https://revawiki.dev/session-tech-stack-decision.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Optimal Decision Making Process for Choosing the Right Tech Stack &mdash; Reva Wiki" />
   <meta property="og:description" content="Internal engineering session on how to choose a tech stack: the factors that matter, an impact/effort priority matrix, and how to calculate whether an automation effort actually pays for itself." />
+  <meta property="og:image" content="https://revawiki.dev/assets/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
@@ -72,19 +76,19 @@
       <p>Four parts, moving from what to weigh, to how to prioritise, to whether it is worth doing at all.</p>
       <ol class="step-list">
         <li>
-          <h4>What a tech stack actually decides</h4>
+          <h3>What a tech stack actually decides</h3>
           <p>Team composition and business goals, not just architecture. Everyone should feel confident in the tools they are using, and the choice has a direct impact on how well the team scales. On the business side: cost, longevity, and time to market, because companies that adopt and adapt faster leave the competition behind.</p>
         </li>
         <li>
-          <h4>The factors to weigh</h4>
+          <h3>The factors to weigh</h3>
           <p>Split into external and internal. <strong>External:</strong> functionality, scalability, maintenance and support, supported target platforms, security, cost, and maturity. <strong>Internal:</strong> project requirements, technical constraints, compliance and regulations, team expertise, and prototype testing and evaluation. The internal list is the one teams skip, and it is usually the one that kills the decision later.</p>
         </li>
         <li>
-          <h4>The action priority matrix</h4>
+          <h3>The action priority matrix</h3>
           <p>Impact against effort, four quadrants. High impact + low effort is <em>Great</em>, execute it. High impact + high effort is <em>Good</em>, but only if conditions allow. Low impact + low effort is <em>Weak</em>, so try to increase the impact first. Low impact + high effort is <em>Bad</em>, so focus on other ideas.</p>
         </li>
         <li>
-          <h4>Does it actually pay for itself?</h4>
+          <h3>Does it actually pay for itself?</h3>
           <p>The part that turns opinion into arithmetic. An effort is worth it when <em>time to complete the effort &lt; current time spent &times; frequency</em>, and the same inequality with cost substituted for time. We worked two live examples: a banking process taking 40 minutes weekly against a 10-hour build (break-even at 15 weeks), and Netmonk's own manual client fulfilment, 30 minutes each, 20 clients a day, against one week of automation work. 2400 &lt; 3000: worth proceeding.</p>
         </li>
       </ol>

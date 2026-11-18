@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Chatting with Your AWS Infrastructure On-the-Go &mdash; Reva Wiki</title>
   <meta name="description" content="Session at AWS Community Day Indonesia on using the AWS API MCP Server to query and operate AWS infrastructure conversationally." />
   <link rel="canonical" href="https://revawiki.dev/session-aws-community-day.html" />
@@ -71,7 +72,7 @@
       <h2>Key Takeaway</h2>
       <ul class="lesson-list">
         <li><strong>MCP is plumbing, not magic.</strong><br>Once you see it as JSON-RPC over stdio or HTTP with a tool-discovery handshake, the mystery goes away and you can reason about what it can and can't do.</li>
-        <li><strong>The CLI bridge is the practical unlock.</strong><br>Because the server drives the AWS CLI, it reaches services the model was never trained on, so the API surface stays current without waiting for a new model.</li>
+        <li><strong>The CLI bridge is what makes it practical.</strong><br>Because the server drives the AWS CLI, it reaches services the model was never trained on, so the API surface stays current without waiting for a new model.</li>
         <li><strong>Command selection is the real time-saver.</strong><br>Most of the friction in day-to-day AWS work isn't running the command, it's remembering the exact one; that's what <code>suggest_aws_commands</code> removes.</li>
       </ul>
     </section>
@@ -81,19 +82,19 @@
       <p>Four parts, working from the protocol itself down to a live demo.</p>
       <ol class="step-list">
         <li>
-          <h4>Model Context Protocol</h4>
+          <h3>Model Context Protocol</h3>
           <p>MCP is an open standard for connecting AI applications to external systems, data sources, tools, and workflows, so a model can access real context instead of guessing. I covered the architecture (an MCP host holding one client per server, each on its own one-to-one connection), the two layers underneath it (a JSON-RPC data layer, and a transport layer that is either stdio for a local process or streamable HTTP for remote), and the session flow: initialize, tool discovery, then tool execution.</p>
         </li>
         <li>
-          <h4>AWS MCP Servers</h4>
+          <h3>AWS MCP Servers</h3>
           <p>AWS publishes a suite of purpose-built MCP servers, around 60 at the time of the talk, grouped by what they touch: documentation, infrastructure and deployment, AI/ML, data and analytics, developer tooling, integration and messaging, cost and operations, and healthcare.</p>
         </li>
         <li>
-          <h4>AWS API MCP Server</h4>
+          <h3>AWS API MCP Server</h3>
           <p>The one this talk centred on. It bridges an assistant to AWS services through AWS CLI commands, so you can create, update, and manage resources across services conversationally. The useful side effect: it helps with command selection and reaches current AWS API surface, including services released after the model's own knowledge cutoff. Three tools do the work: <code>call_aws</code> executes CLI commands with validation and error handling, <code>suggest_aws_commands</code> maps a natural-language query to candidate commands, and the experimental <code>get_execution_plan</code> lays out step-by-step guidance for multi-stage tasks.</p>
         </li>
         <li>
-          <h4>Live demo</h4>
+          <h3>Live demo</h3>
           <p>Querying and operating real AWS infrastructure through a chat interface, using the integration in the companion repo linked at the top.</p>
         </li>
       </ol>

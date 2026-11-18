@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>YAML-based Terraform Standardization — Reva Wiki</title>
   <meta name="description" content="Migrating the company's flagship application infrastructure from console-based provisioning to a YAML-driven Terraform codebase, config-driven and GitOps-compliant." />
   <link rel="canonical" href="https://revawiki.dev/case-study-terraform.html" />
@@ -144,19 +145,19 @@
       </p>
       <ol class="step-list">
         <li>
-          <h4>One codebase</h4>
+          <h3>One codebase</h3>
           <p>A single Terraform module set describing every resource shape the portfolio needs, written once, reviewed once.</p>
         </li>
         <li>
-          <h4>Per-environment YAML</h4>
+          <h3>Per-environment YAML</h3>
           <p>Environment differences live in configuration files, not in forked HCL. Dev, staging and production read the same modules with different inputs.</p>
         </li>
         <li>
-          <h4><code>for_each</code> + <code>TF_VAR_env</code></h4>
+          <h3><code>for_each</code> + <code>TF_VAR_env</code></h3>
           <p>Terraform Enterprise injects the active workspace's environment as a <code>TF_VAR_env</code> variable per its standard convention, which the codebase reads as <code>var.env</code> to filter which resources apply through a <code>for_each</code> loop. A dev-only resource is simply skipped once code promotes to staging, no code change required.</p>
         </li>
         <li>
-          <h4>GitOps branching</h4>
+          <h3>GitOps branching</h3>
           <p>Dev, staging and production map to branches with the review gates compliance required, making promotion a reviewable diff rather than a console action.</p>
         </li>
       </ol>

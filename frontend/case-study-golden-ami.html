@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Dynamic EC2 Provisioning with Golden AMIs &mdash; Reva Wiki</title>
   <meta name="description" content="Golden AMIs built by an automated image pipeline, then provisioned through Bitbucket CI with Terraform and Ansible - cutting deployment from ~40 to ~10 minutes." />
   <link rel="canonical" href="https://revawiki.dev/case-study-golden-ami.html" />
@@ -69,10 +70,10 @@
       <h2>Action</h2>
       <p>Split the work into two phases: bake once, provision many. Anything identical across clients moved into the image; anything client-specific stayed in provisioning.</p>
       <ol class="step-list">
-        <li><h4>Build the golden image</h4><p>An AMI builder pipeline produces a pre-baked image with the OS hardening, runtime, and dependencies already installed and verified.</p></li>
-        <li><h4>Provision infrastructure with Terraform</h4><p>Instances, networking, and supporting AWS resources declared as code rather than created by hand per client.</p></li>
-        <li><h4>Configure with Ansible</h4><p>Client-specific configuration applied on top of the golden image, the layer that genuinely differs between deployments.</p></li>
-        <li><h4>Drive it from Bitbucket CI</h4><p>The whole sequence runs from the pipeline, so a deployment is a triggered job rather than a person following a runbook.</p></li>
+        <li><h3>Build the golden image</h3><p>An AMI builder pipeline produces a pre-baked image with the OS hardening, runtime, and dependencies already installed and verified.</p></li>
+        <li><h3>Provision infrastructure with Terraform</h3><p>Instances, networking, and supporting AWS resources declared as code rather than created by hand per client.</p></li>
+        <li><h3>Configure with Ansible</h3><p>Client-specific configuration applied on top of the golden image, the layer that genuinely differs between deployments.</p></li>
+        <li><h3>Drive it from Bitbucket CI</h3><p>The whole sequence runs from the pipeline, so a deployment is a triggered job rather than a person following a runbook.</p></li>
       </ol>
       <h3 class="stack-title">Tech Stack</h3>
       <div class="stack-grid">

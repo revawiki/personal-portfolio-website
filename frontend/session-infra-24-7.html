@@ -3,12 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Keeping Up Your Infra 24/7: Machine Perspective &mdash; Reva Wiki</title>
   <meta name="description" content="Session on SRE core principles and how each one translates into concrete infrastructure decisions: redundancy, SLO-driven design, toil detection, monitoring, and safe releases." />
   <link rel="canonical" href="https://revawiki.dev/session-infra-24-7.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Keeping Up Your Infra 24/7: Machine Perspective &mdash; Reva Wiki" />
   <meta property="og:description" content="Session on SRE core principles and how each one translates into concrete infrastructure decisions: redundancy, SLO-driven design, toil detection, monitoring, and safe releases." />
+  <meta property="og:image" content="https://revawiki.dev/assets/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
@@ -74,31 +78,31 @@
       <p>The seven SRE core principles, each one stated first as a principle and then re-stated from the machine's point of view.</p>
       <ol class="step-list">
         <li>
-          <h4>Embracing risk</h4>
+          <h3>Embracing risk</h3>
           <p>100% reliability is unrealistic and unnecessary, because as reliability approaches 100%, reducing the remaining risk gets exponentially harder and more expensive. Hence the error budget: 99.99% over a year still allows 52.6 minutes of downtime, and that is budget you are allowed to spend. <strong>Machine view:</strong> even the most expensive car can throw a rod, so buy two cheap cars instead. The whole job is designing out the single point of failure, via disaster recovery sites, cross-region sites, A-B failover, or HA. Redundancy is the mechanism.</p>
         </li>
         <li>
-          <h4>Service level objectives</h4>
+          <h3>Service level objectives</h3>
           <p>An SLO is a measurable quality target, expressed through SLIs: commonly availability, query rate, error rate, and response time. <strong>Machine view:</strong> build the system around whichever SLI you committed to. If the SLO is about response time, engineer for throughput: geo-proximity routing, CDN, caching. If it is about error rate, engineer for stability: horizontal and vertical scaling, orchestration, automation.</p>
         </li>
         <li>
-          <h4>Eliminating toil</h4>
+          <h3>Eliminating toil</h3>
           <p>Toil is manual work that scales linearly, repeats, and leaves the system no better than before, plus cognitive toil, the time lost re-reading guidance for something that keeps recurring, which is what standard documentation is for. <strong>Machine view:</strong> find toil by looking for patterns. When does traffic peak? Does the issue always appear at a specific utilisation percentage? Does the same fix always work? A confirmed pattern is an automation candidate.</p>
         </li>
         <li>
-          <h4>Monitoring</h4>
+          <h3>Monitoring</h3>
           <p>Monitoring means looking at meaningful, actionable data and deciding from it. Too much data means no insight at all. Follow the four golden signals: latency, traffic, errors, saturation. <strong>Machine view:</strong> leave no stone unturned, everything gets an agent. Optimise logging by dropping the level to WARN/ERROR rather than drowning in INFO. Alert on critical metrics at defined thresholds.</p>
         </li>
         <li>
-          <h4>Automation</h4>
+          <h3>Automation</h3>
           <p>The point is freeing engineers from repetitive work that adds no value, so they can do the things automation cannot: creation, ideation, large-scale guidance. It also reduces human error, increases execution speed, and enforces consistency. <strong>Machine view:</strong> verify the manual task 100% first, because the machine will follow a wrong instruction faithfully. Confirm integration is actually supported rather than assuming an approach that worked on system A ports to system B. Plan logic, concurrency, and capacity deliberately.</p>
         </li>
         <li>
-          <h4>Release engineering</h4>
+          <h3>Release engineering</h3>
           <p>Built in from the beginning rather than assigned at the last minute, on four key points: automation and self-service, velocity, identical builds, and a unified standard. <strong>Machine view:</strong> rolling deployment, blue/green, or canary. Designing a system that can release autonomously is important; designing one that can roll back is mandatory. And keep a manual approval gate for production-level change.</p>
         </li>
         <li>
-          <h4>Simplicity</h4>
+          <h3>Simplicity</h3>
           <p>The least complex system that still does the job, because simpler systems are easier to monitor, repair, and improve, and that includes the tooling the team uses. <strong>Machine view:</strong> avoid duplicate tech stacks, because more tools means never-ending integration work. Compare overlapping tools and keep the one that fits. For open-source, check it is still actively maintained. Flashy tools often do not meet the business objective, so put business first.</p>
         </li>
       </ol>

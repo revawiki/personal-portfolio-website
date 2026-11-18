@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Jenkins to CloudBees Pipeline Migration &mdash; Reva Wiki</title>
   <meta name="description" content="Migrating legacy Jenkins pipelines to CloudBees across dev, staging and production, replacing hand-written Jenkinsfiles with Jinja2-templated standards." />
   <link rel="canonical" href="https://revawiki.dev/case-study-cloudbees.html" />
@@ -72,10 +73,10 @@
       <h2>Action</h2>
       <p>The initial plan was to move applications one by one: port the Jenkinsfile, test it on CloudBees, fix whatever broke, check it off, move to the next. At the size of this estate that cycle repeated for every single application, with no part of the work from one carrying over to the next, and it was on track to take months. Templating collapsed that repetition: rather than porting each Jenkinsfile by hand, the pipeline definition became a generated artifact, one canonical template, rendered per application from its own config, so fixing it once fixed it everywhere instead of once per app.</p>
       <ol class="step-list">
-        <li><h4>Audit the existing pipelines</h4><p>Inventory every application's Jenkinsfile and separate the variation that mattered, build tooling, deploy targets, approval gates, from the incidental differences that were just personal style.</p></li>
-        <li><h4>Extract the canonical shape</h4><p>Identify the stages every pipeline genuinely shares, and separate them from the per-application values that only look like structure.</p></li>
-        <li><h4>Template it with Jinja2</h4><p>One Jenkinsfile template, rendered per application from declarative config, the same reasoning behind the <a href="/case-study-terraform.html">YAML-driven Terraform work</a>: keep one reviewed definition, let configuration carry the differences.</p></li>
-        <li><h4>Migrate environment by environment</h4><p>Roll out dev first, then staging, then production, so each environment validated the template before the next inherited it, with the previous platform still available as a fallback until each cutover was confirmed.</p></li>
+        <li><h3>Audit the existing pipelines</h3><p>Inventory every application's Jenkinsfile and separate the variation that mattered, build tooling, deploy targets, approval gates, from the incidental differences that were just personal style.</p></li>
+        <li><h3>Extract the canonical shape</h3><p>Identify the stages every pipeline genuinely shares, and separate them from the per-application values that only look like structure.</p></li>
+        <li><h3>Template it with Jinja2</h3><p>One Jenkinsfile template, rendered per application from declarative config, the same reasoning behind the <a href="/case-study-terraform.html">YAML-driven Terraform work</a>: keep one reviewed definition, let configuration carry the differences.</p></li>
+        <li><h3>Migrate environment by environment</h3><p>Roll out dev first, then staging, then production, so each environment validated the template before the next inherited it, with the previous platform still available as a fallback until each cutover was confirmed.</p></li>
       </ol>
       <div class="code-sample-grid">
         <div class="code-sample">

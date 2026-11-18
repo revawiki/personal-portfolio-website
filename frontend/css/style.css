@@ -1566,7 +1566,7 @@ main > section + section.sec {
 .share-card:hover { border-color: var(--accent); color: inherit; }
 
 .share-meta { color: var(--text-dim); font-size: 0.8rem; margin-bottom: 0.4rem; }
-.share-card h4 { margin: 0 0 0.45rem; font-size: 1rem; color: var(--text); }
+.share-card h3, .share-card h4 { margin: 0 0 0.45rem; font-size: 1rem; color: var(--text); }
 .share-card p { margin: 0; color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; }
 
 /* matches .project-grid / .project-card so Sharing Sessions reads as the
@@ -1972,7 +1972,7 @@ main > section + section.sec {
   padding-top: 0.1rem;
 }
 
-.timeline h4 { margin: 0 0 0.2rem; font-size: 1rem; }
+.timeline h3, .timeline h4 { margin: 0 0 0.2rem; font-size: 1rem; }
 .timeline p { margin: 0; color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
 
 @media (max-width: 620px) {
@@ -2121,7 +2121,7 @@ main > section + section.sec {
   white-space: nowrap;
 }
 
-.award-item h4 { margin: 0 0 0.25rem; font-size: 1.02rem; }
+.award-item h3, .award-item h4 { margin: 0 0 0.25rem; font-size: 1.02rem; }
 .award-item p { margin: 0; color: var(--text-dim); font-size: 0.9rem; line-height: 1.55; }
 
 .project-org {
@@ -2695,7 +2695,7 @@ a.repo:hover { border-color: var(--accent); color: inherit; }
   font-weight: 700;
 }
 
-.step-list h4 { margin: 0 0 0.3rem; font-size: 1rem; }
+.step-list h3, .step-list h4 { margin: 0 0 0.3rem; font-size: 1rem; }
 .step-list p { margin: 0; font-size: 0.92rem; line-height: 1.6; }
 
 /* lessons */
@@ -3012,8 +3012,9 @@ html:focus-within {
     min-height: 44px;
     align-items: center;
   }
-  /* keep the footer legal line clear of the floating chat avatar */
-  .site-cta-legal {
+  /* keep footer closing lines clear of the floating chat avatar */
+  .site-cta-legal,
+  .footer-bottom {
     padding-bottom: 84px;
   }
 }

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>AWS DX Auto-Failover — Reva Wiki</title>
   <meta name="description" content="Automating AWS Direct Connect failover during physical-layer network incidents, removing manual switchover and preventing IDR 79B+ in yearly revenue loss." />
   <link rel="canonical" href="https://revawiki.dev/case-study-dx-failover.html" />
@@ -125,19 +126,19 @@
       </p>
       <ol class="step-list">
         <li>
-          <h4>Detect</h4>
+          <h3>Detect</h3>
           <p>Continuously watch the Direct Connect link's health rather than waiting for a downstream service alarm to surface it second-hand.</p>
         </li>
         <li>
-          <h4>Validate</h4>
+          <h3>Validate</h3>
           <p>Distinguish a real physical-layer failure from transient noise, so the system doesn't flap traffic on every momentary blip.</p>
         </li>
         <li>
-          <h4>Switch</h4>
+          <h3>Switch</h3>
           <p>Execute the cutover to the redundant path automatically, the same steps the runbook prescribed, minus the wait for a human to run them.</p>
         </li>
         <li>
-          <h4>Notify</h4>
+          <h3>Notify</h3>
           <p>Tell the operations team what happened and what state the link is now in, so the human involvement moves from <em>executing</em> to <em>reviewing</em>.</p>
         </li>
       </ol>
