@@ -30,26 +30,47 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Push events on this repo can arrive minutes late and out of order; a
+      # stale run deploying an older commit after a newer one has already
+      # deployed silently reverts infrastructure. Deploy only the branch tip.
+      - name: Skip stale runs
+        id: guard
+        run: |
+          git fetch --quiet origin master
+          TIP=$(git rev-parse origin/master)
+          if [ "$GITHUB_SHA" = "$TIP" ]; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Stale run: $GITHUB_SHA is not master tip $TIP — skipping deploy."
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.guard.outputs.fresh == 'true'
         with:
           python-version: "3.12"
 
       - uses: actions/setup-node@v4
+        if: steps.guard.outputs.fresh == 'true'
         with:
           node-version: "22"
 
       - name: Configure AWS credentials (OIDC)
+        if: steps.guard.outputs.fresh == 'true'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::891376937379:role/wiki-personal-site-gha-deploy
           aws-region: ap-southeast-3
 
       - name: Build Lambda bundle
+        if: steps.guard.outputs.fresh == 'true'
         run: bash backend/build.sh
 
       - name: Install infra dependencies
+        if: steps.guard.outputs.fresh == 'true'
         run: pip install -r infra/requirements.txt
 
       - name: CDK deploy
+        if: steps.guard.outputs.fresh == 'true'
         working-directory: infra
         run: npx --yes aws-cdk@latest deploy --all --require-approval never -c domainName=revawiki.dev
